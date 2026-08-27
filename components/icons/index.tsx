@@ -284,6 +284,115 @@ export function AccessibilityIcon({ size = 24, className = "", ...props }: IconP
   );
 }
 
+// Star Icon
+export function StarIcon({ size = 20, className = "", filled = false, ...props }: IconProps) {
+  if (filled) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} {...props}>
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+      </svg>
+    );
+  }
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+
+// Arrow Right Icon
+export function ArrowRightIcon({ size = 20, className = "", ...props }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </svg>
+  );
+}
+
+// Next.js Logo Mark
+export function NextjsIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-black text-white flex items-center justify-center font-sans font-bold select-none shadow-sm ${className}`}
+    >
+      <svg width="60%" height="60%" viewBox="0 0 180 180" fill="none">
+        <mask height="180" id="mask0_next" maskUnits="userSpaceOnUse" width="180" x="0" y="0" style={{ maskType: "alpha" }}>
+          <circle cx="90" cy="90" r="90" fill="black" />
+        </mask>
+        <g mask="url(#mask0_next)">
+          <path
+            d="M149.508 157.508L69.8398 54.457H54.457V125.543H67.2427V72.1834L139.733 166.027C143.204 163.421 146.478 160.569 149.508 157.508Z"
+            fill="url(#paint0_linear_next)"
+          />
+          <rect fill="url(#paint1_linear_next)" height="71.0857" width="12.7857" x="112.757" y="54.457" />
+        </g>
+        <defs>
+          <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_next" x1="109" x2="144.5" y1="116.5" y2="160.5">
+            <stop stopColor="white" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient gradientUnits="userSpaceOnUse" id="paint1_linear_next" x1="119.143" x2="119.143" y1="54.457" y2="125.543">
+            <stop stopColor="white" />
+            <stop offset="1" stopColor="white" stopOpacity="0.4" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+// Docker Logo Mark
+export function DockerIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl flex items-center justify-center select-none ${className}`}
+    >
+      <svg width="100%" height="100%" viewBox="0 0 64 64" fill="none">
+        {/* Containers */}
+        <rect x="22" y="14" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+        <rect x="29" y="14" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+        <rect x="15" y="20.5" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+        <rect x="22" y="20.5" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+        <rect x="29" y="20.5" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+        <rect x="36" y="20.5" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+        <rect x="8" y="27" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+        <rect x="15" y="27" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+        <rect x="22" y="27" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+        <rect x="29" y="27" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+        <rect x="36" y="27" width="5.5" height="5" rx="0.5" fill="#0284C7" stroke="#0369A1" strokeWidth="0.8" />
+
+        {/* Whale Body */}
+        <path
+          d="M58 29.5C56.8 29 54.4 28.5 52 29.8C50.5 30.6 49.8 32 49.2 33.2C46.5 32.5 43.5 32.2 40 32.2C27.5 32.2 16.5 37.5 11 43C9 45 7 47.8 7 50.5C7 51.8 8.5 53 10.5 53C25 53 38.5 52.2 49.5 45.5C54.2 42.5 57.5 37.5 58 32V29.5Z"
+          fill="#38BDF8"
+          stroke="#0284C7"
+          strokeWidth="1.6"
+          strokeLinejoin="round"
+        />
+        {/* Eye */}
+        <circle cx="16" cy="41" r="1.8" fill="#0F172A" />
+        {/* Spout */}
+        <path d="M57.5 29.5C60.2 26.5 61.5 22.5 60 20C58 21.5 56 24 54.8 26.8" stroke="#0284C7" strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+    </div>
+  );
+}
+
+// TypeScript Logo Mark
+export function TypeScriptIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-[#3178C6] text-white flex items-center justify-center font-sans font-bold select-none shadow-sm ${className}`}
+    >
+      <span className="text-[20px] font-bold tracking-tight text-white pl-0.5 pt-0.5">TS</span>
+    </div>
+  );
+}
+
 // Vertex Brand Logo Mark
 export function VertexLogo({ size = 28, className = "" }: { size?: number | string; className?: string }) {
   return (
@@ -295,3 +404,4 @@ export function VertexLogo({ size = 28, className = "" }: { size?: number | stri
     </svg>
   );
 }
+
