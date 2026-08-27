@@ -1,5 +1,6 @@
 import React from "react";
 import { VertexLogo, BellIcon } from "@/components/icons";
+import { SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
 
 export interface NavbarProps {
   activeRoute?: "courses" | "my-learning";
@@ -55,31 +56,44 @@ export function Navbar({ activeRoute = "courses", className = "", onNavigate }: 
         </div>
 
         {/* Right Nav Utilities */}
-        <div className="flex items-center gap-4 sm:gap-5">
-          <button
-            type="button"
-            aria-label="Notifications"
-            className="w-10 h-10 rounded-full flex items-center justify-center text-[#334155] hover:text-[#0F172A] hover:bg-black/5 transition-colors cursor-pointer"
-          >
-            <BellIcon size={20} />
-          </button>
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Show when="signed-out">
+            <SignInButton mode="modal">
+              <button
+                type="button"
+                className="text-[14px] font-medium text-[#334155] hover:text-[#0F172A] px-3.5 py-2 rounded-lg hover:bg-black/5 transition-colors cursor-pointer"
+              >
+                Sign In
+              </button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <button
+                type="button"
+                className="text-[14px] font-medium text-white bg-[#0F172A] hover:bg-[#1E293B] px-4 py-2 rounded-lg transition-colors cursor-pointer shadow-sm"
+              >
+                Sign Up
+              </button>
+            </SignUpButton>
+          </Show>
 
-          {/* User Profile Avatar with photo matching design */}
-          <div
-            role="button"
-            tabIndex={0}
-            aria-label="User profile"
-            className="w-10 h-10 rounded-full ring-2 ring-white shadow-sm overflow-hidden cursor-pointer hover:ring-[#F97316]/50 transition-all flex items-center justify-center bg-[#FED7AA]"
-          >
-            {/* High quality portrait matching the design */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&h=160&q=80"
-              alt="User profile"
-              className="w-full h-full object-cover"
-              loading="eager"
-            />
-          </div>
+          <Show when="signed-in">
+            <button
+              type="button"
+              aria-label="Notifications"
+              className="w-10 h-10 rounded-full flex items-center justify-center text-[#334155] hover:text-[#0F172A] hover:bg-black/5 transition-colors cursor-pointer"
+            >
+              <BellIcon size={20} />
+            </button>
+            <div className="flex items-center">
+              <UserButton
+                appearance={{
+                  elements: {
+                    userButtonAvatarBox: "w-9 h-9",
+                  },
+                }}
+              />
+            </div>
+          </Show>
         </div>
       </div>
     </header>
