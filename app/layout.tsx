@@ -1,6 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { SanityLive } from "@/sanity/lib/live";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,8 +17,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Vertex Design System",
-  description: "A unified design language for Vertex learning platform.",
+  title: "Vertex - Intelligent Learning Platform",
+  description: "Search your learning in plain English with Vertex.",
 };
 
 export default function RootLayout({
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[#FAFAFC] text-[#0F172A]">
         <ClerkProvider>
           {children}
+          <SanityLive />
         </ClerkProvider>
       </body>
     </html>

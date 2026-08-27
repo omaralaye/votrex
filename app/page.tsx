@@ -24,46 +24,84 @@ interface Course {
   tags: string[];
 }
 
+const DEFAULT_COURSES: Course[] = [
+  {
+    id: "nextjs",
+    title: "Next.js for Production",
+    description: "Build scalable, high-performance web applications with Next.js.",
+    level: "Intermediate",
+    duration: "18h 24m",
+    modulesCount: "12 modules",
+    icon: <NextjsIcon size={44} />,
+    tags: ["React", "SSR", "App Router", "Server Components"],
+  },
+  {
+    id: "docker",
+    title: "Docker Essentials",
+    description: "Containerize applications and streamline your development workflow.",
+    level: "Beginner",
+    duration: "10h 12m",
+    modulesCount: "8 modules",
+    icon: <DockerIcon size={44} />,
+    tags: ["DevOps", "Containers", "Docker Compose", "CI/CD"],
+  },
+  {
+    id: "typescript",
+    title: "TypeScript Deep Dive",
+    description: "Go beyond the basics and write safer, more expressive code.",
+    level: "Intermediate",
+    duration: "14h 36m",
+    modulesCount: "10 modules",
+    icon: <TypeScriptIcon size={44} />,
+    tags: ["TypeScript", "Generics", "Type Systems", "JavaScript"],
+  },
+];
+
+function getCourseIcon(iconIdentifier?: string) {
+  switch (iconIdentifier) {
+    case "nextjs":
+      return <NextjsIcon size={44} />;
+    case "docker":
+      return <DockerIcon size={44} />;
+    case "typescript":
+      return <TypeScriptIcon size={44} />;
+    default:
+      return <NextjsIcon size={44} />;
+  }
+}
 
 export default function VertexHomePage() {
   const [activeTab, setActiveTab] = useState<"courses" | "my-learning">("courses");
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [courses, setCourses] = useState<Course[]>(DEFAULT_COURSES);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const courses: Course[] = [
-    {
-      id: "nextjs",
-      title: "Next.js for Production",
-      description: "Build scalable, high-performance web applications with Next.js.",
-      level: "Intermediate",
-      duration: "18h 24m",
-      modulesCount: "12 modules",
-      icon: <NextjsIcon size={44} />,
-      tags: ["React", "SSR", "App Router", "Server Components"],
-    },
-    {
-      id: "docker",
-      title: "Docker Essentials",
-      description: "Containerize applications and streamline your development workflow.",
-      level: "Beginner",
-      duration: "10h 12m",
-      modulesCount: "8 modules",
-      icon: <DockerIcon size={44} />,
-      tags: ["DevOps", "Containers", "Docker Compose", "CI/CD"],
-    },
-    {
-      id: "typescript",
-      title: "TypeScript Deep Dive",
-      description: "Go beyond the basics and write safer, more expressive code.",
-      level: "Intermediate",
-      duration: "14h 36m",
-      modulesCount: "10 modules",
-      icon: <TypeScriptIcon size={44} />,
-      tags: ["TypeScript", "Generics", "Type Systems", "JavaScript"],
-    },
-  ];
+  useEffect(() => {
+    async function fetchSanityCourses() {
+      try {
+        const { getCourses } = await import("@/sanity/lib/data");
+        const data = await getCourses();
+        if (data && data.length > 0) {
+          const mappedCourses: Course[] = data.map((item) => ({
+            id: item._id,
+            title: item.title,
+            description: item.description,
+            level: item.level || "Beginner",
+            duration: item.duration || "10h",
+            modulesCount: item.modulesCount ? `${item.modulesCount} modules` : "1 module",
+            icon: getCourseIcon(item.iconIdentifier),
+            tags: item.category?.title ? [item.category.title] : [],
+          }));
+          setCourses(mappedCourses);
+        }
+      } catch (err) {
+        console.warn("Sanity fetch fallback:", err);
+      }
+    }
+    fetchSanityCourses();
+  }, []);
 
   // Handle Cmd+K / Ctrl+K keyboard shortcut
   useEffect(() => {
@@ -140,9 +178,9 @@ export default function VertexHomePage() {
                     : "border-[#E2E8F0] hover:border-[#CBD5E1]"
                 }`}
               >
-                <div className="flex items-center flex-1 min-w-0">
+                <div className="flex items-center gap-3.5 flex-1 mr-3">
                   <SearchIcon
-                    size={20}
+                    size={22}
                     className={`transition-colors shrink-0 ${
                       isSearchFocused ? "text-[#F97316]" : "text-[#94A3B8]"
                     }`}
@@ -154,19 +192,17 @@ export default function VertexHomePage() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
                     onBlur={() => setIsSearchFocused(false)}
-                    placeholder="Ask anything about your learning..."
-                    aria-label="Ask anything about your learning"
-                    className="w-full bg-transparent border-none outline-none font-sans text-[15px] text-[#0F172A] placeholder:text-[#94A3B8] ml-3.5 mr-2"
+                    placeholder="Search by topic, keyword, or concept (e.g. 'Docker Compose', 'Generics')..."
+                    className="w-full bg-transparent border-none outline-none font-sans text-[15px] sm:text-[16px] text-[#0F172A] placeholder:text-[#94A3B8] tracking-[-0.01em]"
                   />
                 </div>
 
-                {/* Keyboard Shortcut Indicator */}
-                <div className="flex items-center gap-1.5 shrink-0 select-none">
+                <div className="flex items-center gap-2 shrink-0">
                   {searchQuery ? (
                     <button
                       type="button"
                       onClick={() => setSearchQuery("")}
-                      className="text-xs text-[#94A3B8] hover:text-[#0F172A] px-1.5 py-0.5 rounded cursor-pointer"
+                      className="px-2 py-1 text-[12px] font-sans text-[#64748B] hover:text-[#0F172A] cursor-pointer"
                     >
                       Clear
                     </button>
@@ -240,7 +276,6 @@ export default function VertexHomePage() {
           </div>
         </main>
       </div>
-
 
       {/* Course Detail Modal */}
       {selectedCourse && (
@@ -320,4 +355,3 @@ export default function VertexHomePage() {
     </div>
   );
 }
-
