@@ -1,5 +1,6 @@
 import type { PortableTextBlock } from 'sanity'
 import { sanityFetch } from './live'
+import { urlFor } from './image'
 import {
   COURSES_QUERY,
   COURSES_FILTERED_QUERY,
@@ -48,6 +49,7 @@ export interface InstructorSummary {
   slug: SanitySlug
   role: string
   avatar?: SanityImageReference
+  avatarUrl?: string
   courseCount?: number
 }
 
@@ -77,6 +79,9 @@ export interface LessonSummary {
   _id: string
   title: string
   slug: SanitySlug
+  videoUrl?: string
+  thumbnail?: SanityImageReference
+  thumbnailUrl?: string
   duration: string
   isFreePreview?: boolean
   studentCount?: number
@@ -103,6 +108,7 @@ export interface CourseSummary {
   studentCount?: number
   iconIdentifier?: string
   coverImage?: SanityImageReference
+  coverImageUrl?: string
   category?: {
     _id: string
     title: string
@@ -114,6 +120,7 @@ export interface CourseSummary {
     slug: SanitySlug
     role: string
     avatar?: SanityImageReference
+    avatarUrl?: string
   }
   modulesCount?: number
   lessonsCount?: number
@@ -134,6 +141,7 @@ export interface LessonDetail {
   slug: SanitySlug
   videoUrl?: string
   thumbnail?: SanityImageReference
+  thumbnailUrl?: string
   duration: string
   isFreePreview?: boolean
   studentCount?: number
@@ -148,6 +156,8 @@ export interface LessonDetail {
     slug: SanitySlug
     iconIdentifier?: string
     level?: string
+    coverImage?: SanityImageReference
+    coverImageUrl?: string
     category?: {
       _id: string
       title: string
@@ -159,6 +169,7 @@ export interface LessonDetail {
       slug: SanitySlug
       role: string
       avatar?: SanityImageReference
+      avatarUrl?: string
     }
     modules: {
       _key: string
@@ -168,6 +179,9 @@ export interface LessonDetail {
         _id: string
         title: string
         slug: SanitySlug
+        videoUrl?: string
+        thumbnail?: SanityImageReference
+        thumbnailUrl?: string
         duration: string
         isFreePreview?: boolean
       }[]
@@ -179,8 +193,66 @@ export interface CategoryDetail extends CategorySummary {
   courses: CourseSummary[]
 }
 
-export type LessonWithCourse = LessonSummary & {
+export interface LessonWithCourse extends LessonSummary {
   course?: { _id: string; title: string; slug: SanitySlug }
+}
+
+// ==========================================
+// Image URL Helper Functions with Picsum Seed Fallback
+// ==========================================
+
+export function getLessonThumbnailUrl(lesson: {
+  _id?: string
+  slug?: SanitySlug | string
+  thumbnail?: SanityImageReference
+  thumbnailUrl?: string
+}): string {
+  if (lesson.thumbnailUrl) return lesson.thumbnailUrl
+  if (lesson.thumbnail?.asset?._ref) {
+    try {
+      return urlFor(lesson.thumbnail).width(640).height(360).url()
+    } catch {
+      // fallback
+    }
+  }
+  const seed = (typeof lesson.slug === 'string' ? lesson.slug : lesson.slug?.current) || lesson._id || 'lesson'
+  return `https://picsum.photos/seed/${seed}/640/360`
+}
+
+export function getCourseCoverImageUrl(course: {
+  _id?: string
+  slug?: SanitySlug | string
+  coverImage?: SanityImageReference
+  coverImageUrl?: string
+}): string {
+  if (course.coverImageUrl) return course.coverImageUrl
+  if (course.coverImage?.asset?._ref) {
+    try {
+      return urlFor(course.coverImage).width(1280).height(720).url()
+    } catch {
+      // fallback
+    }
+  }
+  const seed = (typeof course.slug === 'string' ? course.slug : course.slug?.current) || course._id || 'course'
+  return `https://picsum.photos/seed/${seed}/1280/720`
+}
+
+export function getInstructorAvatarUrl(instructor: {
+  _id?: string
+  slug?: SanitySlug | string
+  avatar?: SanityImageReference
+  avatarUrl?: string
+}): string {
+  if (instructor.avatarUrl) return instructor.avatarUrl
+  if (instructor.avatar?.asset?._ref) {
+    try {
+      return urlFor(instructor.avatar).width(400).height(400).url()
+    } catch {
+      // fallback
+    }
+  }
+  const seed = (typeof instructor.slug === 'string' ? instructor.slug : instructor.slug?.current) || instructor._id || 'instructor'
+  return `https://picsum.photos/seed/${seed}/400/400`
 }
 
 // ==========================================

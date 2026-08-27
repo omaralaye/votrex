@@ -31,6 +31,12 @@ export const instructorType = defineType({
       validation: (rule) => rule.required().error('Role or expertise area is required'),
     }),
     defineField({
+      name: 'avatarUrl',
+      title: 'Avatar URL (e.g. Picsum seed)',
+      type: 'url',
+      description: 'Direct avatar image URL (e.g. Picsum seed)',
+    }),
+    defineField({
       name: 'avatar',
       title: 'Avatar / Photo',
       type: 'image',

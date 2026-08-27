@@ -17,6 +17,7 @@ export const COURSES_QUERY = defineQuery(`
     studentCount,
     iconIdentifier,
     coverImage,
+    coverImageUrl,
     category->{
       _id,
       title,
@@ -27,7 +28,8 @@ export const COURSES_QUERY = defineQuery(`
       name,
       slug,
       role,
-      avatar
+      avatar,
+      avatarUrl
     },
     "modulesCount": count(modules),
     "lessonsCount": count(modules[].lessons[])
@@ -55,6 +57,7 @@ export const COURSES_FILTERED_QUERY = defineQuery(`
     studentCount,
     iconIdentifier,
     coverImage,
+    coverImageUrl,
     category->{
       _id,
       title,
@@ -65,7 +68,8 @@ export const COURSES_FILTERED_QUERY = defineQuery(`
       name,
       slug,
       role,
-      avatar
+      avatar,
+      avatarUrl
     },
     "modulesCount": count(modules),
     "lessonsCount": count(modules[].lessons[])
@@ -89,6 +93,7 @@ export const COURSE_BY_SLUG_QUERY = defineQuery(`
     studentCount,
     iconIdentifier,
     coverImage,
+    coverImageUrl,
     overview,
     category->{
       _id,
@@ -103,6 +108,7 @@ export const COURSE_BY_SLUG_QUERY = defineQuery(`
       slug,
       role,
       avatar,
+      avatarUrl,
       bio
     },
     "learningOutcomes": coalesce(learningOutcomes[]{
@@ -119,6 +125,9 @@ export const COURSE_BY_SLUG_QUERY = defineQuery(`
         _id,
         title,
         slug,
+        videoUrl,
+        thumbnail,
+        thumbnailUrl,
         duration,
         isFreePreview,
         studentCount,
@@ -150,6 +159,7 @@ export const LESSON_BY_SLUG_QUERY = defineQuery(`
     slug,
     videoUrl,
     thumbnail,
+    thumbnailUrl,
     duration,
     isFreePreview,
     studentCount,
@@ -172,6 +182,8 @@ export const LESSON_BY_SLUG_QUERY = defineQuery(`
       slug,
       iconIdentifier,
       level,
+      coverImage,
+      coverImageUrl,
       category->{
         _id,
         title,
@@ -182,7 +194,8 @@ export const LESSON_BY_SLUG_QUERY = defineQuery(`
         name,
         slug,
         role,
-        avatar
+        avatar,
+        avatarUrl
       },
       "modules": coalesce(modules[]{
         _key,
@@ -192,6 +205,9 @@ export const LESSON_BY_SLUG_QUERY = defineQuery(`
           _id,
           title,
           slug,
+          videoUrl,
+          thumbnail,
+          thumbnailUrl,
           duration,
           isFreePreview
         }, [])
@@ -208,6 +224,9 @@ export const ALL_LESSONS_QUERY = defineQuery(`
     _id,
     title,
     slug,
+    videoUrl,
+    thumbnail,
+    thumbnailUrl,
     duration,
     isFreePreview,
     studentCount,
@@ -256,12 +275,14 @@ export const CATEGORY_BY_SLUG_QUERY = defineQuery(`
       studentCount,
       iconIdentifier,
       coverImage,
+      coverImageUrl,
       instructor->{
         _id,
         name,
         slug,
         role,
-        avatar
+        avatar,
+        avatarUrl
       },
       "modulesCount": count(modules),
       "lessonsCount": count(modules[].lessons[])
@@ -279,6 +300,7 @@ export const INSTRUCTORS_QUERY = defineQuery(`
     slug,
     role,
     avatar,
+    avatarUrl,
     bio,
     "courseCount": count(*[_type == "course" && references(^._id)])
   }
@@ -294,6 +316,7 @@ export const INSTRUCTOR_BY_SLUG_QUERY = defineQuery(`
     slug,
     role,
     avatar,
+    avatarUrl,
     bio,
     "courses": *[_type == "course" && references(^._id)] | order(_createdAt desc) {
       _id,
@@ -307,6 +330,7 @@ export const INSTRUCTOR_BY_SLUG_QUERY = defineQuery(`
       studentCount,
       iconIdentifier,
       coverImage,
+      coverImageUrl,
       category->{
         _id,
         title,
@@ -334,6 +358,7 @@ export const POPULAR_COURSES_QUERY = defineQuery(`
     studentCount,
     iconIdentifier,
     coverImage,
+    coverImageUrl,
     category->{
       _id,
       title,
@@ -344,7 +369,8 @@ export const POPULAR_COURSES_QUERY = defineQuery(`
       name,
       slug,
       role,
-      avatar
+      avatar,
+      avatarUrl
     },
     "modulesCount": count(modules),
     "lessonsCount": count(modules[].lessons[])

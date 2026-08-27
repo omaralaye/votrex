@@ -21,7 +21,14 @@ if (fs.existsSync(envPath)) {
 
 const projectId = env.NEXT_PUBLIC_SANITY_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = env.NEXT_PUBLIC_SANITY_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
-const token = env.SANITY_API_WRITE_TOKEN || process.env.SANITY_API_WRITE_TOKEN || process.env.SANITY_AUTH_TOKEN
+const token =
+  env.SANITY_API_WRITE_TOKEN ||
+  process.env.SANITY_API_WRITE_TOKEN ||
+  env.SANITY_API_READ_TOKEN ||
+  process.env.SANITY_API_READ_TOKEN ||
+  env.SANITY_API_Read_TOKEN ||
+  process.env.SANITY_API_Read_TOKEN ||
+  process.env.SANITY_AUTH_TOKEN
 
 if (!projectId || !dataset) {
   console.error('❌ Missing NEXT_PUBLIC_SANITY_PROJECT_ID or NEXT_PUBLIC_SANITY_DATASET in .env.local')

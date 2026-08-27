@@ -393,6 +393,141 @@ export function TypeScriptIcon({ size = 48, className = "" }: { size?: number | 
   );
 }
 
+// React Logo Mark
+export function ReactIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-[#23272F] text-[#58C4DC] flex items-center justify-center select-none shadow-sm ${className}`}
+    >
+      <svg width="65%" height="65%" viewBox="-11.5 -10.23174 23 20.46348" fill="none">
+        <circle cx="0" cy="0" r="2.05" fill="#58C4DC" />
+        <g stroke="#58C4DC" strokeWidth="1" fill="none">
+          <ellipse rx="11" ry="4.2" />
+          <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+          <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// Node.js Logo Mark
+export function NodejsIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-[#1E293B] text-[#5FA04E] flex items-center justify-center font-sans font-bold select-none shadow-sm ${className}`}
+    >
+      <span className="text-[19px] font-bold text-[#68A063]">node</span>
+    </div>
+  );
+}
+
+// Cloud / Infrastructure Logo Mark
+export function CloudIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-gradient-to-br from-[#0284C7] to-[#0369A1] text-white flex items-center justify-center select-none shadow-sm ${className}`}
+    >
+      <svg width="55%" height="55%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+      </svg>
+    </div>
+  );
+}
+
+// Database Logo Mark
+export function DatabaseIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-[#336791] text-white flex items-center justify-center select-none shadow-sm ${className}`}
+    >
+      <svg width="55%" height="55%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+        <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+      </svg>
+    </div>
+  );
+}
+
+// AI / LLM Sparkle Logo Mark
+export function AIIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-gradient-to-br from-[#7C3AED] via-[#6366F1] to-[#4F46E5] text-white flex items-center justify-center select-none shadow-sm ${className}`}
+    >
+      <svg width="55%" height="55%" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2L14.4 8.6L21 11L14.4 13.4L12 20L9.6 13.4L3 11L9.6 8.6L12 2Z" />
+        <path d="M19 17L17.8 19.8L15 21L17.8 22.2L19 25L20.2 22.2L23 21L20.2 19.8L19 17Z" opacity="0.8" />
+        <path d="M5 2L4.2 3.8L2.4 4.6L4.2 5.4L5 7.2L5.8 5.4L7.6 4.6L5.8 3.8L5 2Z" opacity="0.7" />
+      </svg>
+    </div>
+  );
+}
+
+// Python Logo Mark
+export function PythonIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-[#1E293B] flex items-center justify-center select-none shadow-sm ${className}`}
+    >
+      <svg width="60%" height="60%" viewBox="0 0 24 24" fill="none">
+        <path d="M11.9 2C8.3 2 8.5 3.5 8.5 3.5L8.5 5.1H12.1V5.6H5.2C2.8 5.6 2.8 8.1 2.8 8.1L2.8 10C2.8 11.8 4.3 11.8 4.3 11.8H5.9V10.2C5.9 8.6 7.3 8.6 7.3 8.6H12C13.6 8.6 13.6 7.2 13.6 7.2V3.7C13.6 2.1 11.9 2 11.9 2ZM10.4 3.3C10.8 3.3 11.1 3.6 11.1 4C11.1 4.4 10.8 4.7 10.4 4.7C10 4.7 9.7 4.4 9.7 4C9.7 3.6 10 3.3 10.4 3.3Z" fill="#38BDF8" />
+        <path d="M12.1 22C15.7 22 15.5 20.5 15.5 20.5L15.5 18.9H11.9V18.4H18.8C21.2 18.4 21.2 15.9 21.2 15.9L21.2 14C21.2 12.2 19.7 12.2 19.7 12.2H18.1V13.8C18.1 15.4 16.7 15.4 16.7 15.4H12C10.4 15.4 10.4 16.8 10.4 16.8V20.3C10.4 21.9 12.1 22 12.1 22ZM13.6 20.7C13.2 20.7 12.9 20.4 12.9 20C12.9 19.6 13.2 19.3 13.6 19.3C14 19.3 14.3 19.6 14.3 20C14.3 20.4 14 20.7 13.6 20.7Z" fill="#FACC15" />
+      </svg>
+    </div>
+  );
+}
+
+// Rust Logo Mark
+export function RustIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-[#B7410E] text-white flex items-center justify-center font-sans font-bold select-none shadow-sm ${className}`}
+    >
+      <span className="text-[19px] font-bold tracking-tight text-white pl-0.5">🦀</span>
+    </div>
+  );
+}
+
+// Security / Shield Logo Mark
+export function SecurityIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-gradient-to-br from-[#0F766E] to-[#115E59] text-white flex items-center justify-center select-none shadow-sm ${className}`}
+    >
+      <svg width="55%" height="55%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="M9 12l2 2 4-4" />
+      </svg>
+    </div>
+  );
+}
+
+// Custom / General Course Logo Mark
+export function CustomCourseIcon({ size = 48, className = "" }: { size?: number | string; className?: string }) {
+  return (
+    <div
+      style={{ width: size, height: size }}
+      className={`rounded-xl bg-gradient-to-br from-[#EA580C] to-[#C2410C] text-white flex items-center justify-center select-none shadow-sm ${className}`}
+    >
+      <svg width="55%" height="55%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+        <polyline points="2 17 12 22 22 17" />
+        <polyline points="2 12 12 17 22 12" />
+      </svg>
+    </div>
+  );
+}
+
 // Vertex Brand Logo Mark
 export function VertexLogo({ size = 28, className = "" }: { size?: number | string; className?: string }) {
   return (
@@ -404,4 +539,5 @@ export function VertexLogo({ size = 28, className = "" }: { size?: number | stri
     </svg>
   );
 }
+
 

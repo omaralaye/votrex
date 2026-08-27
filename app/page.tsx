@@ -8,6 +8,15 @@ import {
   NextjsIcon,
   DockerIcon,
   TypeScriptIcon,
+  ReactIcon,
+  NodejsIcon,
+  CloudIcon,
+  DatabaseIcon,
+  AIIcon,
+  PythonIcon,
+  RustIcon,
+  SecurityIcon,
+  CustomCourseIcon,
 } from "@/components/icons";
 import { Navbar } from "@/components/navigation/navbar";
 import { CourseCard } from "@/components/cards/course-card";
@@ -30,28 +39,28 @@ const DEFAULT_COURSES: Course[] = [
     title: "Next.js for Production",
     description: "Build scalable, high-performance web applications with Next.js.",
     level: "Intermediate",
-    duration: "18h 24m",
-    modulesCount: "12 modules",
+    duration: "2h 04m",
+    modulesCount: "3 modules",
     icon: <NextjsIcon size={44} />,
     tags: ["React", "SSR", "App Router", "Server Components"],
   },
   {
     id: "docker",
-    title: "Docker Essentials",
-    description: "Containerize applications and streamline your development workflow.",
+    title: "Docker & Container Engineering",
+    description: "Containerize applications and streamline your deployment workflow.",
     level: "Beginner",
-    duration: "10h 12m",
-    modulesCount: "8 modules",
+    duration: "1h 28m",
+    modulesCount: "2 modules",
     icon: <DockerIcon size={44} />,
     tags: ["DevOps", "Containers", "Docker Compose", "CI/CD"],
   },
   {
     id: "typescript",
-    title: "TypeScript Deep Dive",
+    title: "TypeScript Deep Dive & Metaprogramming",
     description: "Go beyond the basics and write safer, more expressive code.",
     level: "Intermediate",
-    duration: "14h 36m",
-    modulesCount: "10 modules",
+    duration: "1h 26m",
+    modulesCount: "2 modules",
     icon: <TypeScriptIcon size={44} />,
     tags: ["TypeScript", "Generics", "Type Systems", "JavaScript"],
   },
@@ -65,8 +74,24 @@ function getCourseIcon(iconIdentifier?: string) {
       return <DockerIcon size={44} />;
     case "typescript":
       return <TypeScriptIcon size={44} />;
+    case "react":
+      return <ReactIcon size={44} />;
+    case "node":
+      return <NodejsIcon size={44} />;
+    case "cloud":
+      return <CloudIcon size={44} />;
+    case "database":
+      return <DatabaseIcon size={44} />;
+    case "ai":
+      return <AIIcon size={44} />;
+    case "python":
+      return <PythonIcon size={44} />;
+    case "rust":
+      return <RustIcon size={44} />;
+    case "security":
+      return <SecurityIcon size={44} />;
     default:
-      return <NextjsIcon size={44} />;
+      return <CustomCourseIcon size={44} />;
   }
 }
 
