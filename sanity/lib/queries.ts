@@ -202,6 +202,7 @@ export const LESSON_BY_SLUG_QUERY = defineQuery(`
         _key,
         title,
         summary,
+        duration,
         "lessons": coalesce(lessons[]->{
           _id,
           title,
@@ -210,7 +211,9 @@ export const LESSON_BY_SLUG_QUERY = defineQuery(`
           thumbnail,
           thumbnailUrl,
           duration,
-          isFreePreview
+          isFreePreview,
+          studentCount,
+          summary
         }, [])
       }, [])
     }
