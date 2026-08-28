@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import posthog from "posthog-js";
 import {
@@ -159,8 +159,14 @@ export function LessonView({ lesson, startSeconds = 0 }: LessonViewProps) {
   if (currentLessonIndexInModule === 0) currentLessonIndexInModule = 1;
 
 
-  // Track PostHog page view
+  // Track PostHog page view. Fire once per distinct lesson so a re-render
+  // (StrictMode or a Sanity live update) does not inflate the view count.
+  const viewedLessonRef = useRef<string | null>(null);
   useEffect(() => {
+    const lessonKey = lesson._id || lesson.slug?.current || null;
+    if (!lessonKey || viewedLessonRef.current === lessonKey) return;
+    viewedLessonRef.current = lessonKey;
+
     posthog.capture("lesson_viewed", {
       course_slug: courseSlug,
       course_title: courseTitle,
@@ -519,10 +525,27 @@ export function LessonView({ lesson, startSeconds = 0 }: LessonViewProps) {
           {/* ========================================================= */}
           <section className="w-full mb-8">
             <VideoPlayer
-              videoUrl={lesson.videoUrl || "https://www.youtube.com/watch?v=gSSsZReIFRk"}
+              videoUrl={lesson.videoUrl}
               posterUrl={getLessonThumbnailUrl(lesson)}
               title={lesson.title}
               startSeconds={startSeconds}
+              onPlay={() => {
+                posthog.capture("lesson_video_play_clicked", {
+                  course_slug: courseSlug,
+                  lesson_slug: lesson.slug?.current,
+                  lesson_title: lesson.title,
+                  video_url: lesson.videoUrl,
+                });
+              }}
+              onPlaybackError={(reason) => {
+                posthog.capture("lesson_video_play_failed", {
+                  course_slug: courseSlug,
+                  lesson_slug: lesson.slug?.current,
+                  lesson_title: lesson.title,
+                  video_url: lesson.videoUrl,
+                  reason,
+                });
+              }}
             />
           </section>
 
