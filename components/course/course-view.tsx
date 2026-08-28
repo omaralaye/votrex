@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import posthog from "posthog-js";
 import Image from "next/image";
 import {
   StatsIcon,
@@ -151,11 +152,18 @@ export function CourseView({ course }: CourseViewProps) {
   const visibleModules = showAllModules ? modules : modules.slice(0, initialVisibleCount);
   const hasMoreModules = modules.length > initialVisibleCount;
 
-  const toggleModule = (moduleKey: string) => {
-    setExpandedModules((prev) => ({
-      ...prev,
-      [moduleKey]: !prev[moduleKey],
-    }));
+  const toggleModule = (moduleKey: string, moduleTitle?: string) => {
+    setExpandedModules((prev) => {
+      const next = { ...prev, [moduleKey]: !prev[moduleKey] };
+      if (next[moduleKey]) {
+        posthog.capture("module_expanded", {
+          course_slug: course.slug?.current,
+          course_title: course.title,
+          module_title: moduleTitle,
+        });
+      }
+      return next;
+    });
   };
 
   const breadcrumbItems = [
@@ -245,6 +253,11 @@ export function CourseView({ course }: CourseViewProps) {
                   onClick={() => {
                     const el = document.getElementById("curriculum");
                     el?.scrollIntoView({ behavior: "smooth" });
+                    posthog.capture("continue_learning_clicked", {
+                      course_slug: course.slug?.current,
+                      course_title: course.title,
+                      source: "hero",
+                    });
                   }}
                   className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-[#D8653F] hover:bg-[#C25430] active:scale-[0.99] text-white font-sans font-medium text-[15px] shadow-[0_4px_16px_rgba(216,101,63,0.32)] hover:shadow-[0_6px_20px_rgba(216,101,63,0.42)] transition-all duration-200 cursor-pointer"
                 >
@@ -255,7 +268,17 @@ export function CourseView({ course }: CourseViewProps) {
                 {/* Secondary Bookmark CTA */}
                 <button
                   type="button"
-                  onClick={() => setIsBookmarked((prev) => !prev)}
+                  onClick={() => {
+                    setIsBookmarked((prev) => {
+                      const next = !prev;
+                      posthog.capture("course_bookmarked", {
+                        course_slug: course.slug?.current,
+                        course_title: course.title,
+                        bookmarked: next,
+                      });
+                      return next;
+                    });
+                  }}
                   className={`inline-flex items-center gap-2 px-5 py-3 sm:py-3.5 rounded-xl border font-sans font-medium text-[15px] transition-all duration-200 cursor-pointer shadow-sm ${
                     isBookmarked
                       ? "bg-[#FFF7ED] border-[#FDBA74] text-[#EA580C]"
@@ -327,7 +350,7 @@ export function CourseView({ course }: CourseViewProps) {
                     {/* Module Header Row */}
                     <button
                       type="button"
-                      onClick={() => toggleModule(module._key || `m_${index}`)}
+                      onClick={() => toggleModule(module._key || `m_${index}`, module.title)}
                       className="w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-[#FAF9F6]/80 transition-colors cursor-pointer gap-4"
                     >
                       <div className="flex items-center gap-3.5 sm:gap-4 flex-1 min-w-0">
@@ -408,7 +431,17 @@ export function CourseView({ course }: CourseViewProps) {
               <div className="mt-5 flex justify-center">
                 <button
                   type="button"
-                  onClick={() => setShowAllModules((prev) => !prev)}
+                  onClick={() => {
+                    setShowAllModules((prev) => {
+                      const next = !prev;
+                      posthog.capture("show_all_modules_toggled", {
+                        course_slug: course.slug?.current,
+                        course_title: course.title,
+                        showing_all: next,
+                      });
+                      return next;
+                    });
+                  }}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-[#E2E8F0] hover:bg-[#F8FAFC] hover:border-[#CBD5E1] text-[#0F172A] font-sans font-medium text-[13.5px] sm:text-[14px] shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all cursor-pointer"
                 >
                   <span>
@@ -453,6 +486,11 @@ export function CourseView({ course }: CourseViewProps) {
             onClick={() => {
               const el = document.getElementById("curriculum");
               el?.scrollIntoView({ behavior: "smooth" });
+              posthog.capture("continue_learning_clicked", {
+                course_slug: course.slug?.current,
+                course_title: course.title,
+                source: "progress_bar",
+              });
             }}
             className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-[#D8653F] hover:bg-[#C25430] active:scale-[0.99] text-white font-sans font-medium text-[14px] sm:text-[15px] shadow-[0_4px_14px_rgba(216,101,63,0.3)] transition-all duration-200 cursor-pointer shrink-0"
           >

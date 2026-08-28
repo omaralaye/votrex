@@ -22,6 +22,7 @@ import {
 import { Navbar } from "@/components/navigation/navbar";
 import { CourseCard } from "@/components/cards/course-card";
 import { BottomBarsGraphic } from "@/components/ui/bottom-bars";
+import posthog from "posthog-js";
 
 interface Course {
   id: string;
@@ -205,6 +206,7 @@ export default function VertexHomePage() {
             <div>
               <a
                 href="#courses"
+                onClick={() => posthog.capture("explore_courses_clicked")}
                 className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-gradient-to-r from-[#E75936] to-[#F97316] hover:from-[#D94925] hover:to-[#EA580C] text-white font-sans font-medium text-[15px] shadow-[0_4px_16px_rgba(235,90,54,0.32)] hover:shadow-[0_6px_20px_rgba(235,90,54,0.42)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
               >
                 <span>Explore Courses</span>
@@ -234,7 +236,16 @@ export default function VertexHomePage() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsSearchFocused(true)}
-                    onBlur={() => setIsSearchFocused(false)}
+                    onBlur={() => {
+                      setIsSearchFocused(false);
+                      if (searchQuery.trim()) {
+                        posthog.capture("course_searched", {
+                          query: searchQuery.trim(),
+                          results_count: filteredCourses.length,
+                          source: "home",
+                        });
+                      }
+                    }}
                     placeholder="Search by topic, keyword, or concept (e.g. 'Docker Compose', 'Generics')..."
                     className="w-full bg-transparent border-none outline-none font-sans text-[15px] sm:text-[16px] text-[#0F172A] placeholder:text-[#94A3B8] tracking-[-0.01em]"
                   />
@@ -290,7 +301,15 @@ export default function VertexHomePage() {
                   modulesCount={course.modulesCount}
                   icon={course.icon}
                   href={`/courses/${course.slug}`}
-                  onClick={() => setSelectedCourse(course)}
+                  onClick={() => {
+                    setSelectedCourse(course);
+                    posthog.capture("course_card_clicked", {
+                      course_slug: course.slug,
+                      course_title: course.title,
+                      course_level: course.level,
+                      source: "home",
+                    });
+                  }}
                 />
               ))}
             </div>

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
+import posthog from "posthog-js";
 import {
   SearchIcon,
   StarIcon,
@@ -289,6 +290,7 @@ export default function AllCoursesPage() {
     setSearchQuery("");
     setSelectedCategory("All");
     setSelectedLevel("All Levels");
+    posthog.capture("course_filters_cleared");
   };
 
   return (
@@ -346,6 +348,15 @@ export default function AllCoursesPage() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onBlur={() => {
+                    if (searchQuery.trim()) {
+                      posthog.capture("course_searched", {
+                        query: searchQuery.trim(),
+                        results_count: filteredCourses.length,
+                        source: "courses_page",
+                      });
+                    }
+                  }}
                   placeholder="Search by topic, framework, or keyword (e.g. Next.js, Docker, AI)..."
                   className="w-full bg-transparent border-none outline-none font-sans text-[14px] sm:text-[15px] text-[#0F172A] placeholder:text-[#94A3B8]"
                 />
@@ -365,7 +376,12 @@ export default function AllCoursesPage() {
               <div className="sm:w-48 shrink-0">
                 <select
                   value={selectedLevel}
-                  onChange={(e) => setSelectedLevel(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedLevel(e.target.value);
+                    if (e.target.value !== "All Levels") {
+                      posthog.capture("level_filter_applied", { level: e.target.value });
+                    }
+                  }}
                   aria-label="Filter courses by experience level"
                   className="w-full h-[42px] bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-3 text-[14px] text-[#0F172A] font-medium font-sans appearance-none cursor-pointer focus:outline-none focus:border-[#F97316] focus:ring-2 focus:ring-[#FED7AA]/50 transition-colors"
                 >
@@ -391,7 +407,12 @@ export default function AllCoursesPage() {
                     <button
                       key={cat}
                       type="button"
-                      onClick={() => setSelectedCategory(cat)}
+                      onClick={() => {
+                        setSelectedCategory(cat);
+                        if (cat !== "All") {
+                          posthog.capture("category_filter_applied", { category: cat });
+                        }
+                      }}
                       className={`px-3 py-1.5 rounded-lg text-[13px] font-sans font-medium transition-all cursor-pointer ${
                         isActive
                           ? "bg-[#0F172A] text-white shadow-sm"

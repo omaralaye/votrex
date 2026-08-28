@@ -2,6 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { SanityLive } from "@/sanity/lib/live";
+import { PostHogIdentifier } from "@/components/posthog-identifier";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[#FAFAFC] text-[#0F172A]">
         <ClerkProvider>
+          <PostHogIdentifier />
           {children}
           <SanityLive />
         </ClerkProvider>
