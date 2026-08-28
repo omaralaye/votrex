@@ -177,6 +177,7 @@ export interface LessonDetail {
       _key: string
       title: string
       summary?: string
+      duration?: string
       lessons: {
         _id: string
         title: string
@@ -186,6 +187,8 @@ export interface LessonDetail {
         thumbnailUrl?: string
         duration: string
         isFreePreview?: boolean
+        studentCount?: number
+        summary?: string
       }[]
     }[]
   }
