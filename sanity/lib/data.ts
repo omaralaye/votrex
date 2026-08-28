@@ -265,8 +265,10 @@ export function getInstructorAvatarUrl(instructor: {
 // ==========================================
 
 /**
- * Run a live query and return a fallback when the fetch fails, so a Sanity
- * outage degrades one section instead of crashing the whole route.
+ * Run a live query and unwrap its data. The fallback covers a query that
+ * legitimately returns no document (an empty list or a missing slug). A genuine
+ * fetch failure is re-thrown so the nearest route error boundary can offer a
+ * retry, instead of a silent empty state that hides the outage.
  */
 async function safeSanityFetch<T>(
   options: Parameters<typeof sanityFetch>[0],
@@ -277,8 +279,8 @@ async function safeSanityFetch<T>(
     const { data } = await sanityFetch(options)
     return (data as T) ?? fallback
   } catch (err) {
-    console.warn(`Failed to fetch ${context} from Sanity:`, err)
-    return fallback
+    console.error(`Failed to fetch ${context} from Sanity:`, err)
+    throw err
   }
 }
 

@@ -33,7 +33,7 @@ export default function RootLayout({
         <ClerkProvider>
           <PostHogIdentifier />
           {children}
-          <SanityLive onReconnect={false} />
+          <SanityLive />
         </ClerkProvider>
       </body>
     </html>
