@@ -34,6 +34,12 @@ export const lessonType = defineType({
         }),
     }),
     defineField({
+      name: 'thumbnailUrl',
+      title: 'Thumbnail URL (e.g. Picsum seed)',
+      type: 'url',
+      description: 'Direct image/thumbnail URL (e.g. Picsum seed or YouTube poster)',
+    }),
+    defineField({
       name: 'thumbnail',
       title: 'Thumbnail / Poster Image',
       type: 'image',

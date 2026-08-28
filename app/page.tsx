@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import {
   SearchIcon,
   StarIcon,
@@ -8,6 +9,15 @@ import {
   NextjsIcon,
   DockerIcon,
   TypeScriptIcon,
+  ReactIcon,
+  NodejsIcon,
+  CloudIcon,
+  DatabaseIcon,
+  AIIcon,
+  PythonIcon,
+  RustIcon,
+  SecurityIcon,
+  CustomCourseIcon,
 } from "@/components/icons";
 import { Navbar } from "@/components/navigation/navbar";
 import { CourseCard } from "@/components/cards/course-card";
@@ -15,6 +25,7 @@ import { BottomBarsGraphic } from "@/components/ui/bottom-bars";
 
 interface Course {
   id: string;
+  slug: string;
   title: string;
   description: string;
   level: string;
@@ -27,6 +38,7 @@ interface Course {
 const DEFAULT_COURSES: Course[] = [
   {
     id: "nextjs",
+    slug: "nextjs-for-production",
     title: "Next.js for Production",
     description: "Build scalable, high-performance web applications with Next.js.",
     level: "Intermediate",
@@ -37,21 +49,23 @@ const DEFAULT_COURSES: Course[] = [
   },
   {
     id: "docker",
-    title: "Docker Essentials",
-    description: "Containerize applications and streamline your development workflow.",
+    slug: "docker-container-engineering",
+    title: "Docker & Container Engineering",
+    description: "Containerize applications and streamline your deployment workflow.",
     level: "Beginner",
-    duration: "10h 12m",
-    modulesCount: "8 modules",
+    duration: "2h 30m",
+    modulesCount: "3 modules",
     icon: <DockerIcon size={44} />,
     tags: ["DevOps", "Containers", "Docker Compose", "CI/CD"],
   },
   {
     id: "typescript",
-    title: "TypeScript Deep Dive",
+    slug: "typescript-deep-dive-metaprogramming",
+    title: "TypeScript Deep Dive & Metaprogramming",
     description: "Go beyond the basics and write safer, more expressive code.",
     level: "Intermediate",
-    duration: "14h 36m",
-    modulesCount: "10 modules",
+    duration: "2h 50m",
+    modulesCount: "3 modules",
     icon: <TypeScriptIcon size={44} />,
     tags: ["TypeScript", "Generics", "Type Systems", "JavaScript"],
   },
@@ -65,8 +79,24 @@ function getCourseIcon(iconIdentifier?: string) {
       return <DockerIcon size={44} />;
     case "typescript":
       return <TypeScriptIcon size={44} />;
+    case "react":
+      return <ReactIcon size={44} />;
+    case "node":
+      return <NodejsIcon size={44} />;
+    case "cloud":
+      return <CloudIcon size={44} />;
+    case "database":
+      return <DatabaseIcon size={44} />;
+    case "ai":
+      return <AIIcon size={44} />;
+    case "python":
+      return <PythonIcon size={44} />;
+    case "rust":
+      return <RustIcon size={44} />;
+    case "security":
+      return <SecurityIcon size={44} />;
     default:
-      return <NextjsIcon size={44} />;
+      return <CustomCourseIcon size={44} />;
   }
 }
 
@@ -81,11 +111,24 @@ export default function VertexHomePage() {
   useEffect(() => {
     async function fetchSanityCourses() {
       try {
-        const { getCourses } = await import("@/sanity/lib/data");
-        const data = await getCourses();
+        const { client } = await import("@/sanity/lib/client");
+        const { COURSES_QUERY } = await import("@/sanity/lib/queries");
+        const data = await client.fetch(COURSES_QUERY);
         if (data && data.length > 0) {
-          const mappedCourses: Course[] = data.map((item) => ({
+          type FetchedCourse = {
+            _id: string;
+            slug?: { current: string };
+            title: string;
+            description: string;
+            level?: string;
+            duration?: string;
+            modulesCount?: number;
+            iconIdentifier?: string;
+            category?: { title?: string };
+          };
+          const mappedCourses: Course[] = (data as FetchedCourse[]).map((item) => ({
             id: item._id,
+            slug: item.slug?.current || item._id,
             title: item.title,
             description: item.description,
             level: item.level || "Beginner",
@@ -226,13 +269,13 @@ export default function VertexHomePage() {
               <h2 className="font-serif text-[24px] sm:text-[28px] font-semibold tracking-tight text-[#0F172A]">
                 All Courses
               </h2>
-              <a
-                href="#courses"
+              <Link
+                href="/courses"
                 className="group inline-flex items-center gap-1.5 text-[14px] font-sans font-medium text-[#EA580C] hover:text-[#C2410C] transition-colors cursor-pointer"
               >
                 <span>View all courses</span>
                 <span className="transform group-hover:translate-x-0.5 transition-transform">→</span>
-              </a>
+              </Link>
             </div>
 
             {/* Courses Cards Grid */}
@@ -246,6 +289,7 @@ export default function VertexHomePage() {
                   duration={course.duration}
                   modulesCount={course.modulesCount}
                   icon={course.icon}
+                  href={`/courses/${course.slug}`}
                   onClick={() => setSelectedCourse(course)}
                 />
               ))}

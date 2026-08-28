@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { StatsIcon, ClockIcon, DocumentIcon } from "@/components/icons";
 
 export interface CourseCardProps {
@@ -9,6 +10,7 @@ export interface CourseCardProps {
   modulesCount: number | string;
   icon?: React.ReactNode;
   className?: string;
+  href?: string;
   onClick?: () => void;
 }
 
@@ -20,14 +22,15 @@ export function CourseCard({
   modulesCount = "12 modules",
   icon,
   className = "",
+  href,
   onClick,
 }: CourseCardProps) {
   const formattedModules = typeof modulesCount === "number" ? `${modulesCount} modules` : modulesCount;
 
-  return (
+  const content = (
     <div
       onClick={onClick}
-      className={`group flex flex-col justify-between bg-white border border-[#E2E8F0] rounded-[20px] p-7 shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-200 cursor-pointer ${className}`}
+      className={`group flex flex-col justify-between bg-white border border-[#E2E8F0] rounded-[20px] p-7 shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-200 cursor-pointer h-full ${className}`}
     >
       <div>
         {/* Course Logo / Icon */}
@@ -63,5 +66,16 @@ export function CourseCard({
       </div>
     </div>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="block no-underline h-full">
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 }
+
 

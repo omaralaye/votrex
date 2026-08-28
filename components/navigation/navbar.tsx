@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { VertexLogo, BellIcon } from "@/components/icons";
 import { SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
 
@@ -15,11 +16,13 @@ export function Navbar({ activeRoute = "courses", className = "", onNavigate }: 
         {/* Brand & Left Nav */}
         <div className="flex items-center gap-8 sm:gap-12">
 
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              onNavigate?.("courses");
+          <Link
+            href="/"
+            onClick={(e: React.MouseEvent) => {
+              if (onNavigate) {
+                e.preventDefault();
+                onNavigate("courses");
+              }
             }}
             className="flex items-center gap-2.5 group cursor-pointer"
           >
@@ -27,12 +30,17 @@ export function Navbar({ activeRoute = "courses", className = "", onNavigate }: 
             <span className="font-sans font-bold text-[20px] tracking-tight text-[#0F172A]">
               Vertex
             </span>
-          </a>
+          </Link>
 
           <nav className="flex items-center gap-7 sm:gap-9 text-[14px] font-sans">
-            <button
-              type="button"
-              onClick={() => onNavigate?.("courses")}
+            <Link
+              href="/courses"
+              onClick={(e: React.MouseEvent) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate("courses");
+                }
+              }}
               className={`transition-colors py-1 cursor-pointer font-medium ${
                 activeRoute === "courses"
                   ? "text-[#0F172A] font-semibold"
@@ -40,10 +48,15 @@ export function Navbar({ activeRoute = "courses", className = "", onNavigate }: 
               }`}
             >
               Courses
-            </button>
-            <button
-              type="button"
-              onClick={() => onNavigate?.("my-learning")}
+            </Link>
+            <Link
+              href="/#my-learning"
+              onClick={(e: React.MouseEvent) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate("my-learning");
+                }
+              }}
               className={`transition-colors py-1 cursor-pointer ${
                 activeRoute === "my-learning"
                   ? "text-[#0F172A] font-semibold"
@@ -51,7 +64,7 @@ export function Navbar({ activeRoute = "courses", className = "", onNavigate }: 
               }`}
             >
               My Learning
-            </button>
+            </Link>
           </nav>
         </div>
 

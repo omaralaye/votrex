@@ -20,6 +20,12 @@ export const moduleType = defineType({
       rows: 2,
     }),
     defineField({
+      name: 'duration',
+      title: 'Module Duration',
+      type: 'string',
+      placeholder: '1h 12m',
+    }),
+    defineField({
       name: 'lessons',
       title: 'Lessons in this Module',
       type: 'array',

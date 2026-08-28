@@ -31,6 +31,12 @@ export const courseType = defineType({
       validation: (rule) => rule.required().error('Course description is required'),
     }),
     defineField({
+      name: 'coverImageUrl',
+      title: 'Cover Image URL (e.g. Picsum seed)',
+      type: 'url',
+      description: 'Direct cover image URL (e.g. Picsum seed)',
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'image',
@@ -94,6 +100,10 @@ export const courseType = defineType({
           { title: 'Node.js', value: 'node' },
           { title: 'Cloud / DevOps', value: 'cloud' },
           { title: 'Database', value: 'database' },
+          { title: 'AI / Machine Learning', value: 'ai' },
+          { title: 'Python', value: 'python' },
+          { title: 'Rust', value: 'rust' },
+          { title: 'Security', value: 'security' },
           { title: 'Custom / Other', value: 'custom' },
         ],
       },
