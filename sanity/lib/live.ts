@@ -8,5 +8,5 @@ import { readToken } from '../env'
 export const { sanityFetch, SanityLive } = defineLive({
   client,
   serverToken: readToken,
-  browserToken: readToken,
+  browserToken: process.env.NEXT_PUBLIC_SANITY_READ_TOKEN,
 })

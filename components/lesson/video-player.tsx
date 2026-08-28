@@ -58,7 +58,7 @@ export function VideoPlayer({
       return {
         type: "youtube" as const,
         id: ytId,
-        src: `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1${startParam}`,
+        src: `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1${startParam}`,
       };
     }
 
@@ -120,6 +120,7 @@ export function VideoPlayer({
               src={posterUrl}
               alt={title}
               fill
+              unoptimized
               className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
               sizes="(max-width: 1024px) 100vw, 900px"
               priority

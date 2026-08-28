@@ -10,7 +10,7 @@ if (!process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN) {
   }
 } else {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
-    api_host: "/ingest",
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "/ingest",
     ui_host: "https://us.posthog.com",
     // Include the defaults option as required by PostHog
     defaults: "2026-01-30",

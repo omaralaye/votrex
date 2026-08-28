@@ -1,6 +1,6 @@
 [
   {
-    "_id": "video-gSSsZReIFRk",
+    "_id": "video-lesson-nextjs-101",
     "_type": "video",
     "videoId": "gSSsZReIFRk",
     "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
@@ -60,10 +60,10 @@
     ]
   },
   {
-    "_id": "video-f2w8Yp_N66I",
+    "_id": "video-lesson-nextjs-102",
     "_type": "video",
-    "videoId": "f2w8Yp_N66I",
-    "url": "https://www.youtube.com/watch?v=f2w8Yp_N66I",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -120,10 +120,10 @@
     ]
   },
   {
-    "_id": "video-h_7s3tXqF-I",
+    "_id": "video-lesson-nextjs-103",
     "_type": "video",
-    "videoId": "h_7s3tXqF-I",
-    "url": "https://www.youtube.com/watch?v=h_7s3tXqF-I",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -180,10 +180,10 @@
     ]
   },
   {
-    "_id": "video-zDZtT6iXp3g",
+    "_id": "video-lesson-nextjs-201",
     "_type": "video",
-    "videoId": "zDZtT6iXp3g",
-    "url": "https://www.youtube.com/watch?v=zDZtT6iXp3g",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -240,10 +240,10 @@
     ]
   },
   {
-    "_id": "video-T8v61pZkHw8",
+    "_id": "video-lesson-nextjs-202",
     "_type": "video",
-    "videoId": "T8v61pZkHw8",
-    "url": "https://www.youtube.com/watch?v=T8v61pZkHw8",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -300,10 +300,10 @@
     ]
   },
   {
-    "_id": "video-h8E6j1WbUrg",
+    "_id": "video-lesson-nextjs-203",
     "_type": "video",
-    "videoId": "h8E6j1WbUrg",
-    "url": "https://www.youtube.com/watch?v=h8E6j1WbUrg",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -360,10 +360,10 @@
     ]
   },
   {
-    "_id": "video-VBlSe8TVg4U",
+    "_id": "video-lesson-nextjs-204",
     "_type": "video",
-    "videoId": "VBlSe8TVg4U",
-    "url": "https://www.youtube.com/watch?v=VBlSe8TVg4U",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -420,10 +420,10 @@
     ]
   },
   {
-    "_id": "video-dDpZfOQBMaU",
+    "_id": "video-lesson-nextjs-301",
     "_type": "video",
-    "videoId": "dDpZfOQBMaU",
-    "url": "https://www.youtube.com/watch?v=dDpZfOQBMaU",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -480,10 +480,10 @@
     ]
   },
   {
-    "_id": "video-wm5gMKuwSYk",
+    "_id": "video-lesson-nextjs-302",
     "_type": "video",
-    "videoId": "wm5gMKuwSYk",
-    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -540,10 +540,10 @@
     ]
   },
   {
-    "_id": "video-6mQ3q7ZkEwA",
+    "_id": "video-lesson-nextjs-303",
     "_type": "video",
-    "videoId": "6mQ3q7ZkEwA",
-    "url": "https://www.youtube.com/watch?v=6mQ3q7ZkEwA",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -600,10 +600,10 @@
     ]
   },
   {
-    "_id": "video-9_5A2zRrhG0",
+    "_id": "video-lesson-nextjs-304",
     "_type": "video",
-    "videoId": "9_5A2zRrhG0",
-    "url": "https://www.youtube.com/watch?v=9_5A2zRrhG0",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -660,10 +660,10 @@
     ]
   },
   {
-    "_id": "video-UqQ1Y0gH0pQ",
+    "_id": "video-lesson-nextjs-401",
     "_type": "video",
-    "videoId": "UqQ1Y0gH0pQ",
-    "url": "https://www.youtube.com/watch?v=UqQ1Y0gH0pQ",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -720,7 +720,7 @@
     ]
   },
   {
-    "_id": "video-gSSsZReIFRk",
+    "_id": "video-lesson-nextjs-402",
     "_type": "video",
     "videoId": "gSSsZReIFRk",
     "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
@@ -780,10 +780,10 @@
     ]
   },
   {
-    "_id": "video-f2w8Yp_N66I",
+    "_id": "video-lesson-nextjs-403",
     "_type": "video",
-    "videoId": "f2w8Yp_N66I",
-    "url": "https://www.youtube.com/watch?v=f2w8Yp_N66I",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -840,10 +840,10 @@
     ]
   },
   {
-    "_id": "video-h_7s3tXqF-I",
+    "_id": "video-lesson-nextjs-404",
     "_type": "video",
-    "videoId": "h_7s3tXqF-I",
-    "url": "https://www.youtube.com/watch?v=h_7s3tXqF-I",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -900,10 +900,10 @@
     ]
   },
   {
-    "_id": "video-zDZtT6iXp3g",
+    "_id": "video-lesson-nextjs-501",
     "_type": "video",
-    "videoId": "zDZtT6iXp3g",
-    "url": "https://www.youtube.com/watch?v=zDZtT6iXp3g",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -960,10 +960,10 @@
     ]
   },
   {
-    "_id": "video-T8v61pZkHw8",
+    "_id": "video-lesson-nextjs-502",
     "_type": "video",
-    "videoId": "T8v61pZkHw8",
-    "url": "https://www.youtube.com/watch?v=T8v61pZkHw8",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -1020,10 +1020,10 @@
     ]
   },
   {
-    "_id": "video-h8E6j1WbUrg",
+    "_id": "video-lesson-nextjs-503",
     "_type": "video",
-    "videoId": "h8E6j1WbUrg",
-    "url": "https://www.youtube.com/watch?v=h8E6j1WbUrg",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -1080,10 +1080,10 @@
     ]
   },
   {
-    "_id": "video-VBlSe8TVg4U",
+    "_id": "video-lesson-nextjs-504",
     "_type": "video",
-    "videoId": "VBlSe8TVg4U",
-    "url": "https://www.youtube.com/watch?v=VBlSe8TVg4U",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -1140,10 +1140,10 @@
     ]
   },
   {
-    "_id": "video-dDpZfOQBMaU",
+    "_id": "video-lesson-nextjs-601",
     "_type": "video",
-    "videoId": "dDpZfOQBMaU",
-    "url": "https://www.youtube.com/watch?v=dDpZfOQBMaU",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -1200,10 +1200,10 @@
     ]
   },
   {
-    "_id": "video-wm5gMKuwSYk",
+    "_id": "video-lesson-nextjs-602",
     "_type": "video",
-    "videoId": "wm5gMKuwSYk",
-    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -1260,10 +1260,10 @@
     ]
   },
   {
-    "_id": "video-6mQ3q7ZkEwA",
+    "_id": "video-lesson-nextjs-603",
     "_type": "video",
-    "videoId": "6mQ3q7ZkEwA",
-    "url": "https://www.youtube.com/watch?v=6mQ3q7ZkEwA",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -1320,10 +1320,10 @@
     ]
   },
   {
-    "_id": "video-9_5A2zRrhG0",
+    "_id": "video-lesson-nextjs-701",
     "_type": "video",
-    "videoId": "9_5A2zRrhG0",
-    "url": "https://www.youtube.com/watch?v=9_5A2zRrhG0",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -1380,10 +1380,10 @@
     ]
   },
   {
-    "_id": "video-UqQ1Y0gH0pQ",
+    "_id": "video-lesson-nextjs-702",
     "_type": "video",
-    "videoId": "UqQ1Y0gH0pQ",
-    "url": "https://www.youtube.com/watch?v=UqQ1Y0gH0pQ",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -1440,7 +1440,7 @@
     ]
   },
   {
-    "_id": "video-gSSsZReIFRk",
+    "_id": "video-lesson-nextjs-703",
     "_type": "video",
     "videoId": "gSSsZReIFRk",
     "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
@@ -1500,10 +1500,10 @@
     ]
   },
   {
-    "_id": "video-f2w8Yp_N66I",
+    "_id": "video-lesson-nextjs-704",
     "_type": "video",
-    "videoId": "f2w8Yp_N66I",
-    "url": "https://www.youtube.com/watch?v=f2w8Yp_N66I",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -1560,10 +1560,10 @@
     ]
   },
   {
-    "_id": "video-h_7s3tXqF-I",
+    "_id": "video-lesson-nextjs-801",
     "_type": "video",
-    "videoId": "h_7s3tXqF-I",
-    "url": "https://www.youtube.com/watch?v=h_7s3tXqF-I",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -1620,10 +1620,10 @@
     ]
   },
   {
-    "_id": "video-zDZtT6iXp3g",
+    "_id": "video-lesson-nextjs-802",
     "_type": "video",
-    "videoId": "zDZtT6iXp3g",
-    "url": "https://www.youtube.com/watch?v=zDZtT6iXp3g",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -1680,10 +1680,10 @@
     ]
   },
   {
-    "_id": "video-T8v61pZkHw8",
+    "_id": "video-lesson-nextjs-803",
     "_type": "video",
-    "videoId": "T8v61pZkHw8",
-    "url": "https://www.youtube.com/watch?v=T8v61pZkHw8",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -1740,10 +1740,10 @@
     ]
   },
   {
-    "_id": "video-h8E6j1WbUrg",
+    "_id": "video-lesson-nextjs-804",
     "_type": "video",
-    "videoId": "h8E6j1WbUrg",
-    "url": "https://www.youtube.com/watch?v=h8E6j1WbUrg",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -1800,10 +1800,10 @@
     ]
   },
   {
-    "_id": "video-VBlSe8TVg4U",
+    "_id": "video-lesson-nextjs-901",
     "_type": "video",
-    "videoId": "VBlSe8TVg4U",
-    "url": "https://www.youtube.com/watch?v=VBlSe8TVg4U",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -1860,10 +1860,10 @@
     ]
   },
   {
-    "_id": "video-dDpZfOQBMaU",
+    "_id": "video-lesson-nextjs-902",
     "_type": "video",
-    "videoId": "dDpZfOQBMaU",
-    "url": "https://www.youtube.com/watch?v=dDpZfOQBMaU",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -1920,10 +1920,10 @@
     ]
   },
   {
-    "_id": "video-wm5gMKuwSYk",
+    "_id": "video-lesson-nextjs-903",
     "_type": "video",
-    "videoId": "wm5gMKuwSYk",
-    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -1980,10 +1980,10 @@
     ]
   },
   {
-    "_id": "video-6mQ3q7ZkEwA",
+    "_id": "video-lesson-nextjs-904",
     "_type": "video",
-    "videoId": "6mQ3q7ZkEwA",
-    "url": "https://www.youtube.com/watch?v=6mQ3q7ZkEwA",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -2040,10 +2040,10 @@
     ]
   },
   {
-    "_id": "video-9_5A2zRrhG0",
+    "_id": "video-lesson-nextjs-1001",
     "_type": "video",
-    "videoId": "9_5A2zRrhG0",
-    "url": "https://www.youtube.com/watch?v=9_5A2zRrhG0",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -2100,10 +2100,10 @@
     ]
   },
   {
-    "_id": "video-UqQ1Y0gH0pQ",
+    "_id": "video-lesson-nextjs-1002",
     "_type": "video",
-    "videoId": "UqQ1Y0gH0pQ",
-    "url": "https://www.youtube.com/watch?v=UqQ1Y0gH0pQ",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -2160,7 +2160,7 @@
     ]
   },
   {
-    "_id": "video-gSSsZReIFRk",
+    "_id": "video-lesson-nextjs-1003",
     "_type": "video",
     "videoId": "gSSsZReIFRk",
     "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
@@ -2220,10 +2220,10 @@
     ]
   },
   {
-    "_id": "video-f2w8Yp_N66I",
+    "_id": "video-lesson-nextjs-1004",
     "_type": "video",
-    "videoId": "f2w8Yp_N66I",
-    "url": "https://www.youtube.com/watch?v=f2w8Yp_N66I",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -2280,10 +2280,10 @@
     ]
   },
   {
-    "_id": "video-h_7s3tXqF-I",
+    "_id": "video-lesson-nextjs-1101",
     "_type": "video",
-    "videoId": "h_7s3tXqF-I",
-    "url": "https://www.youtube.com/watch?v=h_7s3tXqF-I",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -2340,10 +2340,10 @@
     ]
   },
   {
-    "_id": "video-zDZtT6iXp3g",
+    "_id": "video-lesson-nextjs-1102",
     "_type": "video",
-    "videoId": "zDZtT6iXp3g",
-    "url": "https://www.youtube.com/watch?v=zDZtT6iXp3g",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -2400,10 +2400,10 @@
     ]
   },
   {
-    "_id": "video-T8v61pZkHw8",
+    "_id": "video-lesson-nextjs-1103",
     "_type": "video",
-    "videoId": "T8v61pZkHw8",
-    "url": "https://www.youtube.com/watch?v=T8v61pZkHw8",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -2460,10 +2460,10 @@
     ]
   },
   {
-    "_id": "video-h8E6j1WbUrg",
+    "_id": "video-lesson-nextjs-1104",
     "_type": "video",
-    "videoId": "h8E6j1WbUrg",
-    "url": "https://www.youtube.com/watch?v=h8E6j1WbUrg",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -2520,10 +2520,10 @@
     ]
   },
   {
-    "_id": "video-VBlSe8TVg4U",
+    "_id": "video-lesson-nextjs-1201",
     "_type": "video",
-    "videoId": "VBlSe8TVg4U",
-    "url": "https://www.youtube.com/watch?v=VBlSe8TVg4U",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -2580,10 +2580,10 @@
     ]
   },
   {
-    "_id": "video-dDpZfOQBMaU",
+    "_id": "video-lesson-nextjs-1202",
     "_type": "video",
-    "videoId": "dDpZfOQBMaU",
-    "url": "https://www.youtube.com/watch?v=dDpZfOQBMaU",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -2640,10 +2640,10 @@
     ]
   },
   {
-    "_id": "video-wm5gMKuwSYk",
+    "_id": "video-lesson-nextjs-1203",
     "_type": "video",
-    "videoId": "wm5gMKuwSYk",
-    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -2700,10 +2700,10 @@
     ]
   },
   {
-    "_id": "video-6mQ3q7ZkEwA",
+    "_id": "video-lesson-nextjs-1204",
     "_type": "video",
-    "videoId": "6mQ3q7ZkEwA",
-    "url": "https://www.youtube.com/watch?v=6mQ3q7ZkEwA",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -2760,10 +2760,10 @@
     ]
   },
   {
-    "_id": "video-0qotVMx-J5s",
+    "_id": "video-lesson-docker-101",
     "_type": "video",
-    "videoId": "0qotVMx-J5s",
-    "url": "https://www.youtube.com/watch?v=0qotVMx-J5s",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -2820,10 +2820,10 @@
     ]
   },
   {
-    "_id": "video-gAkwW2tuIqE",
+    "_id": "video-lesson-docker-102",
     "_type": "video",
-    "videoId": "gAkwW2tuIqE",
-    "url": "https://www.youtube.com/watch?v=gAkwW2tuIqE",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -2880,10 +2880,10 @@
     ]
   },
   {
-    "_id": "video-G3q_20Csh-Q",
+    "_id": "video-lesson-docker-103",
     "_type": "video",
-    "videoId": "G3q_20Csh-Q",
-    "url": "https://www.youtube.com/watch?v=G3q_20Csh-Q",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -2940,10 +2940,10 @@
     ]
   },
   {
-    "_id": "video-d_kO9xGv-sA",
+    "_id": "video-lesson-docker-104",
     "_type": "video",
-    "videoId": "d_kO9xGv-sA",
-    "url": "https://www.youtube.com/watch?v=d_kO9xGv-sA",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -3000,10 +3000,10 @@
     ]
   },
   {
-    "_id": "video-HG68Ymazo18",
+    "_id": "video-lesson-docker-201",
     "_type": "video",
-    "videoId": "HG68Ymazo18",
-    "url": "https://www.youtube.com/watch?v=HG68Ymazo18",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -3060,10 +3060,10 @@
     ]
   },
   {
-    "_id": "video-bKFMS5C4CG0",
+    "_id": "video-lesson-docker-202",
     "_type": "video",
-    "videoId": "bKFMS5C4CG0",
-    "url": "https://www.youtube.com/watch?v=bKFMS5C4CG0",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -3120,10 +3120,10 @@
     ]
   },
   {
-    "_id": "video-p2PH_YPCMSs",
+    "_id": "video-lesson-docker-203",
     "_type": "video",
-    "videoId": "p2PH_YPCMSs",
-    "url": "https://www.youtube.com/watch?v=p2PH_YPCMSs",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -3180,10 +3180,10 @@
     ]
   },
   {
-    "_id": "video-0B2raPOZZ18",
+    "_id": "video-lesson-docker-204",
     "_type": "video",
-    "videoId": "0B2raPOZZ18",
-    "url": "https://www.youtube.com/watch?v=0B2raPOZZ18",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -3240,10 +3240,10 @@
     ]
   },
   {
-    "_id": "video-Kz6o3l_Z9-A",
+    "_id": "video-lesson-docker-301",
     "_type": "video",
-    "videoId": "Kz6o3l_Z9-A",
-    "url": "https://www.youtube.com/watch?v=Kz6o3l_Z9-A",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -3300,10 +3300,10 @@
     ]
   },
   {
-    "_id": "video-7XG3Y8rB_jA",
+    "_id": "video-lesson-docker-302",
     "_type": "video",
-    "videoId": "7XG3Y8rB_jA",
-    "url": "https://www.youtube.com/watch?v=7XG3Y8rB_jA",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -3360,10 +3360,10 @@
     ]
   },
   {
-    "_id": "video-5r_2Z1z3Z6A",
+    "_id": "video-lesson-docker-303",
     "_type": "video",
-    "videoId": "5r_2Z1z3Z6A",
-    "url": "https://www.youtube.com/watch?v=5r_2Z1z3Z6A",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -3420,10 +3420,10 @@
     ]
   },
   {
-    "_id": "video-R8_veQiYErr",
+    "_id": "video-lesson-docker-304",
     "_type": "video",
-    "videoId": "R8_veQiYErr",
-    "url": "https://www.youtube.com/watch?v=R8_veQiYErr",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -3480,10 +3480,10 @@
     ]
   },
   {
-    "_id": "video-d56mG7DezGs",
+    "_id": "video-lesson-typescript-101",
     "_type": "video",
-    "videoId": "d56mG7DezGs",
-    "url": "https://www.youtube.com/watch?v=d56mG7DezGs",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -3540,10 +3540,10 @@
     ]
   },
   {
-    "_id": "video-2lCCKiWGlC0",
+    "_id": "video-lesson-typescript-102",
     "_type": "video",
-    "videoId": "2lCCKiWGlC0",
-    "url": "https://www.youtube.com/watch?v=2lCCKiWGlC0",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -3600,10 +3600,10 @@
     ]
   },
   {
-    "_id": "video-b4wH68dKqL8",
+    "_id": "video-lesson-typescript-103",
     "_type": "video",
-    "videoId": "b4wH68dKqL8",
-    "url": "https://www.youtube.com/watch?v=b4wH68dKqL8",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -3660,10 +3660,10 @@
     ]
   },
   {
-    "_id": "video-1xN5-xU8q9w",
+    "_id": "video-lesson-typescript-104",
     "_type": "video",
-    "videoId": "1xN5-xU8q9w",
-    "url": "https://www.youtube.com/watch?v=1xN5-xU8q9w",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -3720,10 +3720,10 @@
     ]
   },
   {
-    "_id": "video-kRj8W9z4m-8",
+    "_id": "video-lesson-typescript-201",
     "_type": "video",
-    "videoId": "kRj8W9z4m-8",
-    "url": "https://www.youtube.com/watch?v=kRj8W9z4m-8",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -3780,10 +3780,10 @@
     ]
   },
   {
-    "_id": "video-Zf5rJ-Qd9zQ",
+    "_id": "video-lesson-typescript-202",
     "_type": "video",
-    "videoId": "Zf5rJ-Qd9zQ",
-    "url": "https://www.youtube.com/watch?v=Zf5rJ-Qd9zQ",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -3840,10 +3840,10 @@
     ]
   },
   {
-    "_id": "video-0kF5X4j7P_g",
+    "_id": "video-lesson-typescript-203",
     "_type": "video",
-    "videoId": "0kF5X4j7P_g",
-    "url": "https://www.youtube.com/watch?v=0kF5X4j7P_g",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -3900,10 +3900,10 @@
     ]
   },
   {
-    "_id": "video-6v7C8M2uF10",
+    "_id": "video-lesson-typescript-204",
     "_type": "video",
-    "videoId": "6v7C8M2uF10",
-    "url": "https://www.youtube.com/watch?v=6v7C8M2uF10",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -3960,10 +3960,10 @@
     ]
   },
   {
-    "_id": "video-5vTqW1eY8a0",
+    "_id": "video-lesson-typescript-301",
     "_type": "video",
-    "videoId": "5vTqW1eY8a0",
-    "url": "https://www.youtube.com/watch?v=5vTqW1eY8a0",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -4020,10 +4020,10 @@
     ]
   },
   {
-    "_id": "video-7X8K-y3vN4A",
+    "_id": "video-lesson-typescript-302",
     "_type": "video",
-    "videoId": "7X8K-y3vN4A",
-    "url": "https://www.youtube.com/watch?v=7X8K-y3vN4A",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -4080,10 +4080,10 @@
     ]
   },
   {
-    "_id": "video-J3eL3P4qK-s",
+    "_id": "video-lesson-typescript-303",
     "_type": "video",
-    "videoId": "J3eL3P4qK-s",
-    "url": "https://www.youtube.com/watch?v=J3eL3P4qK-s",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -4140,10 +4140,10 @@
     ]
   },
   {
-    "_id": "video-z8Xy2hV4w8E",
+    "_id": "video-lesson-typescript-304",
     "_type": "video",
-    "videoId": "z8Xy2hV4w8E",
-    "url": "https://www.youtube.com/watch?v=z8Xy2hV4w8E",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -4200,10 +4200,10 @@
     ]
   },
   {
-    "_id": "video-5qap5aO4i9A",
+    "_id": "video-lesson-ai-agents-101",
     "_type": "video",
-    "videoId": "5qap5aO4i9A",
-    "url": "https://www.youtube.com/watch?v=5qap5aO4i9A",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -4260,10 +4260,10 @@
     ]
   },
   {
-    "_id": "video-0lOSvOoF2WE",
+    "_id": "video-lesson-ai-agents-102",
     "_type": "video",
-    "videoId": "0lOSvOoF2WE",
-    "url": "https://www.youtube.com/watch?v=0lOSvOoF2WE",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -4320,10 +4320,10 @@
     ]
   },
   {
-    "_id": "video-2xxziLWmaSA",
+    "_id": "video-lesson-ai-agents-103",
     "_type": "video",
-    "videoId": "2xxziLWmaSA",
-    "url": "https://www.youtube.com/watch?v=2xxziLWmaSA",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -4380,10 +4380,10 @@
     ]
   },
   {
-    "_id": "video-jkrNmkKqhp4",
+    "_id": "video-lesson-ai-agents-104",
     "_type": "video",
-    "videoId": "jkrNmkKqhp4",
-    "url": "https://www.youtube.com/watch?v=jkrNmkKqhp4",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -4440,10 +4440,10 @@
     ]
   },
   {
-    "_id": "video-8OJC21T2SL4",
+    "_id": "video-lesson-ai-agents-201",
     "_type": "video",
-    "videoId": "8OJC21T2SL4",
-    "url": "https://www.youtube.com/watch?v=8OJC21T2SL4",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -4500,10 +4500,10 @@
     ]
   },
   {
-    "_id": "video-TRjq7t2Ub50",
+    "_id": "video-lesson-ai-agents-202",
     "_type": "video",
-    "videoId": "TRjq7t2Ub50",
-    "url": "https://www.youtube.com/watch?v=TRjq7t2Ub50",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -4560,10 +4560,10 @@
     ]
   },
   {
-    "_id": "video-wU_9k60d_fQ",
+    "_id": "video-lesson-ai-agents-203",
     "_type": "video",
-    "videoId": "wU_9k60d_fQ",
-    "url": "https://www.youtube.com/watch?v=wU_9k60d_fQ",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -4620,10 +4620,10 @@
     ]
   },
   {
-    "_id": "video-zGgC8N3p_qE",
+    "_id": "video-lesson-ai-agents-204",
     "_type": "video",
-    "videoId": "zGgC8N3p_qE",
-    "url": "https://www.youtube.com/watch?v=zGgC8N3p_qE",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -4680,10 +4680,10 @@
     ]
   },
   {
-    "_id": "video-hvAPnpSfSGo",
+    "_id": "video-lesson-ai-agents-301",
     "_type": "video",
-    "videoId": "hvAPnpSfSGo",
-    "url": "https://www.youtube.com/watch?v=hvAPnpSfSGo",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -4740,10 +4740,10 @@
     ]
   },
   {
-    "_id": "video-R8KB-Zcynxc",
+    "_id": "video-lesson-ai-agents-302",
     "_type": "video",
-    "videoId": "R8KB-Zcynxc",
-    "url": "https://www.youtube.com/watch?v=R8KB-Zcynxc",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -4800,10 +4800,10 @@
     ]
   },
   {
-    "_id": "video-AnrEwY7z7r0",
+    "_id": "video-lesson-ai-agents-303",
     "_type": "video",
-    "videoId": "AnrEwY7z7r0",
-    "url": "https://www.youtube.com/watch?v=AnrEwY7z7r0",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -4860,10 +4860,10 @@
     ]
   },
   {
-    "_id": "video-vV_XkM4w7y0",
+    "_id": "video-lesson-ai-agents-304",
     "_type": "video",
-    "videoId": "vV_XkM4w7y0",
-    "url": "https://www.youtube.com/watch?v=vV_XkM4w7y0",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -4920,10 +4920,10 @@
     ]
   },
   {
-    "_id": "video-0_T0b64d6uI",
+    "_id": "video-lesson-react-patterns-101",
     "_type": "video",
-    "videoId": "0_T0b64d6uI",
-    "url": "https://www.youtube.com/watch?v=0_T0b64d6uI",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -4980,10 +4980,10 @@
     ]
   },
   {
-    "_id": "video-T_s_T3hP1aA",
+    "_id": "video-lesson-react-patterns-102",
     "_type": "video",
-    "videoId": "T_s_T3hP1aA",
-    "url": "https://www.youtube.com/watch?v=T_s_T3hP1aA",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -5040,10 +5040,10 @@
     ]
   },
   {
-    "_id": "video-680r_R173tA",
+    "_id": "video-lesson-react-patterns-103",
     "_type": "video",
-    "videoId": "680r_R173tA",
-    "url": "https://www.youtube.com/watch?v=680r_R173tA",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -5100,10 +5100,10 @@
     ]
   },
   {
-    "_id": "video-9x3zB_P7k98",
+    "_id": "video-lesson-react-patterns-104",
     "_type": "video",
-    "videoId": "9x3zB_P7k98",
-    "url": "https://www.youtube.com/watch?v=9x3zB_P7k98",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -5160,10 +5160,10 @@
     ]
   },
   {
-    "_id": "video-hEGg-3oIHdQ",
+    "_id": "video-lesson-react-patterns-201",
     "_type": "video",
-    "videoId": "hEGg-3oIHdQ",
-    "url": "https://www.youtube.com/watch?v=hEGg-3oIHdQ",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -5220,10 +5220,10 @@
     ]
   },
   {
-    "_id": "video-33O3L3E980s",
+    "_id": "video-lesson-react-patterns-202",
     "_type": "video",
-    "videoId": "33O3L3E980s",
-    "url": "https://www.youtube.com/watch?v=33O3L3E980s",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -5280,10 +5280,10 @@
     ]
   },
   {
-    "_id": "video-2e81Z2eS4j0",
+    "_id": "video-lesson-react-patterns-203",
     "_type": "video",
-    "videoId": "2e81Z2eS4j0",
-    "url": "https://www.youtube.com/watch?v=2e81Z2eS4j0",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -5340,10 +5340,10 @@
     ]
   },
   {
-    "_id": "video-3NszE4QvTz4",
+    "_id": "video-lesson-react-patterns-204",
     "_type": "video",
-    "videoId": "3NszE4QvTz4",
-    "url": "https://www.youtube.com/watch?v=3NszE4QvTz4",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -5400,10 +5400,10 @@
     ]
   },
   {
-    "_id": "video-cZBnndfB_aE",
+    "_id": "video-lesson-react-patterns-301",
     "_type": "video",
-    "videoId": "cZBnndfB_aE",
-    "url": "https://www.youtube.com/watch?v=cZBnndfB_aE",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -5460,10 +5460,10 @@
     ]
   },
   {
-    "_id": "video-_kg_zQzM2iE",
+    "_id": "video-lesson-react-patterns-302",
     "_type": "video",
-    "videoId": "_kg_zQzM2iE",
-    "url": "https://www.youtube.com/watch?v=_kg_zQzM2iE",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -5520,10 +5520,10 @@
     ]
   },
   {
-    "_id": "video-8Z9a8tq5s7w",
+    "_id": "video-lesson-react-patterns-303",
     "_type": "video",
-    "videoId": "8Z9a8tq5s7w",
-    "url": "https://www.youtube.com/watch?v=8Z9a8tq5s7w",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -5580,10 +5580,10 @@
     ]
   },
   {
-    "_id": "video-6X7Z_X8W3vU",
+    "_id": "video-lesson-react-patterns-304",
     "_type": "video",
-    "videoId": "6X7Z_X8W3vU",
-    "url": "https://www.youtube.com/watch?v=6X7Z_X8W3vU",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -5640,10 +5640,10 @@
     ]
   },
   {
-    "_id": "video-X48VuDVv0do",
+    "_id": "video-lesson-kubernetes-101",
     "_type": "video",
-    "videoId": "X48VuDVv0do",
-    "url": "https://www.youtube.com/watch?v=X48VuDVv0do",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -5700,10 +5700,10 @@
     ]
   },
   {
-    "_id": "video-T4Z7visMM4E",
+    "_id": "video-lesson-kubernetes-102",
     "_type": "video",
-    "videoId": "T4Z7visMM4E",
-    "url": "https://www.youtube.com/watch?v=T4Z7visMM4E",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -5760,10 +5760,10 @@
     ]
   },
   {
-    "_id": "video-80Ew_fsV4rM",
+    "_id": "video-lesson-kubernetes-103",
     "_type": "video",
-    "videoId": "80Ew_fsV4rM",
-    "url": "https://www.youtube.com/watch?v=80Ew_fsV4rM",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -5820,10 +5820,10 @@
     ]
   },
   {
-    "_id": "video-5Vd_U8_X7zI",
+    "_id": "video-lesson-kubernetes-104",
     "_type": "video",
-    "videoId": "5Vd_U8_X7zI",
-    "url": "https://www.youtube.com/watch?v=5Vd_U8_X7zI",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -5880,10 +5880,10 @@
     ]
   },
   {
-    "_id": "video-vV2F6kE2u88",
+    "_id": "video-lesson-kubernetes-201",
     "_type": "video",
-    "videoId": "vV2F6kE2u88",
-    "url": "https://www.youtube.com/watch?v=vV2F6kE2u88",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -5940,10 +5940,10 @@
     ]
   },
   {
-    "_id": "video-6z7E2qP0b78",
+    "_id": "video-lesson-kubernetes-202",
     "_type": "video",
-    "videoId": "6z7E2qP0b78",
-    "url": "https://www.youtube.com/watch?v=6z7E2qP0b78",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -6000,10 +6000,10 @@
     ]
   },
   {
-    "_id": "video-3n4z_V5x_kE",
+    "_id": "video-lesson-kubernetes-203",
     "_type": "video",
-    "videoId": "3n4z_V5x_kE",
-    "url": "https://www.youtube.com/watch?v=3n4z_V5x_kE",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -6060,10 +6060,10 @@
     ]
   },
   {
-    "_id": "video-48y2R6Z1yS0",
+    "_id": "video-lesson-kubernetes-204",
     "_type": "video",
-    "videoId": "48y2R6Z1yS0",
-    "url": "https://www.youtube.com/watch?v=48y2R6Z1yS0",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -6120,10 +6120,10 @@
     ]
   },
   {
-    "_id": "video--ykwb1d0DXU",
+    "_id": "video-lesson-kubernetes-301",
     "_type": "video",
-    "videoId": "-ykwb1d0DXU",
-    "url": "https://www.youtube.com/watch?v=-ykwb1d0DXU",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -6180,10 +6180,10 @@
     ]
   },
   {
-    "_id": "video-MeU5_uc5_Xk",
+    "_id": "video-lesson-kubernetes-302",
     "_type": "video",
-    "videoId": "MeU5_uc5_Xk",
-    "url": "https://www.youtube.com/watch?v=MeU5_uc5_Xk",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -6240,10 +6240,10 @@
     ]
   },
   {
-    "_id": "video-3gGpMmYeEO8",
+    "_id": "video-lesson-kubernetes-303",
     "_type": "video",
-    "videoId": "3gGpMmYeEO8",
-    "url": "https://www.youtube.com/watch?v=3gGpMmYeEO8",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -6300,10 +6300,10 @@
     ]
   },
   {
-    "_id": "video-8K_4S2Z1a9o",
+    "_id": "video-lesson-kubernetes-304",
     "_type": "video",
-    "videoId": "8K_4S2Z1a9o",
-    "url": "https://www.youtube.com/watch?v=8K_4S2Z1a9o",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -6360,10 +6360,10 @@
     ]
   },
   {
-    "_id": "video-8aGhZQkoFbQ",
+    "_id": "video-lesson-nodejs-microservices-101",
     "_type": "video",
-    "videoId": "8aGhZQkoFbQ",
-    "url": "https://www.youtube.com/watch?v=8aGhZQkoFbQ",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -6420,10 +6420,10 @@
     ]
   },
   {
-    "_id": "video-gT8w5O9_0Uo",
+    "_id": "video-lesson-nodejs-microservices-102",
     "_type": "video",
-    "videoId": "gT8w5O9_0Uo",
-    "url": "https://www.youtube.com/watch?v=gT8w5O9_0Uo",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -6480,10 +6480,10 @@
     ]
   },
   {
-    "_id": "video-3k11Y3vW6Uo",
+    "_id": "video-lesson-nodejs-microservices-103",
     "_type": "video",
-    "videoId": "3k11Y3vW6Uo",
-    "url": "https://www.youtube.com/watch?v=3k11Y3vW6Uo",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -6540,10 +6540,10 @@
     ]
   },
   {
-    "_id": "video-hliQE9TrWkg",
+    "_id": "video-lesson-nodejs-microservices-104",
     "_type": "video",
-    "videoId": "hliQE9TrWkg",
-    "url": "https://www.youtube.com/watch?v=hliQE9TrWkg",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -6600,10 +6600,10 @@
     ]
   },
   {
-    "_id": "video-Yw4r8jD6hA4",
+    "_id": "video-lesson-nodejs-microservices-201",
     "_type": "video",
-    "videoId": "Yw4r8jD6hA4",
-    "url": "https://www.youtube.com/watch?v=Yw4r8jD6hA4",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -6660,10 +6660,10 @@
     ]
   },
   {
-    "_id": "video-deG25y_r6JY",
+    "_id": "video-lesson-nodejs-microservices-202",
     "_type": "video",
-    "videoId": "deG25y_r6JY",
-    "url": "https://www.youtube.com/watch?v=deG25y_r6JY",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -6720,10 +6720,10 @@
     ]
   },
   {
-    "_id": "video-R873BlBMUB4",
+    "_id": "video-lesson-nodejs-microservices-203",
     "_type": "video",
-    "videoId": "R873BlBMUB4",
-    "url": "https://www.youtube.com/watch?v=R873BlBMUB4",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -6780,10 +6780,10 @@
     ]
   },
   {
-    "_id": "video-jgpVdJB2sKQ",
+    "_id": "video-lesson-nodejs-microservices-204",
     "_type": "video",
-    "videoId": "jgpVdJB2sKQ",
-    "url": "https://www.youtube.com/watch?v=jgpVdJB2sKQ",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -6840,10 +6840,10 @@
     ]
   },
   {
-    "_id": "video-ADHcBxEXvFA",
+    "_id": "video-lesson-nodejs-microservices-301",
     "_type": "video",
-    "videoId": "ADHcBxEXvFA",
-    "url": "https://www.youtube.com/watch?v=ADHcBxEXvFA",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -6900,10 +6900,10 @@
     ]
   },
   {
-    "_id": "video-p79tN2N9u_s",
+    "_id": "video-lesson-nodejs-microservices-302",
     "_type": "video",
-    "videoId": "p79tN2N9u_s",
-    "url": "https://www.youtube.com/watch?v=p79tN2N9u_s",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -6960,10 +6960,10 @@
     ]
   },
   {
-    "_id": "video-8x8vE_jA6P4",
+    "_id": "video-lesson-nodejs-microservices-303",
     "_type": "video",
-    "videoId": "8x8vE_jA6P4",
-    "url": "https://www.youtube.com/watch?v=8x8vE_jA6P4",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -7020,10 +7020,10 @@
     ]
   },
   {
-    "_id": "video-1vL3wV_H6t8",
+    "_id": "video-lesson-nodejs-microservices-304",
     "_type": "video",
-    "videoId": "1vL3wV_H6t8",
-    "url": "https://www.youtube.com/watch?v=1vL3wV_H6t8",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -7080,10 +7080,10 @@
     ]
   },
   {
-    "_id": "video-clrtTWZvdHE",
+    "_id": "video-lesson-postgresql-mastery-101",
     "_type": "video",
-    "videoId": "clrtTWZvdHE",
-    "url": "https://www.youtube.com/watch?v=clrtTWZvdHE",
+    "videoId": "qw--VYLpxG4",
+    "url": "https://www.youtube.com/watch?v=qw--VYLpxG4",
     "chapters": [
       {
         "_key": "ch1",
@@ -7140,10 +7140,10 @@
     ]
   },
   {
-    "_id": "video-mG004L4bFvU",
+    "_id": "video-lesson-postgresql-mastery-102",
     "_type": "video",
-    "videoId": "mG004L4bFvU",
-    "url": "https://www.youtube.com/watch?v=mG004L4bFvU",
+    "videoId": "zsjvFFKOm3c",
+    "url": "https://www.youtube.com/watch?v=zsjvFFKOm3c",
     "chapters": [
       {
         "_key": "ch1",
@@ -7200,10 +7200,10 @@
     ]
   },
   {
-    "_id": "video-zE6W1nE_9S4",
+    "_id": "video-lesson-postgresql-mastery-103",
     "_type": "video",
-    "videoId": "zE6W1nE_9S4",
-    "url": "https://www.youtube.com/watch?v=zE6W1nE_9S4",
+    "videoId": "7S_tz1z_5bA",
+    "url": "https://www.youtube.com/watch?v=7S_tz1z_5bA",
     "chapters": [
       {
         "_key": "ch1",
@@ -7260,10 +7260,10 @@
     ]
   },
   {
-    "_id": "video-9L9j2M0yU8U",
+    "_id": "video-lesson-postgresql-mastery-104",
     "_type": "video",
-    "videoId": "9L9j2M0yU8U",
-    "url": "https://www.youtube.com/watch?v=9L9j2M0yU8U",
+    "videoId": "qw--VYLpxG4",
+    "url": "https://www.youtube.com/watch?v=qw--VYLpxG4",
     "chapters": [
       {
         "_key": "ch1",
@@ -7320,10 +7320,10 @@
     ]
   },
   {
-    "_id": "video-d_k8S9s2a1w",
+    "_id": "video-lesson-postgresql-mastery-201",
     "_type": "video",
-    "videoId": "d_k8S9s2a1w",
-    "url": "https://www.youtube.com/watch?v=d_k8S9s2a1w",
+    "videoId": "7S_tz1z_5bA",
+    "url": "https://www.youtube.com/watch?v=7S_tz1z_5bA",
     "chapters": [
       {
         "_key": "ch1",
@@ -7380,10 +7380,10 @@
     ]
   },
   {
-    "_id": "video-wX0R8bS5a4A",
+    "_id": "video-lesson-postgresql-mastery-202",
     "_type": "video",
-    "videoId": "wX0R8bS5a4A",
-    "url": "https://www.youtube.com/watch?v=wX0R8bS5a4A",
+    "videoId": "qw--VYLpxG4",
+    "url": "https://www.youtube.com/watch?v=qw--VYLpxG4",
     "chapters": [
       {
         "_key": "ch1",
@@ -7440,10 +7440,10 @@
     ]
   },
   {
-    "_id": "video-0kE2f7y0W3s",
+    "_id": "video-lesson-postgresql-mastery-203",
     "_type": "video",
-    "videoId": "0kE2f7y0W3s",
-    "url": "https://www.youtube.com/watch?v=0kE2f7y0W3s",
+    "videoId": "zsjvFFKOm3c",
+    "url": "https://www.youtube.com/watch?v=zsjvFFKOm3c",
     "chapters": [
       {
         "_key": "ch1",
@@ -7500,10 +7500,10 @@
     ]
   },
   {
-    "_id": "video-g9zE4rT0w78",
+    "_id": "video-lesson-postgresql-mastery-204",
     "_type": "video",
-    "videoId": "g9zE4rT0w78",
-    "url": "https://www.youtube.com/watch?v=g9zE4rT0w78",
+    "videoId": "qw--VYLpxG4",
+    "url": "https://www.youtube.com/watch?v=qw--VYLpxG4",
     "chapters": [
       {
         "_key": "ch1",
@@ -7560,10 +7560,10 @@
     ]
   },
   {
-    "_id": "video-7X1E3mR0w8A",
+    "_id": "video-lesson-postgresql-mastery-301",
     "_type": "video",
-    "videoId": "7X1E3mR0w8A",
-    "url": "https://www.youtube.com/watch?v=7X1E3mR0w8A",
+    "videoId": "7S_tz1z_5bA",
+    "url": "https://www.youtube.com/watch?v=7S_tz1z_5bA",
     "chapters": [
       {
         "_key": "ch1",
@@ -7620,10 +7620,10 @@
     ]
   },
   {
-    "_id": "video-2n3a7W1e9bA",
+    "_id": "video-lesson-postgresql-mastery-302",
     "_type": "video",
-    "videoId": "2n3a7W1e9bA",
-    "url": "https://www.youtube.com/watch?v=2n3a7W1e9bA",
+    "videoId": "qw--VYLpxG4",
+    "url": "https://www.youtube.com/watch?v=qw--VYLpxG4",
     "chapters": [
       {
         "_key": "ch1",
@@ -7680,10 +7680,10 @@
     ]
   },
   {
-    "_id": "video-5r6Y3hB7a9o",
+    "_id": "video-lesson-postgresql-mastery-303",
     "_type": "video",
-    "videoId": "5r6Y3hB7a9o",
-    "url": "https://www.youtube.com/watch?v=5r6Y3hB7a9o",
+    "videoId": "7S_tz1z_5bA",
+    "url": "https://www.youtube.com/watch?v=7S_tz1z_5bA",
     "chapters": [
       {
         "_key": "ch1",
@@ -7740,10 +7740,10 @@
     ]
   },
   {
-    "_id": "video-8V7Z2y1uF0E",
+    "_id": "video-lesson-postgresql-mastery-304",
     "_type": "video",
-    "videoId": "8V7Z2y1uF0E",
-    "url": "https://www.youtube.com/watch?v=8V7Z2y1uF0E",
+    "videoId": "qw--VYLpxG4",
+    "url": "https://www.youtube.com/watch?v=qw--VYLpxG4",
     "chapters": [
       {
         "_key": "ch1",
@@ -7800,10 +7800,10 @@
     ]
   },
   {
-    "_id": "video-QUT1VxF65nM",
+    "_id": "video-lesson-python-ai-data-101",
     "_type": "video",
-    "videoId": "QUT1VxF65nM",
-    "url": "https://www.youtube.com/watch?v=QUT1VxF65nM",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -7860,10 +7860,10 @@
     ]
   },
   {
-    "_id": "video-mi9f9zOaqM8",
+    "_id": "video-lesson-python-ai-data-102",
     "_type": "video",
-    "videoId": "mi9f9zOaqM8",
-    "url": "https://www.youtube.com/watch?v=mi9f9zOaqM8",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -7920,10 +7920,10 @@
     ]
   },
   {
-    "_id": "video-GkM3U3Z6h4w",
+    "_id": "video-lesson-python-ai-data-103",
     "_type": "video",
-    "videoId": "GkM3U3Z6h4w",
-    "url": "https://www.youtube.com/watch?v=GkM3U3Z6h4w",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -7980,10 +7980,10 @@
     ]
   },
   {
-    "_id": "video-bs9tlDFWWdQ",
+    "_id": "video-lesson-python-ai-data-104",
     "_type": "video",
-    "videoId": "bs9tlDFWWdQ",
-    "url": "https://www.youtube.com/watch?v=bs9tlDFWWdQ",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -8040,10 +8040,10 @@
     ]
   },
   {
-    "_id": "video-0sOvCWFmrtA",
+    "_id": "video-lesson-python-ai-data-201",
     "_type": "video",
-    "videoId": "0sOvCWFmrtA",
-    "url": "https://www.youtube.com/watch?v=0sOvCWFmrtA",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -8100,10 +8100,10 @@
     ]
   },
   {
-    "_id": "video-EMXFZB8FVUA",
+    "_id": "video-lesson-python-ai-data-202",
     "_type": "video",
-    "videoId": "EMXFZB8FVUA",
-    "url": "https://www.youtube.com/watch?v=EMXFZB8FVUA",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -8160,10 +8160,10 @@
     ]
   },
   {
-    "_id": "video-tiZFewofSLM",
+    "_id": "video-lesson-python-ai-data-203",
     "_type": "video",
-    "videoId": "tiZFewofSLM",
-    "url": "https://www.youtube.com/watch?v=tiZFewofSLM",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -8220,10 +8220,10 @@
     ]
   },
   {
-    "_id": "video-TPcWX7dkhq8",
+    "_id": "video-lesson-python-ai-data-204",
     "_type": "video",
-    "videoId": "TPcWX7dkhq8",
-    "url": "https://www.youtube.com/watch?v=TPcWX7dkhq8",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -8280,10 +8280,10 @@
     ]
   },
   {
-    "_id": "video-aOz5k5qZ81A",
+    "_id": "video-lesson-python-ai-data-301",
     "_type": "video",
-    "videoId": "aOz5k5qZ81A",
-    "url": "https://www.youtube.com/watch?v=aOz5k5qZ81A",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -8340,10 +8340,10 @@
     ]
   },
   {
-    "_id": "video-1xN5_xU8q9w",
+    "_id": "video-lesson-python-ai-data-302",
     "_type": "video",
-    "videoId": "1xN5_xU8q9w",
-    "url": "https://www.youtube.com/watch?v=1xN5_xU8q9w",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -8400,10 +8400,10 @@
     ]
   },
   {
-    "_id": "video-3z8Z2w7x5y0",
+    "_id": "video-lesson-python-ai-data-303",
     "_type": "video",
-    "videoId": "3z8Z2w7x5y0",
-    "url": "https://www.youtube.com/watch?v=3z8Z2w7x5y0",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -8460,10 +8460,10 @@
     ]
   },
   {
-    "_id": "video-7X1E3mR0w8B",
+    "_id": "video-lesson-python-ai-data-304",
     "_type": "video",
-    "videoId": "7X1E3mR0w8B",
-    "url": "https://www.youtube.com/watch?v=7X1E3mR0w8B",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -8520,10 +8520,10 @@
     ]
   },
   {
-    "_id": "video-CHzERullHe8",
+    "_id": "video-lesson-web-security-101",
     "_type": "video",
-    "videoId": "CHzERullHe8",
-    "url": "https://www.youtube.com/watch?v=CHzERullHe8",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -8580,10 +8580,10 @@
     ]
   },
   {
-    "_id": "video-7Q17ubqLfaM",
+    "_id": "video-lesson-web-security-102",
     "_type": "video",
-    "videoId": "7Q17ubqLfaM",
-    "url": "https://www.youtube.com/watch?v=7Q17ubqLfaM",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",
@@ -8640,10 +8640,10 @@
     ]
   },
   {
-    "_id": "video-5z7e_S9j8A0",
+    "_id": "video-lesson-web-security-103",
     "_type": "video",
-    "videoId": "5z7e_S9j8A0",
-    "url": "https://www.youtube.com/watch?v=5z7e_S9j8A0",
+    "videoId": "RBM03RihZVs",
+    "url": "https://www.youtube.com/watch?v=RBM03RihZVs",
     "chapters": [
       {
         "_key": "ch1",
@@ -8700,10 +8700,10 @@
     ]
   },
   {
-    "_id": "video-8V7Z2y1uF0A",
+    "_id": "video-lesson-web-security-104",
     "_type": "video",
-    "videoId": "8V7Z2y1uF0A",
-    "url": "https://www.youtube.com/watch?v=8V7Z2y1uF0A",
+    "videoId": "wm5gMKuwSYk",
+    "url": "https://www.youtube.com/watch?v=wm5gMKuwSYk",
     "chapters": [
       {
         "_key": "ch1",
@@ -8760,10 +8760,10 @@
     ]
   },
   {
-    "_id": "video-EoaDgJP46hm",
+    "_id": "video-lesson-web-security-201",
     "_type": "video",
-    "videoId": "EoaDgJP46hm",
-    "url": "https://www.youtube.com/watch?v=EoaDgJP46hm",
+    "videoId": "843nec-IvW0",
+    "url": "https://www.youtube.com/watch?v=843nec-IvW0",
     "chapters": [
       {
         "_key": "ch1",
@@ -8820,10 +8820,10 @@
     ]
   },
   {
-    "_id": "video-eWEgUcHPle0",
+    "_id": "video-lesson-web-security-202",
     "_type": "video",
-    "videoId": "eWEgUcHPle0",
-    "url": "https://www.youtube.com/watch?v=eWEgUcHPle0",
+    "videoId": "ZVnjOPwW4ZA",
+    "url": "https://www.youtube.com/watch?v=ZVnjOPwW4ZA",
     "chapters": [
       {
         "_key": "ch1",
@@ -8880,10 +8880,10 @@
     ]
   },
   {
-    "_id": "video-ciNHn38EyRc",
+    "_id": "video-lesson-web-security-203",
     "_type": "video",
-    "videoId": "ciNHn38EyRc",
-    "url": "https://www.youtube.com/watch?v=ciNHn38EyRc",
+    "videoId": "SqcY0GlETPk",
+    "url": "https://www.youtube.com/watch?v=SqcY0GlETPk",
     "chapters": [
       {
         "_key": "ch1",
@@ -8940,10 +8940,10 @@
     ]
   },
   {
-    "_id": "video-Jm_j_Jq6r8g",
+    "_id": "video-lesson-web-security-204",
     "_type": "video",
-    "videoId": "Jm_j_Jq6r8g",
-    "url": "https://www.youtube.com/watch?v=Jm_j_Jq6r8g",
+    "videoId": "w7ejDZ8SWv8",
+    "url": "https://www.youtube.com/watch?v=w7ejDZ8SWv8",
     "chapters": [
       {
         "_key": "ch1",
@@ -9000,10 +9000,10 @@
     ]
   },
   {
-    "_id": "video-Kz6o3l_Z9-B",
+    "_id": "video-lesson-web-security-301",
     "_type": "video",
-    "videoId": "Kz6o3l_Z9-B",
-    "url": "https://www.youtube.com/watch?v=Kz6o3l_Z9-B",
+    "videoId": "bMknfKXIFA8",
+    "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
     "chapters": [
       {
         "_key": "ch1",
@@ -9060,10 +9060,10 @@
     ]
   },
   {
-    "_id": "video-4KHiSt0oLJ0",
+    "_id": "video-lesson-web-security-302",
     "_type": "video",
-    "videoId": "4KHiSt0oLJ0",
-    "url": "https://www.youtube.com/watch?v=4KHiSt0oLJ0",
+    "videoId": "Tn6-PIqc4UM",
+    "url": "https://www.youtube.com/watch?v=Tn6-PIqc4UM",
     "chapters": [
       {
         "_key": "ch1",
@@ -9120,10 +9120,10 @@
     ]
   },
   {
-    "_id": "video-mG004L4bFvB",
+    "_id": "video-lesson-web-security-303",
     "_type": "video",
-    "videoId": "mG004L4bFvB",
-    "url": "https://www.youtube.com/watch?v=mG004L4bFvB",
+    "videoId": "gSSsZReIFRk",
+    "url": "https://www.youtube.com/watch?v=gSSsZReIFRk",
     "chapters": [
       {
         "_key": "ch1",
@@ -9180,10 +9180,10 @@
     ]
   },
   {
-    "_id": "video-O6cm7i0Q5w8",
+    "_id": "video-lesson-web-security-304",
     "_type": "video",
-    "videoId": "O6cm7i0Q5w8",
-    "url": "https://www.youtube.com/watch?v=O6cm7i0Q5w8",
+    "videoId": "Zq5fmkH0T78",
+    "url": "https://www.youtube.com/watch?v=Zq5fmkH0T78",
     "chapters": [
       {
         "_key": "ch1",

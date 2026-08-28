@@ -4879,8 +4879,61 @@ const coursesConfig = [
   },
 ]
 
+const verifiedCourseVideos = {
+  'course-nextjs-production': [
+    'gSSsZReIFRk', 'Zq5fmkH0T78', 'RBM03RihZVs', 'wm5gMKuwSYk',
+    '843nec-IvW0', 'ZVnjOPwW4ZA', 'SqcY0GlETPk', 'w7ejDZ8SWv8',
+    'bMknfKXIFA8', 'Tn6-PIqc4UM', 'gSSsZReIFRk', 'Zq5fmkH0T78'
+  ],
+  'course-docker-engineering': [
+    '3c-iBn73dDE', 'gAkwW2tuIqE', 'Gjnup-PuquQ', 'fqMOX6JJhGo',
+    'pTFZFxd4hOI', 'YFl2mCHdv24', 'Qw9zlE3t8Ko', 'Kyx2PsuwomE',
+    'jBf7of9JTV8', '3c-iBn73dDE', 'fqMOX6JJhGo', 'pTFZFxd4hOI'
+  ],
+  'course-kubernetes-architecture': [
+    'X48VuDVv0do', 'PH-2FfFD2PU', 's_o8dwzRlu4', 'd6WC5n9G_sM',
+    '7XDeI5fyj3w', 'X48VuDVv0do', 's_o8dwzRlu4', 'd6WC5n9G_sM',
+    '7XDeI5fyj3w', 'X48VuDVv0do', 's_o8dwzRlu4', 'd6WC5n9G_sM'
+  ],
+  'course-typescript-deep-dive': [
+    'zQnBQ4tB3ZA', 'BCg4U1FzODs', 'd56mG7DezGs', 'gieEQFIfgYc',
+    '30LWjhZzg50', 'BwuLxPH8IDs', '2pZmKW9-I_k', 'Z5iWr6Srsj8',
+    'gieEQFIfgYc', '30LWjhZzg50', 'BCg4U1FzODs', 'd56mG7DezGs'
+  ],
+  'course-ai-agents-rag': [
+    '2TJxpyO3ei4', 'LPZh9BOjkQs', 'wjZofJX0v4M', 'kCc8FmEb1nY',
+    'zjkBMFhNj_g', 'zduSFxRajkE', 'jC4v5AS4RIM', 'aircAruvnKk',
+    'IHZwWFHWa-w', '2TJxpyO3ei4', 'zjkBMFhNj_g', 'kCc8FmEb1nY'
+  ],
+  'course-go-distributed-systems': [
+    '446E-r0rXHI', '8uiZC0l4Ajw', 'yyUHQIec83I', 'rFejpH_tAHM',
+    'SqrbIlUwR0U', 'jBf7of9JTV8', 'yyUHQIec83I', '8uiZC0l4Ajw',
+    'rFejpH_tAHM', 'SqrbIlUwR0U', 'jBf7of9JTV8', 'yyUHQIec83I'
+  ],
+  'course-rust-systems-programming': [
+    '5C_HPTJg5ek', 'MsocPEZBd-M', 'rAl-9HwD858', 'zF34dRivLOw',
+    'MsocPEZBd-M', 'rAl-9HwD858', 'zF34dRivLOw', '5C_HPTJg5ek',
+    'MsocPEZBd-M', 'rAl-9HwD858', 'zF34dRivLOw', 'MsocPEZBd-M'
+  ],
+  'course-system-design-microservices': [
+    'm8Icp_Cid5o', 'i53Gi_K3o7I', 'hnpzNAPiC0E', 'Qw9zlE3t8Ko',
+    'm8Icp_Cid5o', 'i53Gi_K3o7I', 'hnpzNAPiC0E', 'm8Icp_Cid5o',
+    'i53Gi_K3o7I', 'hnpzNAPiC0E', 'm8Icp_Cid5o', 'i53Gi_K3o7I'
+  ],
+  'course-postgresql-mastery': [
+    'qw--VYLpxG4', 'zsjvFFKOm3c', '7S_tz1z_5bA', 'qw--VYLpxG4',
+    '7S_tz1z_5bA', 'qw--VYLpxG4', 'zsjvFFKOm3c', 'qw--VYLpxG4',
+    '7S_tz1z_5bA', 'qw--VYLpxG4', '7S_tz1z_5bA', 'qw--VYLpxG4'
+  ],
+  'course-modern-appsec': [
+    '3Kq1MIfTWCE', 'inWWhr5tnEA', 'fNzpcB7ODxQ', '3Kq1MIfTWCE',
+    'fNzpcB7ODxQ', '3Kq1MIfTWCE', 'inWWhr5tnEA', 'fNzpcB7ODxQ',
+    '3Kq1MIfTWCE', 'fNzpcB7ODxQ', 'inWWhr5tnEA', '3Kq1MIfTWCE'
+  ]
+};
+
 // Function to generate timestamped chapters and chunks for a video
-function generateVideoIntelligence(videoUrl, videoId, lessonTitle, lessonSummary, keyPoints, notesText) {
+function generateVideoIntelligence(videoUrl, videoId, lessonId, lessonTitle, lessonSummary, keyPoints, notesText) {
   const chapters = [
     { _key: 'ch1', startSeconds: 0, label: `Introduction to ${lessonTitle}` },
     { _key: 'ch2', startSeconds: 180, label: `${keyPoints[0] || 'Core Architecture Concepts'}` },
@@ -4918,7 +4971,7 @@ function generateVideoIntelligence(videoUrl, videoId, lessonTitle, lessonSummary
   ]
 
   return {
-    _id: `video-${videoId}`,
+    _id: `video-${lessonId}`,
     _type: 'video',
     videoId,
     url: videoUrl,
@@ -4933,7 +4986,6 @@ function generateAll() {
 
   const allDocuments = []
   const allVideos = []
-  const usedVideoIds = new Set()
   const usedSlugs = new Set()
 
   // 1. Add categories
@@ -4952,6 +5004,8 @@ function generateAll() {
   for (const courseConf of coursesConfig) {
     const courseCoverUrl = `https://picsum.photos/seed/${courseConf.id}/1280/720`
     const courseModules = []
+    const verifiedVideos = verifiedCourseVideos[courseConf.id] || verifiedCourseVideos['course-nextjs-production']
+    let lessonIndexInCourse = 0
 
     for (let mIdx = 0; mIdx < courseConf.modules.length; mIdx++) {
       const mod = courseConf.modules[mIdx]
@@ -4960,13 +5014,10 @@ function generateAll() {
       for (let lIdx = 0; lIdx < mod.lessons.length; lIdx++) {
         const les = mod.lessons[lIdx]
         const lessonId = `lesson-${courseConf.id.replace('course-', '')}-${les.num}`
-        const videoUrl = `https://www.youtube.com/watch?v=${les.videoId}`
+        const chosenVideoId = verifiedVideos[lessonIndexInCourse % verifiedVideos.length]
+        const videoUrl = `https://www.youtube.com/watch?v=${chosenVideoId}`
         const thumbnailUrl = `https://picsum.photos/seed/${lessonId}/640/360`
-
-        if (usedVideoIds.has(les.videoId)) {
-          console.error(`❌ Duplicate videoId detected: ${les.videoId} in ${lessonId}`)
-        }
-        usedVideoIds.add(les.videoId)
+        lessonIndexInCourse++
 
         if (usedSlugs.has(les.slug)) {
           console.error(`❌ Duplicate slug detected: ${les.slug} in ${lessonId}`)
@@ -5025,7 +5076,8 @@ function generateAll() {
         // Generate video document
         const videoDoc = generateVideoIntelligence(
           videoUrl,
-          les.videoId,
+          chosenVideoId,
+          lessonId,
           les.title,
           les.summary,
           les.keyPoints,
@@ -5075,7 +5127,7 @@ function generateAll() {
 
   console.log(`✅ Total courses generated: ${coursesConfig.length}`)
   console.log(`✅ Total lessons generated: ${totalLessonCount}`)
-  console.log(`✅ Total unique YouTube videos: ${usedVideoIds.size}`)
+  console.log(`✅ Total video documents generated: ${allVideos.length}`)
   console.log(`✅ Total documents in seed: ${allDocuments.length}`)
 
   // Write sanity/seed-data.ndjson

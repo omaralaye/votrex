@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import posthog from "posthog-js";
 import Image from "next/image";
 import {
@@ -87,6 +88,7 @@ function getCourseHeroGraphic(course: CourseDetail) {
           src={course.coverImageUrl}
           alt={course.title}
           fill
+          unoptimized
           className="object-cover transition-transform duration-500 hover:scale-105"
           sizes="(max-width: 768px) 100vw, 380px"
           priority
@@ -392,15 +394,16 @@ export function CourseView({ course }: CourseViewProps) {
                       <div className="bg-[#FAF9F6]/60 border-t border-[#F1F5F9] px-5 sm:px-8 py-3 divide-y divide-[#F1F5F9]/80">
                         {lessons.length > 0 ? (
                           lessons.map((lesson, lIdx) => (
-                            <div
+                            <Link
                               key={lesson._id || `les_${lIdx}`}
-                              className="py-3 flex items-center justify-between text-[13.5px] font-sans gap-3"
+                              href={`/courses/${course.slug?.current || "nextjs-for-production"}/${lesson.slug?.current || ""}`}
+                              className="py-3 flex items-center justify-between text-[13.5px] font-sans gap-3 text-[#1E293B] hover:text-[#D8653F] transition-colors group cursor-pointer"
                             >
                               <div className="flex items-center gap-3 min-w-0">
-                                <div className="text-[#D8653F] shrink-0">
+                                <div className="text-[#D8653F] group-hover:scale-110 transition-transform shrink-0">
                                   <PlayIcon size={16} filled />
                                 </div>
-                                <span className="font-medium text-[#1E293B] truncate">
+                                <span className="font-medium truncate group-hover:underline underline-offset-2">
                                   {lesson.title}
                                 </span>
                                 {lesson.isFreePreview && (
@@ -412,7 +415,7 @@ export function CourseView({ course }: CourseViewProps) {
                               <span className="text-[#64748B] text-[12px] shrink-0">
                                 {lesson.duration || "12:00"}
                               </span>
-                            </div>
+                            </Link>
                           ))
                         ) : (
                           <div className="py-3 text-[13px] text-[#64748B] italic">
