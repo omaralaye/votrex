@@ -265,6 +265,24 @@ export function getInstructorAvatarUrl(instructor: {
 // ==========================================
 
 /**
+ * Run a live query and return a fallback when the fetch fails, so a Sanity
+ * outage degrades one section instead of crashing the whole route.
+ */
+async function safeSanityFetch<T>(
+  options: Parameters<typeof sanityFetch>[0],
+  fallback: T,
+  context: string,
+): Promise<T> {
+  try {
+    const { data } = await sanityFetch(options)
+    return (data as T) ?? fallback
+  } catch (err) {
+    console.warn(`Failed to fetch ${context} from Sanity:`, err)
+    return fallback
+  }
+}
+
+/**
  * Get all courses or filtered courses
  */
 export async function getCourses(filters?: {
@@ -272,43 +290,33 @@ export async function getCourses(filters?: {
   level?: string
   search?: string
 }): Promise<CourseSummary[]> {
-  try {
-    if (filters?.categorySlug || filters?.level || filters?.search) {
-      const { data } = await sanityFetch({
+  if (filters?.categorySlug || filters?.level || filters?.search) {
+    return safeSanityFetch<CourseSummary[]>(
+      {
         query: COURSES_FILTERED_QUERY,
         params: {
           categorySlug: filters.categorySlug ?? null,
           level: filters.level ?? null,
           search: filters.search ? `*${filters.search}*` : null,
         },
-      })
-      return (data as CourseSummary[]) || []
-    }
-
-    const { data } = await sanityFetch({
-      query: COURSES_QUERY,
-    })
-    return (data as CourseSummary[]) || []
-  } catch (err) {
-    console.warn('Failed to fetch courses from Sanity:', err)
-    return []
+      },
+      [],
+      'courses',
+    )
   }
+
+  return safeSanityFetch<CourseSummary[]>({ query: COURSES_QUERY }, [], 'courses')
 }
 
 /**
  * Get course detail by slug
  */
 export async function getCourseBySlug(slug: string): Promise<CourseDetail | null> {
-  try {
-    const { data } = await sanityFetch({
-      query: COURSE_BY_SLUG_QUERY,
-      params: { slug },
-    })
-    return (data as CourseDetail) || null
-  } catch (err) {
-    console.warn(`Failed to fetch course detail for slug "${slug}":`, err)
-    return null
-  }
+  return safeSanityFetch<CourseDetail | null>(
+    { query: COURSE_BY_SLUG_QUERY, params: { slug } },
+    null,
+    `course detail for slug "${slug}"`,
+  )
 }
 
 /**
@@ -328,107 +336,63 @@ export async function getAllCourseSlugs(): Promise<string[]> {
  * Get lesson by slug with reverse course lookup
  */
 export async function getLessonBySlug(slug: string): Promise<LessonDetail | null> {
-  try {
-    const { data } = await sanityFetch({
-      query: LESSON_BY_SLUG_QUERY,
-      params: { slug },
-    })
-    return (data as LessonDetail) || null
-  } catch (err) {
-    console.warn(`Failed to fetch lesson detail for slug "${slug}":`, err)
-    return null
-  }
+  return safeSanityFetch<LessonDetail | null>(
+    { query: LESSON_BY_SLUG_QUERY, params: { slug } },
+    null,
+    `lesson detail for slug "${slug}"`,
+  )
 }
 
 /**
  * Get all lessons
  */
 export async function getAllLessons(): Promise<LessonWithCourse[]> {
-  try {
-    const { data } = await sanityFetch({
-      query: ALL_LESSONS_QUERY,
-    })
-    return (data as LessonWithCourse[]) || []
-  } catch (err) {
-    console.warn('Failed to fetch all lessons from Sanity:', err)
-    return []
-  }
+  return safeSanityFetch<LessonWithCourse[]>({ query: ALL_LESSONS_QUERY }, [], 'all lessons')
 }
 
 /**
  * Get all categories with course counts
  */
 export async function getAllCategories(): Promise<CategorySummary[]> {
-  try {
-    const { data } = await sanityFetch({
-      query: CATEGORIES_QUERY,
-    })
-    return (data as CategorySummary[]) || []
-  } catch (err) {
-    console.warn('Failed to fetch categories from Sanity:', err)
-    return []
-  }
+  return safeSanityFetch<CategorySummary[]>({ query: CATEGORIES_QUERY }, [], 'categories')
 }
 
 /**
  * Get category by slug with its courses
  */
 export async function getCategoryBySlug(slug: string): Promise<CategoryDetail | null> {
-  try {
-    const { data } = await sanityFetch({
-      query: CATEGORY_BY_SLUG_QUERY,
-      params: { slug },
-    })
-    return (data as CategoryDetail) || null
-  } catch (err) {
-    console.warn(`Failed to fetch category detail for slug "${slug}":`, err)
-    return null
-  }
+  return safeSanityFetch<CategoryDetail | null>(
+    { query: CATEGORY_BY_SLUG_QUERY, params: { slug } },
+    null,
+    `category detail for slug "${slug}"`,
+  )
 }
 
 /**
  * Get all instructors with course counts
  */
 export async function getAllInstructors(): Promise<InstructorSummary[]> {
-  try {
-    const { data } = await sanityFetch({
-      query: INSTRUCTORS_QUERY,
-    })
-    return (data as InstructorSummary[]) || []
-  } catch (err) {
-    console.warn('Failed to fetch instructors from Sanity:', err)
-    return []
-  }
+  return safeSanityFetch<InstructorSummary[]>({ query: INSTRUCTORS_QUERY }, [], 'instructors')
 }
 
 /**
  * Get instructor by slug with authored courses
  */
 export async function getInstructorBySlug(slug: string): Promise<InstructorDetail | null> {
-  try {
-    const { data } = await sanityFetch({
-      query: INSTRUCTOR_BY_SLUG_QUERY,
-      params: { slug },
-    })
-    return (data as InstructorDetail) || null
-  } catch (err) {
-    console.warn(`Failed to fetch instructor detail for slug "${slug}":`, err)
-    return null
-  }
+  return safeSanityFetch<InstructorDetail | null>(
+    { query: INSTRUCTOR_BY_SLUG_QUERY, params: { slug } },
+    null,
+    `instructor detail for slug "${slug}"`,
+  )
 }
 
 /**
  * Get popular courses
  */
 export async function getPopularCourses(limit: number = 6): Promise<CourseSummary[]> {
-  try {
-    const { data } = await sanityFetch({
-      query: POPULAR_COURSES_QUERY,
-      params: { limit },
-    })
-    return (data as CourseSummary[]) || []
-  } catch (err) {
-    console.warn('Failed to fetch popular courses from Sanity:', err)
-    return []
-  }
+  return safeSanityFetch<CourseSummary[]>(
+    { query: POPULAR_COURSES_QUERY, params: { limit } },
+    [],
+    'popular courses',
+  )
 }
