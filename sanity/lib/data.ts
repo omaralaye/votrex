@@ -1,4 +1,5 @@
 import type { PortableTextBlock } from 'sanity'
+import { client } from './client'
 import { sanityFetch } from './live'
 import { urlFor } from './image'
 import {
@@ -92,6 +93,7 @@ export interface ModuleSummary {
   _key: string
   title: string
   summary?: string
+  duration?: string
   lessons: LessonSummary[]
 }
 
@@ -300,10 +302,13 @@ export async function getCourseBySlug(slug: string): Promise<CourseDetail | null
  * Get all course slugs for static paths
  */
 export async function getAllCourseSlugs(): Promise<string[]> {
-  const { data } = await sanityFetch({
-    query: COURSE_SLUGS_QUERY,
-  })
-  return ((data as { slug: string }[]) || []).map((item) => item.slug)
+  try {
+    const data = await client.fetch<{ slug: string }[]>(COURSE_SLUGS_QUERY)
+    return (data || []).map((item) => item.slug)
+  } catch (err) {
+    console.warn('Failed to fetch course slugs for static generation:', err)
+    return []
+  }
 }
 
 /**

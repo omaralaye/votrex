@@ -121,6 +121,7 @@ export const COURSE_BY_SLUG_QUERY = defineQuery(`
       _key,
       title,
       summary,
+      duration,
       "lessons": coalesce(lessons[]->{
         _id,
         title,
