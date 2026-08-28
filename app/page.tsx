@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   SearchIcon,
   StarIcon,
@@ -102,12 +103,25 @@ function getCourseIcon(iconIdentifier?: string) {
 }
 
 export default function VertexHomePage() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<"courses" | "my-learning">("courses");
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [courses, setCourses] = useState<Course[]>(DEFAULT_COURSES);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      posthog.capture("course_searched", {
+        query: searchQuery.trim(),
+        results_count: filteredCourses.length,
+        source: "home",
+      });
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
 
   useEffect(() => {
     async function fetchSanityCourses() {
@@ -215,7 +229,7 @@ export default function VertexHomePage() {
             </div>
 
             {/* Search Box */}
-            <div className="w-full max-w-[680px] mt-10 sm:mt-12 mb-4">
+            <form onSubmit={handleSearchSubmit} className="w-full max-w-[680px] mt-10 sm:mt-12 mb-4">
               <div
                 className={`relative flex items-center justify-between w-full bg-white rounded-2xl border px-4 sm:px-5 py-3.5 sm:py-4 transition-all duration-200 shadow-[0_2px_12px_rgba(15,23,42,0.04)] ${
                   isSearchFocused
@@ -238,13 +252,6 @@ export default function VertexHomePage() {
                     onFocus={() => setIsSearchFocused(true)}
                     onBlur={() => {
                       setIsSearchFocused(false);
-                      if (searchQuery.trim()) {
-                        posthog.capture("course_searched", {
-                          query: searchQuery.trim(),
-                          results_count: filteredCourses.length,
-                          source: "home",
-                        });
-                      }
                     }}
                     placeholder="Search by topic, keyword, or concept (e.g. 'Docker Compose', 'Generics')..."
                     className="w-full bg-transparent border-none outline-none font-sans text-[15px] sm:text-[16px] text-[#0F172A] placeholder:text-[#94A3B8] tracking-[-0.01em]"
@@ -267,7 +274,7 @@ export default function VertexHomePage() {
                   )}
                 </div>
               </div>
-            </div>
+            </form>
           </div>
 
           {/* Section Divider */}

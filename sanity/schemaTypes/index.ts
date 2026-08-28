@@ -4,6 +4,7 @@ import { courseType } from './courseType'
 import { instructorType } from './instructorType'
 import { lessonType } from './lessonType'
 import { videoType } from './videoType'
+import { agentContextType } from './agentContextType'
 import { moduleType } from './objects/moduleType'
 import { learningOutcome } from './objects/learningOutcome'
 import { resource } from './objects/resource'
@@ -16,6 +17,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     instructorType,
     categoryType,
     videoType,
+    agentContextType,
 
     // Embedded Objects
     moduleType,
@@ -23,3 +25,4 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     resource,
   ],
 }
+
