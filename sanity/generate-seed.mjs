@@ -4880,55 +4880,56 @@ const coursesConfig = [
 ]
 
 const verifiedCourseVideos = {
-  'course-nextjs-production': [
+  'course-nextjs': [
     'gSSsZReIFRk', 'Zq5fmkH0T78', 'RBM03RihZVs', 'wm5gMKuwSYk',
     '843nec-IvW0', 'ZVnjOPwW4ZA', 'SqcY0GlETPk', 'w7ejDZ8SWv8',
-    'bMknfKXIFA8', 'Tn6-PIqc4UM', 'gSSsZReIFRk', 'Zq5fmkH0T78'
+    'bMknfKXIFA8', 'Tn6-PIqc4UM', 'mU6anWqZJcc', 's2skans2dP4',
+    'LDB4uaJ87e0', 'f55qeKGgB_M'
   ],
-  'course-docker-engineering': [
+  'course-docker': [
     '3c-iBn73dDE', 'gAkwW2tuIqE', 'Gjnup-PuquQ', 'fqMOX6JJhGo',
     'pTFZFxd4hOI', 'YFl2mCHdv24', 'Qw9zlE3t8Ko', 'Kyx2PsuwomE',
-    'jBf7of9JTV8', '3c-iBn73dDE', 'fqMOX6JJhGo', 'pTFZFxd4hOI'
+    'pg19Z8LL06w', 'rOTqprHv1YE', '3c-iBn73dDE', 'fqMOX6JJhGo'
   ],
-  'course-kubernetes-architecture': [
-    'X48VuDVv0do', 'PH-2FfFD2PU', 's_o8dwzRlu4', 'd6WC5n9G_sM',
-    '7XDeI5fyj3w', 'X48VuDVv0do', 's_o8dwzRlu4', 'd6WC5n9G_sM',
-    '7XDeI5fyj3w', 'X48VuDVv0do', 's_o8dwzRlu4', 'd6WC5n9G_sM'
-  ],
-  'course-typescript-deep-dive': [
+  'course-typescript': [
     'zQnBQ4tB3ZA', 'BCg4U1FzODs', 'd56mG7DezGs', 'gieEQFIfgYc',
     '30LWjhZzg50', 'BwuLxPH8IDs', '2pZmKW9-I_k', 'Z5iWr6Srsj8',
     'gieEQFIfgYc', '30LWjhZzg50', 'BCg4U1FzODs', 'd56mG7DezGs'
   ],
-  'course-ai-agents-rag': [
+  'course-ai-agents': [
     '2TJxpyO3ei4', 'LPZh9BOjkQs', 'wjZofJX0v4M', 'kCc8FmEb1nY',
     'zjkBMFhNj_g', 'zduSFxRajkE', 'jC4v5AS4RIM', 'aircAruvnKk',
-    'IHZwWFHWa-w', '2TJxpyO3ei4', 'zjkBMFhNj_g', 'kCc8FmEb1nY'
+    'IHZwWFHWa-w', 'sal78ACtGTc', '2TJxpyO3ei4', 'kCc8FmEb1nY'
   ],
-  'course-go-distributed-systems': [
+  'course-react-patterns': [
+    'Tn6-PIqc4UM', 'w7ejDZ8SWv8', 's2skans2dP4', 'ZVnjOPwW4ZA',
+    'Ke90Tje7VS0', '0ZJgIjIuY7U', 'Z5iWr6Srsj8', 'SqcY0GlETPk',
+    'bMknfKXIFA8', 'LDB4uaJ87e0', 'Tn6-PIqc4UM', 'w7ejDZ8SWv8'
+  ],
+  'course-kubernetes': [
+    'X48VuDVv0do', 'PH-2FfFD2PU', 's_o8dwzRlu4', 'd6WC5n9G_sM',
+    '7XDeI5fyj3w', 'VnvRFRk_51k', 'aSrqRSk43lY', 'X48VuDVv0do',
+    's_o8dwzRlu4', 'd6WC5n9G_sM', '7XDeI5fyj3w', 'VnvRFRk_51k'
+  ],
+  'course-nodejs-microservices': [
+    'Oe421EPjeBE', 'm8Icp_Cid5o', 'i53Gi_K3o7I', 'hnpzNAPiC0E',
     '446E-r0rXHI', '8uiZC0l4Ajw', 'yyUHQIec83I', 'rFejpH_tAHM',
-    'SqrbIlUwR0U', 'jBf7of9JTV8', 'yyUHQIec83I', '8uiZC0l4Ajw',
-    'rFejpH_tAHM', 'SqrbIlUwR0U', 'jBf7of9JTV8', 'yyUHQIec83I'
-  ],
-  'course-rust-systems-programming': [
-    '5C_HPTJg5ek', 'MsocPEZBd-M', 'rAl-9HwD858', 'zF34dRivLOw',
-    'MsocPEZBd-M', 'rAl-9HwD858', 'zF34dRivLOw', '5C_HPTJg5ek',
-    'MsocPEZBd-M', 'rAl-9HwD858', 'zF34dRivLOw', 'MsocPEZBd-M'
-  ],
-  'course-system-design-microservices': [
-    'm8Icp_Cid5o', 'i53Gi_K3o7I', 'hnpzNAPiC0E', 'Qw9zlE3t8Ko',
-    'm8Icp_Cid5o', 'i53Gi_K3o7I', 'hnpzNAPiC0E', 'm8Icp_Cid5o',
-    'i53Gi_K3o7I', 'hnpzNAPiC0E', 'm8Icp_Cid5o', 'i53Gi_K3o7I'
+    'SqrbIlUwR0U', 'jBf7of9JTV8', 'Oe421EPjeBE', 'm8Icp_Cid5o'
   ],
   'course-postgresql-mastery': [
-    'qw--VYLpxG4', 'zsjvFFKOm3c', '7S_tz1z_5bA', 'qw--VYLpxG4',
-    '7S_tz1z_5bA', 'qw--VYLpxG4', 'zsjvFFKOm3c', 'qw--VYLpxG4',
-    '7S_tz1z_5bA', 'qw--VYLpxG4', '7S_tz1z_5bA', 'qw--VYLpxG4'
+    'qw--VYLpxG4', 'zsjvFFKOm3c', '7S_tz1z_5bA', 'SpfIwlAYaKk',
+    'qw--VYLpxG4', 'zsjvFFKOm3c', '7S_tz1z_5bA', 'SpfIwlAYaKk',
+    'qw--VYLpxG4', '7S_tz1z_5bA', 'SpfIwlAYaKk', 'zsjvFFKOm3c'
   ],
-  'course-modern-appsec': [
+  'course-python-ai-data': [
+    'HGOBQPFzWKo', 'LHBE6Q9XlzI', 'GPVsHOlRBBI', 'r-uOLxNrNk8',
+    'YYXdXT2l-Gg', 'kqtD5dpn9C8', 'aircAruvnKk', 'IHZwWFHWa-w',
+    'HGOBQPFzWKo', 'LHBE6Q9XlzI', 'GPVsHOlRBBI', 'r-uOLxNrNk8'
+  ],
+  'course-web-security': [
     '3Kq1MIfTWCE', 'inWWhr5tnEA', 'fNzpcB7ODxQ', '3Kq1MIfTWCE',
-    'fNzpcB7ODxQ', '3Kq1MIfTWCE', 'inWWhr5tnEA', 'fNzpcB7ODxQ',
-    '3Kq1MIfTWCE', 'fNzpcB7ODxQ', 'inWWhr5tnEA', '3Kq1MIfTWCE'
+    'inWWhr5tnEA', 'fNzpcB7ODxQ', '3Kq1MIfTWCE', 'inWWhr5tnEA',
+    'fNzpcB7ODxQ', '3Kq1MIfTWCE', 'inWWhr5tnEA', 'fNzpcB7ODxQ'
   ]
 };
 
@@ -5028,7 +5029,7 @@ function generateAll() {
   for (const courseConf of coursesConfig) {
     const courseCoverUrl = `https://picsum.photos/seed/${courseConf.id}/1280/720`
     const courseModules = []
-    const verifiedVideos = verifiedCourseVideos[courseConf.id] || verifiedCourseVideos['course-nextjs-production']
+    const verifiedVideos = verifiedCourseVideos[courseConf.id] || verifiedCourseVideos['course-nextjs']
     let lessonIndexInCourse = 0
 
     for (let mIdx = 0; mIdx < courseConf.modules.length; mIdx++) {
