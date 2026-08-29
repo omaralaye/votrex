@@ -71,6 +71,13 @@ function parseDurationToSeconds(durationStr?: string): number {
   return totalSec > 0 ? totalSec : 900;
 }
 
+function formatTime(seconds: number): string {
+  const s = Math.max(0, Math.floor(seconds));
+  const mins = Math.floor(s / 60);
+  const secs = s % 60;
+  return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+}
+
 export function VideoPlayer({
   videoUrl,
   posterUrl,
@@ -85,8 +92,11 @@ export function VideoPlayer({
   onComplete,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showTimestampBanner, setShowTimestampBanner] = useState(startSeconds > 0);
   const trackedMilestonesRef = useRef<Set<number>>(new Set());
   const playbackStartTimeRef = useRef<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const totalDurationSeconds = useMemo(() => parseDurationToSeconds(duration), [duration]);
 
   const embedInfo = useMemo(() => {
@@ -120,10 +130,11 @@ export function VideoPlayer({
       };
     }
 
-    // Direct MP4 or generic video URL
+    // Direct MP4 or generic video URL with optional media fragment
+    const directSrc = startSeconds > 0 ? `${videoUrl}#t=${Math.floor(startSeconds)}` : videoUrl;
     return {
       type: "direct" as const,
-      src: videoUrl,
+      src: directSrc,
     };
   }, [videoUrl, startSeconds]);
 
@@ -148,6 +159,55 @@ export function VideoPlayer({
       }
     },
     [title, courseSlug, lessonSlug, onWatchDepth, onComplete]
+  );
+
+  const seekToTime = useCallback(
+    (seconds: number) => {
+      const sec = Math.max(0, Math.floor(seconds));
+
+      if (videoRef.current) {
+        videoRef.current.currentTime = sec;
+        videoRef.current.play().catch(() => {});
+      }
+
+      if (iframeRef.current?.contentWindow) {
+        // YouTube API seek
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({
+            event: "command",
+            func: "seekTo",
+            args: [sec, true],
+          }),
+          "*"
+        );
+
+        // Vimeo API seek
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({
+            method: "setCurrentTime",
+            value: sec,
+          }),
+          "*"
+        );
+
+        // Bunny Stream seek
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({
+            event: "seek",
+            time: sec,
+          }),
+          "*"
+        );
+      }
+
+      posthog.capture("video_seeked", {
+        target_seconds: sec,
+        video_title: title,
+        course_slug: courseSlug,
+        lesson_slug: lessonSlug,
+      });
+    },
+    [title, courseSlug, lessonSlug]
   );
 
   const handlePlay = () => {
@@ -220,17 +280,60 @@ export function VideoPlayer({
     return () => window.removeEventListener("message", handleWindowMessage);
   }, [isPlaying, totalDurationSeconds, triggerWatchDepth]);
 
+  // Direct video element seeking on load
+  const handleDirectVideoReady = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget;
+    if (startSeconds > 0 && Math.abs(video.currentTime - startSeconds) > 1) {
+      video.currentTime = startSeconds;
+    }
+  };
+
   return (
     <div
-      className={`relative w-full aspect-video rounded-[20px] sm:rounded-[24px] overflow-hidden bg-[#0A0A0B] border border-[#1E293B]/80 shadow-[0_12px_40px_rgba(0,0,0,0.35)] select-none ${className}`}
+      className={`relative w-full aspect-video rounded-[20px] sm:rounded-[24px] overflow-hidden bg-[#0A0A0B] border border-[#1E293B]/80 shadow-[0_12px_40px_rgba(0,0,0,0.35)] select-none group ${className}`}
     >
+      {/* On-Site Timestamp Starting Pill Overlay */}
+      {showTimestampBanner && startSeconds > 0 && (
+        <div className="absolute top-3.5 left-3.5 z-30 flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-black/85 backdrop-blur-md border border-[#EA580C]/40 text-white shadow-lg animate-fade-in transition-all">
+          <div className="w-2 h-2 rounded-full bg-[#EA580C] animate-pulse" />
+          <span className="font-sans text-[12px] font-medium text-white/90">
+            Playing from <strong className="text-[#EA580C] font-semibold">{formatTime(startSeconds)}</strong>
+          </span>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              seekToTime(0);
+              setShowTimestampBanner(false);
+            }}
+            className="ml-1 text-[11px] font-sans font-semibold text-white/70 hover:text-white bg-white/10 hover:bg-white/20 px-2 py-0.5 rounded-md transition-colors cursor-pointer"
+          >
+            Restart from 00:00
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowTimestampBanner(false);
+            }}
+            className="text-white/40 hover:text-white text-[13px] ml-0.5 leading-none transition-colors"
+            aria-label="Dismiss timestamp notice"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {isPlaying && embedInfo ? (
         embedInfo.type === "direct" ? (
           <video
+            ref={videoRef}
             src={embedInfo.src}
             controls
             autoPlay
             poster={posterUrl}
+            onLoadedMetadata={handleDirectVideoReady}
+            onCanPlay={handleDirectVideoReady}
             onTimeUpdate={(e) => {
               const video = e.currentTarget;
               const currentTime = video.currentTime;
@@ -269,6 +372,7 @@ export function VideoPlayer({
           </video>
         ) : (
           <iframe
+            ref={iframeRef}
             src={embedInfo.src}
             title={title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -315,16 +419,18 @@ export function VideoPlayer({
               </span>
             </button>
             <span className="text-white/90 font-sans font-medium text-[13px] sm:text-[14px] tracking-wide uppercase drop-shadow-md">
-              {startSeconds > 0 ? `Resume at ${Math.floor(startSeconds / 60)}:${(Math.floor(startSeconds) % 60).toString().padStart(2, '0')}` : "Play Lesson Video"}
+              {startSeconds > 0
+                ? `Resume at ${formatTime(startSeconds)}`
+                : "Play Lesson Video"}
             </span>
           </div>
 
-          {/* Progress Simulation Bar in Screenshot */}
+          {/* Progress Simulation Bar with Start Marker */}
           <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex items-center justify-between text-white/80 font-sans text-[12px] sm:text-[13px]">
             <div className="flex items-center gap-3 flex-1 mr-4">
               <span className="text-white font-medium">
                 {startSeconds > 0
-                  ? `${Math.floor(startSeconds / 60)}:${(Math.floor(startSeconds) % 60).toString().padStart(2, "0")} / ${duration || "1:28:00"}`
+                  ? `${formatTime(startSeconds)} / ${duration || "1:28:00"}`
                   : `00:00 / ${duration || "1:28:00"}`}
               </span>
               <div className="flex-1 h-1 sm:h-1.5 bg-white/20 rounded-full overflow-hidden">

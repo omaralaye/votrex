@@ -4998,9 +4998,33 @@ function generateAll() {
     allDocuments.push(inst)
   }
 
+  // 3. Add Agent Context document (Search Config)
+  const agentContextDoc = {
+    _id: 'agent-context-vertex-search',
+    _type: 'sanity.agentContext',
+    name: 'Vertex Search Agent Context',
+    slug: { _type: 'slug', current: 'vertex-search' },
+    groqFilter:
+      '_type in ["course", "lesson", "video", "instructor", "category"] && !(_id in path("drafts.**"))',
+    instructions: `### Content Relationships & Navigation
+- Lessons do not store a parent course reference. To resolve a lesson's course and module, query courses where \`modules[].lessons[]._ref == lesson._id\`.
+- Module numbers (e.g. "Module 5") and lesson labels (e.g. "Lesson 5.1") are derived from the 1-based order in \`course.modules[]\` and \`module.lessons[]\`.
+- \`video\` documents are internal lookup records matched to lessons via \`lesson.videoUrl == video.url\` or videoId. Never return \`video\` documents directly as standalone search results.
+
+### Two-Stage Timestamp Resolution
+- Stage 1 (Chapters First): Search \`video.chapters[].label\` (Table of Contents) for direct topic matches. Use \`startSeconds\` as the moment timestamp.
+- Stage 2 (Transcript Fallback): If no chapter matches, search \`video.chunks[].text\` for spoken phrases and resolve to that chunk's \`startSeconds\`.
+
+### Query Patterns & Safety
+- Plain text matching for lesson notes: use \`pt::text(content)\` — do not match Portable Text block objects directly.
+- Context window protection: Never return entire \`chunks\` arrays in query projections. Project only matched slices: \`chunks[text match $query][0..2]\`.
+- Specificity ranking: Exact title match > chapter label match > key points match > summary match > transcript chunk match.`,
+  }
+  allDocuments.push(agentContextDoc)
+
   let totalLessonCount = 0
 
-  // 3. Process each course
+  // 4. Process each course
   for (const courseConf of coursesConfig) {
     const courseCoverUrl = `https://picsum.photos/seed/${courseConf.id}/1280/720`
     const courseModules = []

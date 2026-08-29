@@ -1,5 +1,5 @@
 import type { StructureResolver } from 'sanity/structure'
-import { BookIcon, PlayIcon, TagIcon, UserIcon } from '@sanity/icons'
+import { BookIcon, PlayIcon, SparklesIcon, TagIcon, UserIcon } from '@sanity/icons'
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
@@ -51,4 +51,18 @@ export const structure: StructureResolver = (S) =>
             .filter('_type == "lesson"')
             .defaultOrdering([{ field: 'title', direction: 'asc' }])
         ),
+
+      S.divider(),
+
+      // Search Agent Context
+      S.listItem()
+        .title('Agent Context (Search Config)')
+        .icon(SparklesIcon)
+        .child(
+          S.documentList()
+            .title('Agent Contexts')
+            .filter('_type == "sanity.agentContext"')
+            .defaultOrdering([{ field: 'name', direction: 'asc' }])
+        ),
     ])
+
