@@ -1,5 +1,5 @@
 import type { PortableTextBlock } from 'sanity'
-import { client } from './client'
+import { client, serverClient } from './client'
 import { sanityFetch } from './live'
 import { urlFor } from './image'
 import {
@@ -261,6 +261,40 @@ export function getInstructorAvatarUrl(instructor: {
 }
 
 // ==========================================
+// Resilient Fetch Helper with Retry & Fallback
+// ==========================================
+
+async function fetchWithRetry<T>(
+  query: string,
+  params: Record<string, unknown> = {},
+  retries = 2
+): Promise<T | null> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const { data } = await sanityFetch({
+        query,
+        params,
+      })
+      return (data as T) ?? null
+    } catch (err: unknown) {
+      if (attempt < retries) {
+        await new Promise((resolve) => setTimeout(resolve, 200 * (attempt + 1)))
+        continue
+      }
+      try {
+        const fallbackClient = serverClient || client
+        const fallbackData = await fallbackClient.fetch<T>(query, params)
+        return fallbackData ?? null
+      } catch (fallbackErr) {
+        console.warn('Sanity fetch query failed after retries:', err instanceof Error ? err.message : err)
+        return null
+      }
+    }
+  }
+  return null
+}
+
+// ==========================================
 // Data Access Functions
 // ==========================================
 
@@ -272,43 +306,24 @@ export async function getCourses(filters?: {
   level?: string
   search?: string
 }): Promise<CourseSummary[]> {
-  try {
-    if (filters?.categorySlug || filters?.level || filters?.search) {
-      const { data } = await sanityFetch({
-        query: COURSES_FILTERED_QUERY,
-        params: {
-          categorySlug: filters.categorySlug ?? null,
-          level: filters.level ?? null,
-          search: filters.search ? `*${filters.search}*` : null,
-        },
-      })
-      return (data as CourseSummary[]) || []
-    }
-
-    const { data } = await sanityFetch({
-      query: COURSES_QUERY,
+  if (filters?.categorySlug || filters?.level || filters?.search) {
+    const data = await fetchWithRetry<CourseSummary[]>(COURSES_FILTERED_QUERY, {
+      categorySlug: filters.categorySlug ?? null,
+      level: filters.level ?? null,
+      search: filters.search ? `*${filters.search}*` : null,
     })
-    return (data as CourseSummary[]) || []
-  } catch (err) {
-    console.warn('Failed to fetch courses from Sanity:', err)
-    return []
+    return data || []
   }
+
+  const data = await fetchWithRetry<CourseSummary[]>(COURSES_QUERY)
+  return data || []
 }
 
 /**
  * Get course detail by slug
  */
 export async function getCourseBySlug(slug: string): Promise<CourseDetail | null> {
-  try {
-    const { data } = await sanityFetch({
-      query: COURSE_BY_SLUG_QUERY,
-      params: { slug },
-    })
-    return (data as CourseDetail) || null
-  } catch (err) {
-    console.warn(`Failed to fetch course detail for slug "${slug}":`, err)
-    return null
-  }
+  return await fetchWithRetry<CourseDetail>(COURSE_BY_SLUG_QUERY, { slug })
 }
 
 /**
@@ -316,7 +331,7 @@ export async function getCourseBySlug(slug: string): Promise<CourseDetail | null
  */
 export async function getAllCourseSlugs(): Promise<string[]> {
   try {
-    const data = await client.fetch<{ slug: string }[]>(COURSE_SLUGS_QUERY)
+    const data = await (serverClient || client).fetch<{ slug: string }[]>(COURSE_SLUGS_QUERY)
     return (data || []).map((item) => item.slug)
   } catch (err) {
     console.warn('Failed to fetch course slugs for static generation:', err)
@@ -328,107 +343,51 @@ export async function getAllCourseSlugs(): Promise<string[]> {
  * Get lesson by slug with reverse course lookup
  */
 export async function getLessonBySlug(slug: string): Promise<LessonDetail | null> {
-  try {
-    const { data } = await sanityFetch({
-      query: LESSON_BY_SLUG_QUERY,
-      params: { slug },
-    })
-    return (data as LessonDetail) || null
-  } catch (err) {
-    console.warn(`Failed to fetch lesson detail for slug "${slug}":`, err)
-    return null
-  }
+  return await fetchWithRetry<LessonDetail>(LESSON_BY_SLUG_QUERY, { slug })
 }
 
 /**
  * Get all lessons
  */
 export async function getAllLessons(): Promise<LessonWithCourse[]> {
-  try {
-    const { data } = await sanityFetch({
-      query: ALL_LESSONS_QUERY,
-    })
-    return (data as LessonWithCourse[]) || []
-  } catch (err) {
-    console.warn('Failed to fetch all lessons from Sanity:', err)
-    return []
-  }
+  const data = await fetchWithRetry<LessonWithCourse[]>(ALL_LESSONS_QUERY)
+  return data || []
 }
 
 /**
  * Get all categories with course counts
  */
 export async function getAllCategories(): Promise<CategorySummary[]> {
-  try {
-    const { data } = await sanityFetch({
-      query: CATEGORIES_QUERY,
-    })
-    return (data as CategorySummary[]) || []
-  } catch (err) {
-    console.warn('Failed to fetch categories from Sanity:', err)
-    return []
-  }
+  const data = await fetchWithRetry<CategorySummary[]>(CATEGORIES_QUERY)
+  return data || []
 }
 
 /**
  * Get category by slug with its courses
  */
 export async function getCategoryBySlug(slug: string): Promise<CategoryDetail | null> {
-  try {
-    const { data } = await sanityFetch({
-      query: CATEGORY_BY_SLUG_QUERY,
-      params: { slug },
-    })
-    return (data as CategoryDetail) || null
-  } catch (err) {
-    console.warn(`Failed to fetch category detail for slug "${slug}":`, err)
-    return null
-  }
+  return await fetchWithRetry<CategoryDetail>(CATEGORY_BY_SLUG_QUERY, { slug })
 }
 
 /**
  * Get all instructors with course counts
  */
 export async function getAllInstructors(): Promise<InstructorSummary[]> {
-  try {
-    const { data } = await sanityFetch({
-      query: INSTRUCTORS_QUERY,
-    })
-    return (data as InstructorSummary[]) || []
-  } catch (err) {
-    console.warn('Failed to fetch instructors from Sanity:', err)
-    return []
-  }
+  const data = await fetchWithRetry<InstructorSummary[]>(INSTRUCTORS_QUERY)
+  return data || []
 }
 
 /**
  * Get instructor by slug with authored courses
  */
 export async function getInstructorBySlug(slug: string): Promise<InstructorDetail | null> {
-  try {
-    const { data } = await sanityFetch({
-      query: INSTRUCTOR_BY_SLUG_QUERY,
-      params: { slug },
-    })
-    return (data as InstructorDetail) || null
-  } catch (err) {
-    console.warn(`Failed to fetch instructor detail for slug "${slug}":`, err)
-    return null
-  }
+  return await fetchWithRetry<InstructorDetail>(INSTRUCTOR_BY_SLUG_QUERY, { slug })
 }
 
 /**
  * Get popular courses
  */
 export async function getPopularCourses(limit: number = 6): Promise<CourseSummary[]> {
-  try {
-    const { data } = await sanityFetch({
-      query: POPULAR_COURSES_QUERY,
-      params: { limit },
-    })
-    return (data as CourseSummary[]) || []
-  } catch (err) {
-    console.warn('Failed to fetch popular courses from Sanity:', err)
-    return []
-  }
+  const data = await fetchWithRetry<CourseSummary[]>(POPULAR_COURSES_QUERY, { limit })
+  return data || []
 }
