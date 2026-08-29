@@ -1,8 +1,14 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
-import { PlayIcon } from "@/components/icons";
+import { PlayIcon, ExternalLinkIcon } from "@/components/icons";
+
+// A stalled embed shows a spinner forever, so fail over to the error state
+// when the player does not report a load within this window.
+const LOAD_TIMEOUT_MS = 12000;
+
+type PlaybackStatus = "idle" | "loading" | "ready" | "error";
 
 interface VideoPlayerProps {
   videoUrl?: string;
@@ -10,6 +16,10 @@ interface VideoPlayerProps {
   title?: string;
   startSeconds?: number;
   className?: string;
+  /** Fires when the learner clicks play. */
+  onPlay?: () => void;
+  /** Fires once each time playback fails to load. */
+  onPlaybackError?: (reason: string) => void;
 }
 
 /**
@@ -40,14 +50,54 @@ function isBunnyUrl(url: string): boolean {
   return url.includes("bunny") || url.includes("mediadelivery.net");
 }
 
+function Spinner() {
+  return (
+    <svg
+      className="animate-spin"
+      width="40"
+      height="40"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
+      <path
+        d="M22 12a10 10 0 0 1-10 10"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function WarningIcon() {
+  return (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 9v4m0 4h.01M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.7 3.86a2 2 0 0 0-3.42 0Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function VideoPlayer({
   videoUrl,
   posterUrl,
   title = "Lesson Video",
   startSeconds = 0,
   className = "",
+  onPlay,
+  onPlaybackError,
 }: VideoPlayerProps) {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [status, setStatus] = useState<PlaybackStatus>("idle");
+  const [attempt, setAttempt] = useState(0);
+  // Guards the failure callback so a single stall reports one event.
+  const reported = useRef(false);
 
   const embedInfo = useMemo(() => {
     if (!videoUrl) return null;
@@ -87,56 +137,151 @@ export function VideoPlayer({
     };
   }, [videoUrl, startSeconds]);
 
-  // If user hasn't clicked play yet, or if we want to show the initial iframe
-  return (
-    <div
-      className={`relative w-full aspect-video rounded-[20px] sm:rounded-[24px] overflow-hidden bg-[#0A0A0B] border border-[#1E293B]/80 shadow-[0_12px_40px_rgba(0,0,0,0.35)] select-none ${className}`}
-    >
-      {isPlaying && embedInfo ? (
-        embedInfo.type === "direct" ? (
+  const fail = (reason: string) => {
+    if (reported.current) return;
+    reported.current = true;
+    setStatus("error");
+    onPlaybackError?.(reason);
+  };
+
+  // Fail over when the embed does not load within the timeout window.
+  useEffect(() => {
+    if (status !== "loading") return;
+    const timer = setTimeout(() => fail("timeout"), LOAD_TIMEOUT_MS);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, attempt]);
+
+  const startPlayback = () => {
+    if (!embedInfo) return;
+    reported.current = false;
+    setStatus("loading");
+    onPlay?.();
+  };
+
+  const retry = () => {
+    reported.current = false;
+    setAttempt((n) => n + 1);
+    setStatus("loading");
+  };
+
+  const markReady = () => {
+    setStatus((prev) => (prev === "loading" ? "ready" : prev));
+  };
+
+  const outerClass = `relative w-full aspect-video rounded-[20px] sm:rounded-[24px] overflow-hidden bg-[#0A0A0B] border border-[#1E293B]/80 shadow-[0_12px_40px_rgba(0,0,0,0.35)] select-none ${className}`;
+
+  // Error state: retry and a link out to the source video.
+  if (status === "error") {
+    return (
+      <div className={outerClass}>
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0A0F1D]">
+          <div className="text-[#F97316]">
+            <WarningIcon />
+          </div>
+          <div>
+            <p className="font-sans font-semibold text-white text-[15px] sm:text-[16px]">
+              This video could not load
+            </p>
+            <p className="font-sans text-white/70 text-[13px] sm:text-[14px] mt-1">
+              Check your connection and try again.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 mt-1">
+            <button
+              type="button"
+              onClick={retry}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F97316] hover:bg-[#EA580C] text-white font-sans font-medium text-[14px] transition-colors cursor-pointer"
+            >
+              Try again
+            </button>
+            {videoUrl && (
+              <a
+                href={videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-white/30 text-white/90 hover:bg-white/10 font-sans font-medium text-[14px] transition-colors cursor-pointer"
+              >
+                <span>Open video</span>
+                <ExternalLinkIcon size={16} />
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Loading / ready state: render the embed with a spinner until it reports a load.
+  if ((status === "loading" || status === "ready") && embedInfo) {
+    return (
+      <div className={outerClass}>
+        {embedInfo.type === "direct" ? (
           <video
+            key={attempt}
             src={embedInfo.src}
             controls
             autoPlay
             poster={posterUrl}
+            onLoadedData={markReady}
+            onError={() => fail("media_error")}
             className="w-full h-full object-cover"
           >
             Your browser does not support the video tag.
           </video>
         ) : (
           <iframe
+            key={attempt}
             src={embedInfo.src}
             title={title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
+            onLoad={markReady}
+            onError={() => fail("embed_error")}
             className="w-full h-full border-0"
           />
-        )
-      ) : (
-        <div className="relative w-full h-full flex items-center justify-center group cursor-pointer" onClick={() => setIsPlaying(true)}>
-          {/* Poster or Fallback Graphic */}
-          {posterUrl ? (
-            <Image
-              src={posterUrl}
-              alt={title}
-              fill
-              unoptimized
-              className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-              sizes="(max-width: 1024px) 100vw, 900px"
-              priority
-            />
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0A0F1D] flex items-center justify-center">
-              <div className="font-serif text-[120px] font-bold text-white/5 select-none">
-                N
-              </div>
+        )}
+
+        {status === "loading" && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#0A0A0B] pointer-events-none">
+            <div className="text-[#F97316]">
+              <Spinner />
             </div>
-          )}
+            <span className="font-sans text-white/70 text-[13px]">Loading video…</span>
+          </div>
+        )}
+      </div>
+    );
+  }
 
-          {/* Dark Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20 group-hover:via-black/20 transition-all duration-300" />
+  // Idle state: poster with a play button, or an honest "no video" message.
+  return (
+    <div className={outerClass}>
+      <div
+        className={`relative w-full h-full flex items-center justify-center group ${embedInfo ? "cursor-pointer" : ""}`}
+        onClick={embedInfo ? startPlayback : undefined}
+      >
+        {/* Poster or Fallback Graphic */}
+        {posterUrl ? (
+          <Image
+            src={posterUrl}
+            alt={title}
+            fill
+            unoptimized
+            className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+            sizes="(max-width: 1024px) 100vw, 900px"
+            priority
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0A0F1D] flex items-center justify-center">
+            <div className="font-serif text-[120px] font-bold text-white/5 select-none">N</div>
+          </div>
+        )}
 
-          {/* Center Play Button */}
+        {/* Dark Overlay Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20 group-hover:via-black/20 transition-all duration-300" />
+
+        {embedInfo ? (
           <div className="relative z-10 flex flex-col items-center gap-3">
             <button
               type="button"
@@ -151,24 +296,17 @@ export function VideoPlayer({
               Play Lesson Video
             </span>
           </div>
-
-          {/* Progress Simulation Bar in Screenshot */}
-          <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex items-center justify-between text-white/80 font-sans text-[12px] sm:text-[13px]">
-            <div className="flex items-center gap-3 flex-1 mr-4">
-              <span className="text-white font-medium">12:45 / 1:28:00</span>
-              <div className="flex-1 h-1 sm:h-1.5 bg-white/20 rounded-full overflow-hidden">
-                <div className="h-full bg-[#F97316] rounded-full w-[25%]" />
-              </div>
-            </div>
-            <div className="flex items-center gap-3 sm:gap-4 text-white/70">
-              <span>1x</span>
-              <span className="border border-white/40 px-1 py-0.2 rounded text-[10px] uppercase font-bold">CC</span>
-              <button type="button" aria-label="Settings" className="hover:text-white transition-colors">⚙</button>
-              <button type="button" aria-label="Fullscreen" className="hover:text-white transition-colors">⛶</button>
-            </div>
+        ) : (
+          <div className="relative z-10 flex flex-col items-center gap-1 px-6 text-center">
+            <span className="text-white/90 font-sans font-semibold text-[15px] sm:text-[16px]">
+              No video for this lesson yet
+            </span>
+            <span className="text-white/60 font-sans text-[13px]">
+              Check back soon — this lesson is still being recorded.
+            </span>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
