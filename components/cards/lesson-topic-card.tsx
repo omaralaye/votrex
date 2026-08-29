@@ -76,6 +76,25 @@ function CourseMiniBadge({ iconIdentifier }: { iconIdentifier?: string; courseTi
   );
 }
 
+function TopicHeaderIcon({ iconIdentifier = "" }: { iconIdentifier?: string }) {
+  const icon = iconIdentifier.toLowerCase();
+  if (icon.includes("react")) {
+    return (
+      <div className="w-5 h-5 text-[#38BDF8] flex items-center justify-center font-bold text-[13px] select-none">
+        ⚛
+      </div>
+    );
+  }
+  if (icon.includes("node")) {
+    return (
+      <div className="w-5 h-5 text-[#4ADE80] flex items-center justify-center font-bold text-[11px] select-none">
+        JS
+      </div>
+    );
+  }
+  return <DocumentIcon size={18} className="text-[#94A3B8]" />;
+}
+
 export function LessonTopicCard({
   title = "Data Fetching & Caching",
   description = "Explore different data fetching methods in Next.js and how to cache and revalidate data for optimal performance.",
@@ -95,8 +114,8 @@ export function LessonTopicCard({
       <div className="relative w-full md:w-[240px] lg:w-[260px] aspect-[16/10] md:aspect-auto shrink-0 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-4 sm:p-5 flex flex-col justify-between overflow-hidden">
         <div>
           {/* Top Left Icon */}
-          <div className="mb-2 text-[#64748B]">
-            <DocumentIcon size={18} className="text-[#94A3B8]" />
+          <div className="mb-2.5">
+            <TopicHeaderIcon iconIdentifier={courseIconIdentifier} />
           </div>
 
           {/* Bullet List of Key Points */}
@@ -112,8 +131,8 @@ export function LessonTopicCard({
 
         {/* Bottom Right Checkmark */}
         <div className="flex justify-end pt-2">
-          <div className="w-5 h-5 rounded-full bg-[#475569] text-white flex items-center justify-center shadow-xs">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <div className="w-5 h-5 rounded-full bg-[#334155] text-white flex items-center justify-center shadow-xs">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>
@@ -164,7 +183,7 @@ export function LessonTopicCard({
 
   if (href) {
     return (
-      <Link href={href} className="block no-underline">
+      <Link href={href} onClick={onViewLesson} className="block no-underline">
         {cardContent}
       </Link>
     );

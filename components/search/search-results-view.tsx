@@ -43,6 +43,7 @@ export function SearchResultsView({
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         searchInputRef.current?.focus();
+        searchInputRef.current?.select();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -72,6 +73,7 @@ export function SearchResultsView({
           results_count: result.totalResults,
           courses_count: result.coursesCount,
           sort: sortOrder,
+          source: "search_page",
         });
       }
     } catch (err) {
@@ -103,13 +105,31 @@ export function SearchResultsView({
     }
   };
 
+  const handleClearSearch = () => {
+    const prevQuery = query;
+    setQuery("");
+    setData({
+      query: "",
+      totalResults: 0,
+      coursesCount: 0,
+      results: [],
+    });
+    router.push("/search");
+    searchInputRef.current?.focus();
+    if (prevQuery.trim()) {
+      posthog.capture("search_cleared", {
+        previous_query: prevQuery.trim(),
+      });
+    }
+  };
+
   const results = data?.results || [];
   const totalCount = data?.totalResults || 0;
   const coursesCount = data?.coursesCount || 0;
 
   return (
     <div className="relative min-h-screen w-full bg-[#FAF9F6] text-[#0F172A] flex flex-col justify-between overflow-x-hidden selection:bg-[#FED7AA] selection:text-[#9A3412]">
-      {/* Subtle diagonal pinstripe texture pattern across background */}
+      {/* Diagonal pinstripe texture pattern from design */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.035] bg-[repeating-linear-gradient(45deg,#0F172A_0,#0F172A_1px,transparent_0,transparent_9px)]"
@@ -119,8 +139,8 @@ export function SearchResultsView({
         {/* Navigation Bar */}
         <Navbar activeRoute="courses" />
 
-        {/* Main Content */}
-        <main className="w-full max-w-[960px] mx-auto px-5 sm:px-8 lg:px-10 pt-8 sm:pt-12 pb-16">
+        {/* Main Content Container */}
+        <main className="w-full max-w-[920px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 pb-16">
           {/* Header Section */}
           <div className="flex flex-col items-center text-center">
             {/* Top Badge */}
@@ -131,7 +151,7 @@ export function SearchResultsView({
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-serif text-[36px] sm:text-[46px] md:text-[52px] leading-[1.15] tracking-[-0.015em] text-[#0F172A] font-normal max-w-2xl">
+            <h1 className="font-serif text-[38px] sm:text-[48px] md:text-[54px] leading-[1.12] tracking-[-0.015em] text-[#0F172A] font-normal max-w-2xl">
               {query.trim() ? (
                 <>
                   Results for <span className="text-[#EA580C] font-serif font-normal">“{query.trim()}”</span>
@@ -142,14 +162,14 @@ export function SearchResultsView({
             </h1>
 
             {/* Sub-headline */}
-            <p className="font-sans text-[14px] sm:text-[16px] text-[#64748B] mt-3 sm:mt-4 mb-8 font-normal">
+            <p className="font-sans text-[14px] sm:text-[15.5px] text-[#64748B] mt-3 sm:mt-3.5 mb-7 sm:mb-8 font-normal">
               {query.trim()
                 ? `Found ${totalCount} ${totalCount === 1 ? "result" : "results"} across ${coursesCount} ${coursesCount === 1 ? "course" : "courses"}`
                 : "Type keywords or topics to find exact lessons and video moments across all courses."}
             </p>
 
             {/* Search Input Bar */}
-            <form onSubmit={handleSearchSubmit} className="w-full max-w-[680px] mb-10 sm:mb-12">
+            <form onSubmit={handleSearchSubmit} className="w-full max-w-[660px] mb-8 sm:mb-10">
               <div
                 className={`relative flex items-center justify-between w-full bg-white rounded-2xl border px-4 sm:px-5 py-3 sm:py-3.5 transition-all duration-200 shadow-[0_2px_12px_rgba(15,23,42,0.04)] ${
                   isSearchFocused
@@ -180,23 +200,13 @@ export function SearchResultsView({
                   {query ? (
                     <button
                       type="button"
-                      onClick={() => {
-                        setQuery("");
-                        setData({
-                          query: "",
-                          totalResults: 0,
-                          coursesCount: 0,
-                          results: [],
-                        });
-                        router.push("/search");
-                        searchInputRef.current?.focus();
-                      }}
-                      className="px-2 py-1 text-[12px] font-sans text-[#64748B] hover:text-[#0F172A] cursor-pointer"
+                      onClick={handleClearSearch}
+                      className="px-2.5 py-1 rounded-lg bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[12px] font-sans text-[#64748B] hover:text-[#0F172A] cursor-pointer transition-colors"
                     >
                       Clear
                     </button>
                   ) : (
-                    <kbd className="inline-flex items-center justify-center px-2.5 py-1 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[12px] font-sans text-[#64748B] font-medium shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+                    <kbd className="inline-flex items-center justify-center px-2.5 py-1 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[12px] font-sans text-[#64748B] font-medium shadow-[0_1px_2px_rgba(0,0,0,0.03)] select-none">
                       ⌘ K
                     </kbd>
                   )}
@@ -207,7 +217,7 @@ export function SearchResultsView({
 
           {/* Results Header: Count & Sort Controls */}
           {query.trim() && (
-            <div className="flex items-center justify-between mb-6 pb-2">
+            <div className="flex items-center justify-between mb-5 pb-1">
               <div className="font-sans font-medium text-[15px] sm:text-[16px] text-[#0F172A]">
                 {totalCount} {totalCount === 1 ? "result" : "results"}
               </div>
@@ -233,9 +243,9 @@ export function SearchResultsView({
             </div>
           )}
 
-          {/* Loading Indicator */}
+          {/* Loading State */}
           {isLoading && (
-            <div className="w-full flex items-center justify-center py-12">
+            <div className="w-full flex items-center justify-center py-14">
               <div className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm text-sm text-[#64748B]">
                 <div className="w-4 h-4 rounded-full border-2 border-[#EA580C] border-t-transparent animate-spin" />
                 <span>Searching courses & video transcripts...</span>
@@ -246,12 +256,25 @@ export function SearchResultsView({
           {/* Results List */}
           {!isLoading && results.length > 0 && (
             <div className="space-y-4 sm:space-y-5">
-              {results.map((item) => {
+              {results.map((item, index) => {
                 const lessonUrl = `/courses/${item.courseSlug}/${item.lessonSlug}${
                   item.type === "video" && item.startSeconds !== undefined ? `?t=${item.startSeconds}` : ""
                 }`;
 
                 const handleResultClick = () => {
+                  posthog.capture("search_result_opened", {
+                    query: query.trim(),
+                    result_id: item.id,
+                    result_type: item.type,
+                    result_title: item.title,
+                    course_slug: item.courseSlug,
+                    course_title: item.courseTitle,
+                    lesson_slug: item.lessonSlug,
+                    module_label: item.moduleLabel,
+                    lesson_label: item.lessonLabel,
+                    start_seconds: item.startSeconds,
+                    position: index + 1,
+                  });
                   posthog.capture("search_result_clicked", {
                     query: query.trim(),
                     result_id: item.id,
@@ -313,7 +336,7 @@ export function SearchResultsView({
                 No matching results found
               </h3>
               <p className="font-sans text-[14.5px] text-[#64748B] max-w-md mx-auto mb-6">
-                We couldn&apos;t find any lessons or video moments matching &quot;{query}&quot;. Try checking for typos or searching with broader keywords.
+                We couldn&apos;t find any lessons or video moments matching &quot;{query}&quot;. Try checking for typos or searching with broader keywords like &quot;data fetching&quot;, &quot;Docker&quot;, or &quot;React&quot;.
               </p>
               <Link
                 href="/courses"

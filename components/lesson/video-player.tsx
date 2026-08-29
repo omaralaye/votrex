@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import posthog from "posthog-js";
 import { PlayIcon } from "@/components/icons";
 
 interface VideoPlayerProps {
@@ -9,7 +10,13 @@ interface VideoPlayerProps {
   posterUrl?: string;
   title?: string;
   startSeconds?: number;
+  courseSlug?: string;
+  lessonSlug?: string;
+  duration?: string;
   className?: string;
+  onPlay?: () => void;
+  onWatchDepth?: (depthPercentage: number) => void;
+  onComplete?: () => void;
 }
 
 /**
@@ -40,14 +47,47 @@ function isBunnyUrl(url: string): boolean {
   return url.includes("bunny") || url.includes("mediadelivery.net");
 }
 
+function parseDurationToSeconds(durationStr?: string): number {
+  if (!durationStr) return 900;
+  const trimmed = durationStr.trim().toLowerCase();
+
+  // Format: "12:45" or "1:12:45"
+  if (trimmed.includes(":")) {
+    const parts = trimmed.split(":").map((p) => parseFloat(p) || 0);
+    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    if (parts.length === 2) return parts[0] * 60 + parts[1];
+  }
+
+  // Format: "1h 28m" or "2h 30m" or "45m" or "15m"
+  let totalSec = 0;
+  const hourMatch = trimmed.match(/(\d+)\s*h/);
+  const minMatch = trimmed.match(/(\d+)\s*m/);
+  const secMatch = trimmed.match(/(\d+)\s*s/);
+
+  if (hourMatch) totalSec += parseInt(hourMatch[1], 10) * 3600;
+  if (minMatch) totalSec += parseInt(minMatch[1], 10) * 60;
+  if (secMatch) totalSec += parseInt(secMatch[1], 10);
+
+  return totalSec > 0 ? totalSec : 900;
+}
+
 export function VideoPlayer({
   videoUrl,
   posterUrl,
   title = "Lesson Video",
   startSeconds = 0,
+  courseSlug,
+  lessonSlug,
+  duration,
   className = "",
+  onPlay,
+  onWatchDepth,
+  onComplete,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const trackedMilestonesRef = useRef<Set<number>>(new Set());
+  const playbackStartTimeRef = useRef<number | null>(null);
+  const totalDurationSeconds = useMemo(() => parseDurationToSeconds(duration), [duration]);
 
   const embedInfo = useMemo(() => {
     if (!videoUrl) return null;
@@ -87,7 +127,99 @@ export function VideoPlayer({
     };
   }, [videoUrl, startSeconds]);
 
-  // If user hasn't clicked play yet, or if we want to show the initial iframe
+  const triggerWatchDepth = useCallback(
+    (depthPercentage: number, currentTimeSec: number, totalDurationSec: number) => {
+      if (trackedMilestonesRef.current.has(depthPercentage)) return;
+      trackedMilestonesRef.current.add(depthPercentage);
+
+      posthog.capture("video_watch_depth", {
+        depth_percentage: depthPercentage,
+        current_time: Math.round(currentTimeSec),
+        duration: Math.round(totalDurationSec),
+        video_title: title,
+        course_slug: courseSlug,
+        lesson_slug: lessonSlug,
+      });
+
+      onWatchDepth?.(depthPercentage);
+
+      if (depthPercentage === 100) {
+        onComplete?.();
+      }
+    },
+    [title, courseSlug, lessonSlug, onWatchDepth, onComplete]
+  );
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+    playbackStartTimeRef.current = Date.now();
+
+    posthog.capture("video_played", {
+      video_url: videoUrl,
+      video_provider: embedInfo?.type || "unknown",
+      title,
+      start_seconds: startSeconds,
+      is_resumed: startSeconds > 0,
+      course_slug: courseSlug,
+      lesson_slug: lessonSlug,
+      duration,
+    });
+
+    if (startSeconds > 0) {
+      posthog.capture("video_resume_used", {
+        course_slug: courseSlug,
+        lesson_slug: lessonSlug,
+        resume_position_seconds: startSeconds,
+        video_title: title,
+        source: "timestamp_link",
+      });
+    }
+
+    onPlay?.();
+  };
+
+  // Watch depth tracker for iframe & simulated playback
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const milestones = [25, 50, 75, 90, 100];
+    const interval = setInterval(() => {
+      if (!playbackStartTimeRef.current) return;
+      const elapsedSeconds = (Date.now() - playbackStartTimeRef.current) / 1000 + startSeconds;
+      const currentProgress = Math.min(100, (elapsedSeconds / totalDurationSeconds) * 100);
+
+      for (const m of milestones) {
+        if (currentProgress >= m) {
+          triggerWatchDepth(m, elapsedSeconds, totalDurationSeconds);
+        }
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [isPlaying, startSeconds, totalDurationSeconds, triggerWatchDepth]);
+
+  // YouTube / Vimeo postMessage listener for ended events
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const handleWindowMessage = (event: MessageEvent) => {
+      try {
+        if (typeof event.data === "string") {
+          const parsed = JSON.parse(event.data);
+          // YouTube ended event: info === 0
+          if (parsed.event === "onStateChange" && parsed.info === 0) {
+            triggerWatchDepth(100, totalDurationSeconds, totalDurationSeconds);
+          }
+        }
+      } catch {
+        // non-JSON message
+      }
+    };
+
+    window.addEventListener("message", handleWindowMessage);
+    return () => window.removeEventListener("message", handleWindowMessage);
+  }, [isPlaying, totalDurationSeconds, triggerWatchDepth]);
+
   return (
     <div
       className={`relative w-full aspect-video rounded-[20px] sm:rounded-[24px] overflow-hidden bg-[#0A0A0B] border border-[#1E293B]/80 shadow-[0_12px_40px_rgba(0,0,0,0.35)] select-none ${className}`}
@@ -99,6 +231,38 @@ export function VideoPlayer({
             controls
             autoPlay
             poster={posterUrl}
+            onTimeUpdate={(e) => {
+              const video = e.currentTarget;
+              const currentTime = video.currentTime;
+              const dur = video.duration || totalDurationSeconds;
+              if (dur > 0) {
+                const pct = (currentTime / dur) * 100;
+                const milestones = [25, 50, 75, 90, 100];
+                for (const m of milestones) {
+                  if (pct >= m) {
+                    triggerWatchDepth(m, currentTime, dur);
+                  }
+                }
+              }
+            }}
+            onPause={(e) => {
+              const video = e.currentTarget;
+              const currentTime = video.currentTime;
+              const dur = video.duration || totalDurationSeconds;
+              posthog.capture("video_paused", {
+                current_time: Math.round(currentTime),
+                duration: Math.round(dur),
+                depth_percentage: Math.round((currentTime / dur) * 100),
+                video_title: title,
+                course_slug: courseSlug,
+                lesson_slug: lessonSlug,
+              });
+            }}
+            onEnded={(e) => {
+              const video = e.currentTarget;
+              const dur = video.duration || totalDurationSeconds;
+              triggerWatchDepth(100, dur, dur);
+            }}
             className="w-full h-full object-cover"
           >
             Your browser does not support the video tag.
@@ -113,7 +277,10 @@ export function VideoPlayer({
           />
         )
       ) : (
-        <div className="relative w-full h-full flex items-center justify-center group cursor-pointer" onClick={() => setIsPlaying(true)}>
+        <div
+          className="relative w-full h-full flex items-center justify-center group cursor-pointer"
+          onClick={handlePlay}
+        >
           {/* Poster or Fallback Graphic */}
           {posterUrl ? (
             <Image
@@ -148,16 +315,28 @@ export function VideoPlayer({
               </span>
             </button>
             <span className="text-white/90 font-sans font-medium text-[13px] sm:text-[14px] tracking-wide uppercase drop-shadow-md">
-              Play Lesson Video
+              {startSeconds > 0 ? `Resume at ${Math.floor(startSeconds / 60)}:${(Math.floor(startSeconds) % 60).toString().padStart(2, '0')}` : "Play Lesson Video"}
             </span>
           </div>
 
           {/* Progress Simulation Bar in Screenshot */}
           <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 flex items-center justify-between text-white/80 font-sans text-[12px] sm:text-[13px]">
             <div className="flex items-center gap-3 flex-1 mr-4">
-              <span className="text-white font-medium">12:45 / 1:28:00</span>
+              <span className="text-white font-medium">
+                {startSeconds > 0
+                  ? `${Math.floor(startSeconds / 60)}:${(Math.floor(startSeconds) % 60).toString().padStart(2, "0")} / ${duration || "1:28:00"}`
+                  : `00:00 / ${duration || "1:28:00"}`}
+              </span>
               <div className="flex-1 h-1 sm:h-1.5 bg-white/20 rounded-full overflow-hidden">
-                <div className="h-full bg-[#F97316] rounded-full w-[25%]" />
+                <div
+                  className="h-full bg-[#F97316] rounded-full"
+                  style={{
+                    width: `${Math.max(
+                      5,
+                      startSeconds > 0 ? Math.min(100, (startSeconds / totalDurationSeconds) * 100) : 15
+                    )}%`,
+                  }}
+                />
               </div>
             </div>
             <div className="flex items-center gap-3 sm:gap-4 text-white/70">

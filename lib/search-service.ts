@@ -75,32 +75,25 @@ interface RawVideoData {
   }>;
 }
 
-/**
- * Execute grounded intelligent search across courses, lessons, and video intelligence.
- */
-export async function searchContent(
-  query: string,
-  sort: 'relevance' | 'newest' | 'duration' = 'relevance'
-): Promise<SearchResponse> {
-  const trimmed = (query || '').trim();
-  if (!trimmed) {
-    return {
-      query: '',
-      totalResults: 0,
-      coursesCount: 0,
-      results: [],
-    };
+// In-memory cache for Sanity catalog data to provide sub-10ms search responses
+let cachedData: {
+  courses: RawCourseData[];
+  videos: RawVideoData[];
+  timestamp: number;
+} | null = null;
+
+const CACHE_TTL_MS = 60 * 1000; // 1 minute TTL
+
+async function getCachedSanityCatalog(): Promise<{
+  courses: RawCourseData[];
+  videos: RawVideoData[];
+}> {
+  const now = Date.now();
+  if (cachedData && now - cachedData.timestamp < CACHE_TTL_MS) {
+    return { courses: cachedData.courses, videos: cachedData.videos };
   }
 
   const sanity = serverClient || client;
-  const searchTerms = trimmed
-    .toLowerCase()
-    .replace(/[^\w\s]/g, ' ')
-    .split(/\s+/)
-    .filter((t) => t.length > 0);
-
-  // Fetch all courses with full hierarchical structure (modules and populated lessons)
-  // along with all video documents
   const [coursesData, videosData] = await Promise.all([
     sanity.fetch<RawCourseData[]>(`
       *[_type == "course" && defined(slug.current)] {
@@ -137,18 +130,128 @@ export async function searchContent(
     `),
   ]);
 
-  // Index video data by URL and videoId for fast lookup
-  const videoByUrl = new Map<string, RawVideoData>();
-  for (const v of videosData || []) {
-    if (v.url) {
-      videoByUrl.set(v.url, v);
-    }
-    if (v.videoId) {
-      videoByUrl.set(v.videoId, v);
-    }
+  cachedData = {
+    courses: coursesData || [],
+    videos: videosData || [],
+    timestamp: now,
+  };
+
+  return { courses: cachedData.courses, videos: cachedData.videos };
+}
+
+/**
+ * Generate common morphological stems for a word (e.g. "fetching" -> ["fetching", "fetch"])
+ */
+function getWordStems(word: string): string[] {
+  const w = word.toLowerCase().trim();
+  const stems = new Set<string>([w]);
+
+  if (w.endsWith('ing')) stems.add(w.slice(0, -3));
+  if (w.endsWith('es')) stems.add(w.slice(0, -2));
+  if (w.endsWith('s')) stems.add(w.slice(0, -1));
+  if (w.endsWith('ed')) stems.add(w.slice(0, -2));
+  if (w.endsWith('tion')) stems.add(w.slice(0, -4));
+  if (w.endsWith('ment')) stems.add(w.slice(0, -4));
+
+  // Common programming aliases & inflections
+  if (w === 'fetch' || w === 'fetching') {
+    stems.add('fetch');
+    stems.add('fetching');
+    stems.add('fetched');
+  }
+  if (w === 'cache' || w === 'caching') {
+    stems.add('cache');
+    stems.add('caching');
+    stems.add('revalidate');
+  }
+  if (w === 'route' || w === 'routing') {
+    stems.add('route');
+    stems.add('routing');
+  }
+  if (w === 'render' || w === 'rendering') {
+    stems.add('render');
+    stems.add('rendering');
+    stems.add('ssr');
+  }
+  if (w === 'component' || w === 'components') {
+    stems.add('component');
+    stems.add('components');
+    stems.add('rsc');
+  }
+  if (w === 'hook' || w === 'hooks') {
+    stems.add('hook');
+    stems.add('hooks');
+    stems.add('useeffect');
+    stems.add('usestate');
   }
 
-  // Build a flat lookup of every lesson with its parent course, module info, and derived numbers
+  return Array.from(stems).filter((s) => s.length >= 3);
+}
+
+/**
+ * Intelligent grounded search wired with Sanity courses, curriculum, and video moments
+ */
+export async function searchContent(
+  query: string,
+  sort: 'relevance' | 'newest' | 'duration' = 'relevance'
+): Promise<SearchResponse> {
+  const trimmed = (query || '').trim();
+  if (!trimmed) {
+    return {
+      query: '',
+      totalResults: 0,
+      coursesCount: 0,
+      results: [],
+    };
+  }
+
+  const { courses: coursesData, videos: videosData } = await getCachedSanityCatalog();
+
+  const queryLower = trimmed.toLowerCase();
+  const searchTerms = queryLower
+    .replace(/[^\w\s]/g, ' ')
+    .split(/\s+/)
+    .filter((t) => t.length > 0);
+
+  const termStems = searchTerms.map((term) => getWordStems(term));
+
+  // Map videos by URL and videoId
+  const videoByUrl = new Map<string, RawVideoData>();
+  for (const v of videosData || []) {
+    if (v.url) videoByUrl.set(v.url, v);
+    if (v.videoId) videoByUrl.set(v.videoId, v);
+  }
+
+  function computeTextScore(text: string | undefined): number {
+    if (!text) return 0;
+    const lower = text.toLowerCase();
+    if (lower === queryLower) return 100;
+    if (lower.includes(queryLower)) return 90;
+
+    let exactMatches = 0;
+    let stemMatches = 0;
+
+    searchTerms.forEach((term, idx) => {
+      if (lower.includes(term)) {
+        exactMatches++;
+      } else {
+        const stems = termStems[idx] || [];
+        if (stems.some((st) => lower.includes(st))) {
+          stemMatches++;
+        }
+      }
+    });
+
+    const totalMatched = exactMatches + stemMatches;
+    if (totalMatched === searchTerms.length) {
+      return 75 + (exactMatches === searchTerms.length ? 15 : 0);
+    }
+    if (totalMatched > 0) {
+      return (totalMatched / searchTerms.length) * 55;
+    }
+    return 0;
+  }
+
   interface LessonMeta {
     lesson: NonNullable<NonNullable<NonNullable<RawCourseData['modules']>[0]['lessons']>[0]>;
     courseTitle: string;
@@ -188,24 +291,9 @@ export async function searchContent(
   }
 
   const results: SearchResultItem[] = [];
-  const queryLower = trimmed.toLowerCase();
+  const seenKeys = new Set<string>();
 
-  // Helper to compute match score
-  function computeTextScore(text: string | undefined): number {
-    if (!text) return 0;
-    const lower = text.toLowerCase();
-    if (lower === queryLower) return 100;
-    if (lower.includes(queryLower)) return 85;
-    let termMatches = 0;
-    for (const term of searchTerms) {
-      if (lower.includes(term)) termMatches++;
-    }
-    if (termMatches === searchTerms.length) return 70;
-    if (termMatches > 0) return 40 * (termMatches / searchTerms.length);
-    return 0;
-  }
-
-  // 1. Process Video Moments (Chapters table of contents first, then transcript chunks)
+  // 1. Process Video Moments (Chapters table of contents and transcript chunks)
   for (const meta of allLessons) {
     const { lesson, courseTitle, courseSlug, courseIconIdentifier, moduleLabel, moduleTitle, lessonLabel } = meta;
     if (!lesson.videoUrl) continue;
@@ -213,111 +301,120 @@ export async function searchContent(
     const video = videoByUrl.get(lesson.videoUrl);
     if (!video) continue;
 
-    let matchedMoment: {
-      title: string;
-      description: string;
-      startSeconds: number;
-      score: number;
-    } | null = null;
-
-    // A. Check chapters (Table of Contents) - High Priority
+    // A. Check chapters (Table of Contents)
     if (video.chapters && video.chapters.length > 0) {
-      let bestChapterScore = 0;
-      let bestChapter: (typeof video.chapters)[0] | null = null;
-
       for (const ch of video.chapters) {
         const score = computeTextScore(ch.label);
-        if (score > bestChapterScore && score >= 35) {
-          bestChapterScore = score;
-          bestChapter = ch;
+        if (score >= 25) {
+          const timestampFormatted = formatSeconds(ch.startSeconds || 0);
+          const key = `video-${lesson._id}-${ch.startSeconds}`;
+          if (!seenKeys.has(key)) {
+            seenKeys.add(key);
+            results.push({
+              id: key,
+              type: 'video',
+              title: ch.label,
+              description: lesson.summary || `Learn how to master ${ch.label} with hands-on examples and production best practices.`,
+              courseTitle,
+              courseSlug,
+              courseIconIdentifier,
+              moduleLabel,
+              moduleTitle,
+              lessonLabel,
+              lessonSlug: lesson.slug?.current || lesson._id,
+              duration: lesson.duration || '12:45',
+              startSeconds: ch.startSeconds || 0,
+              timestampFormatted,
+              thumbnailUrl: lesson.thumbnailUrl,
+              score: score + 12, // Chapter boost
+            });
+          }
         }
-      }
-
-      if (bestChapter && bestChapterScore > 0) {
-        matchedMoment = {
-          title: bestChapter.label,
-          description: lesson.summary || `Learn how to master ${bestChapter.label} with best practices and hands-on examples.`,
-          startSeconds: bestChapter.startSeconds || 0,
-          score: bestChapterScore + 15, // Chapter boost
-        };
       }
     }
 
-    // B. Fallback to transcript chunks if no chapter matched
-    if (!matchedMoment && video.chunks && video.chunks.length > 0) {
+    // B. Check transcript chunks for high-relevance matches
+    if (video.chunks && video.chunks.length > 0) {
       let bestChunkScore = 0;
       let bestChunk: (typeof video.chunks)[0] | null = null;
 
       for (const chunk of video.chunks) {
         const score = computeTextScore(chunk.text);
-        if (score > bestChunkScore && score >= 40) {
+        if (score > bestChunkScore && score >= 35) {
           bestChunkScore = score;
           bestChunk = chunk;
         }
       }
 
       if (bestChunk && bestChunkScore > 0) {
-        matchedMoment = {
-          title: lesson.title,
-          description: bestChunk.text.slice(0, 150) + '...',
-          startSeconds: bestChunk.startSeconds || 0,
-          score: bestChunkScore,
-        };
+        const key = `video-${lesson._id}-${bestChunk.startSeconds}`;
+        if (!seenKeys.has(key)) {
+          seenKeys.add(key);
+          const timestampFormatted = formatSeconds(bestChunk.startSeconds || 0);
+          results.push({
+            id: key,
+            type: 'video',
+            title: lesson.title,
+            description: bestChunk.text.slice(0, 150) + '...',
+            courseTitle,
+            courseSlug,
+            courseIconIdentifier,
+            moduleLabel,
+            moduleTitle,
+            lessonLabel,
+            lessonSlug: lesson.slug?.current || lesson._id,
+            duration: lesson.duration || '12:45',
+            startSeconds: bestChunk.startSeconds || 0,
+            timestampFormatted,
+            thumbnailUrl: lesson.thumbnailUrl,
+            score: bestChunkScore,
+          });
+        }
       }
-    }
-
-    if (matchedMoment) {
-      const timestampFormatted = formatSeconds(matchedMoment.startSeconds);
-      results.push({
-        id: `video-${lesson._id}-${matchedMoment.startSeconds}`,
-        type: 'video',
-        title: matchedMoment.title,
-        description: matchedMoment.description,
-        courseTitle,
-        courseSlug,
-        courseIconIdentifier,
-        moduleLabel,
-        moduleTitle,
-        lessonLabel,
-        lessonSlug: lesson.slug?.current || lesson._id,
-        duration: lesson.duration || '12:45',
-        startSeconds: matchedMoment.startSeconds,
-        timestampFormatted,
-        thumbnailUrl: lesson.thumbnailUrl,
-        score: matchedMoment.score,
-      });
     }
   }
 
-  // 2. Process Lesson Results (Matching topic, title, key points, summary)
+  // 2. Process Lesson Results (Matching topic, title, key points, summary, module)
   for (const meta of allLessons) {
     const { lesson, courseTitle, courseSlug, courseIconIdentifier, moduleLabel, moduleTitle, lessonLabel } = meta;
 
     const titleScore = computeTextScore(lesson.title);
     const summaryScore = computeTextScore(lesson.summary);
     const keyPointsScore = (lesson.keyPoints || []).reduce((max, kp) => Math.max(max, computeTextScore(kp)), 0);
+    const moduleScore = computeTextScore(moduleTitle);
+    const courseScore = computeTextScore(courseTitle);
 
-    const overallLessonScore = Math.max(titleScore * 1.1, keyPointsScore * 0.9, summaryScore * 0.7);
+    const overallLessonScore = Math.max(
+      titleScore * 1.25,
+      keyPointsScore * 1.05,
+      moduleScore * 0.9,
+      summaryScore * 0.8,
+      courseScore * 0.65
+    );
 
-    if (overallLessonScore >= 35) {
-      results.push({
-        id: `lesson-${lesson._id}`,
-        type: 'lesson',
-        title: lesson.title,
-        description: lesson.summary || `Explore the core architecture, key concepts, and practical implementation patterns.`,
-        courseTitle,
-        courseSlug,
-        courseIconIdentifier,
-        moduleLabel,
-        moduleTitle,
-        lessonLabel,
-        lessonSlug: lesson.slug?.current || lesson._id,
-        duration: lesson.duration || '15:00',
-        keyPoints: lesson.keyPoints && lesson.keyPoints.length > 0
-          ? lesson.keyPoints.slice(0, 3)
-          : ['Core implementation patterns', 'Architecture & best practices', 'Production deployment'],
-        score: overallLessonScore,
-      });
+    if (overallLessonScore >= 25) {
+      const key = `lesson-${lesson._id}`;
+      if (!seenKeys.has(key)) {
+        seenKeys.add(key);
+        results.push({
+          id: key,
+          type: 'lesson',
+          title: lesson.title,
+          description: lesson.summary || `Explore the core architecture, key concepts, and practical implementation patterns.`,
+          courseTitle,
+          courseSlug,
+          courseIconIdentifier,
+          moduleLabel,
+          moduleTitle,
+          lessonLabel,
+          lessonSlug: lesson.slug?.current || lesson._id,
+          duration: lesson.duration || '15:00',
+          keyPoints: lesson.keyPoints && lesson.keyPoints.length > 0
+            ? lesson.keyPoints.slice(0, 3)
+            : ['Core implementation patterns', 'Architecture & best practices', 'Production deployment'],
+          score: overallLessonScore,
+        });
+      }
     }
   }
 

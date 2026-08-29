@@ -1,0 +1,127 @@
+[
+  {
+    "event_name": "search_performed",
+    "event_description": "Captures when a search query is submitted or executed, with query terms, results count, courses count, and sort order.",
+    "file": "app/api/search/route.ts"
+  },
+  {
+    "event_name": "search_result_opened",
+    "event_description": "Captures when a user opens a search result card (video moment or lesson topic) with result type and start seconds.",
+    "file": "components/search/search-results-view.tsx"
+  },
+  {
+    "event_name": "search_result_clicked",
+    "event_description": "Captures search result clicks for backward compatibility with existing insights.",
+    "file": "components/search/search-results-view.tsx"
+  },
+  {
+    "event_name": "search_sort_changed",
+    "event_description": "Captures when the search results sort order dropdown is changed.",
+    "file": "components/search/search-results-view.tsx"
+  },
+  {
+    "event_name": "search_cleared",
+    "event_description": "Captures when a user clears their active search query.",
+    "file": "components/search/search-results-view.tsx"
+  },
+  {
+    "event_name": "video_played",
+    "event_description": "Captures when a lesson video starts playing with provider type, title, and initial timestamp.",
+    "file": "components/lesson/video-player.tsx"
+  },
+  {
+    "event_name": "video_watch_depth",
+    "event_description": "Captures when playback crosses 25%, 50%, 75%, 90%, and 100% completion milestones.",
+    "file": "components/lesson/video-player.tsx"
+  },
+  {
+    "event_name": "video_resume_used",
+    "event_description": "Captures when a learner starts or resumes video playback from a non-zero timestamp.",
+    "file": "components/lesson/video-player.tsx"
+  },
+  {
+    "event_name": "video_paused",
+    "event_description": "Captures when a video playback is paused with current time and progress percentage.",
+    "file": "components/lesson/video-player.tsx"
+  },
+  {
+    "event_name": "lesson_completed",
+    "event_description": "Captures when a learner marks a lesson as complete, finishes the video, or advances to the next lesson.",
+    "file": "components/lesson/lesson-view.tsx"
+  },
+  {
+    "event_name": "course_completed",
+    "event_description": "Captures when a learner completes the final lesson or whole course.",
+    "file": "components/lesson/lesson-view.tsx"
+  },
+  {
+    "event_name": "lesson_viewed",
+    "event_description": "Captures when a user navigates to and views a lesson page.",
+    "file": "components/lesson/lesson-view.tsx"
+  },
+  {
+    "event_name": "lesson_bookmarked",
+    "event_description": "Captures when a user bookmarks or unbookmarks a lesson.",
+    "file": "components/lesson/lesson-view.tsx"
+  },
+  {
+    "event_name": "lesson_tab_switched",
+    "event_description": "Captures when a user switches between the Lesson Content and Notes tabs.",
+    "file": "components/lesson/lesson-view.tsx"
+  },
+  {
+    "event_name": "lesson_resource_clicked",
+    "event_description": "Captures when a user clicks an external lesson resource or document link.",
+    "file": "components/lesson/lesson-view.tsx"
+  },
+  {
+    "event_name": "lesson_navigated",
+    "event_description": "Captures when a user navigates using Previous Lesson or Next Lesson buttons.",
+    "file": "components/lesson/lesson-view.tsx"
+  },
+  {
+    "event_name": "course_card_clicked",
+    "event_description": "Captures when a user clicks on a course card from the catalog or home page.",
+    "file": "app/page.tsx"
+  },
+  {
+    "event_name": "course_bookmarked",
+    "event_description": "Captures when a user bookmarks or unbookmarks a course.",
+    "file": "components/course/course-view.tsx"
+  },
+  {
+    "event_name": "continue_learning_clicked",
+    "event_description": "Captures when a user clicks the Continue Learning CTA in the course hero or floating progress bar.",
+    "file": "components/course/course-view.tsx"
+  },
+  {
+    "event_name": "module_expanded",
+    "event_description": "Captures when a user expands a course curriculum module accordion.",
+    "file": "components/course/course-view.tsx"
+  },
+  {
+    "event_name": "show_all_modules_toggled",
+    "event_description": "Captures when a user toggles the full course curriculum accordion list.",
+    "file": "components/course/course-view.tsx"
+  },
+  {
+    "event_name": "category_filter_applied",
+    "event_description": "Captures when a category filter pill is selected in the course catalog.",
+    "file": "app/courses/page.tsx"
+  },
+  {
+    "event_name": "level_filter_applied",
+    "event_description": "Captures when an experience level filter is selected in the course catalog.",
+    "file": "app/courses/page.tsx"
+  },
+  {
+    "event_name": "course_filters_cleared",
+    "event_description": "Captures when all catalog filters are reset.",
+    "file": "app/courses/page.tsx"
+  },
+  {
+    "event_name": "explore_courses_clicked",
+    "event_description": "Captures when a user clicks the Explore Courses button in the homepage hero.",
+    "file": "app/page.tsx"
+  }
+]

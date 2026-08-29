@@ -349,9 +349,15 @@ export default function AllCoursesPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onBlur={() => {
-                    if (searchQuery.trim()) {
+                    const trimmed = searchQuery.trim();
+                    if (trimmed) {
+                      posthog.capture("search_performed", {
+                        query: trimmed,
+                        results_count: filteredCourses.length,
+                        source: "courses_page",
+                      });
                       posthog.capture("course_searched", {
-                        query: searchQuery.trim(),
+                        query: trimmed,
                         results_count: filteredCourses.length,
                         source: "courses_page",
                       });
@@ -363,7 +369,15 @@ export default function AllCoursesPage() {
                 {searchQuery && (
                   <button
                     type="button"
-                    onClick={() => setSearchQuery("")}
+                    onClick={() => {
+                      const prev = searchQuery.trim();
+                      setSearchQuery("");
+                      if (prev) {
+                        posthog.capture("search_cleared", {
+                          previous_query: prev,
+                        });
+                      }
+                    }}
                     aria-label="Clear search query"
                     className="text-xs text-[#64748B] hover:text-[#0F172A] px-2 py-0.5 rounded cursor-pointer shrink-0"
                   >
@@ -460,6 +474,14 @@ export default function AllCoursesPage() {
                   modulesCount={course.modulesCount}
                   icon={getCourseIcon(course.iconIdentifier)}
                   href={`/courses/${course.slug}`}
+                  onClick={() => {
+                    posthog.capture("course_card_clicked", {
+                      course_slug: course.slug,
+                      course_title: course.title,
+                      course_level: course.level,
+                      source: "courses_page",
+                    });
+                  }}
                 />
               ))}
             </div>

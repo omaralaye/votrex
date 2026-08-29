@@ -29,6 +29,7 @@ async function SearchPageContent({ searchParams }: { searchParams: SearchPagePro
 
   return (
     <SearchResultsView
+      key={`${query}-${sort}`}
       initialQuery={query}
       initialSort={sort}
       initialData={initialData}

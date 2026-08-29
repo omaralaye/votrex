@@ -43,7 +43,7 @@ export function Navbar({ activeRoute = "courses", className = "", onNavigate }: 
               }}
               className={`transition-colors py-1 cursor-pointer font-medium ${
                 activeRoute === "courses"
-                  ? "text-[#0F172A] font-semibold"
+                  ? "text-[#EA580C] font-semibold"
                   : "text-[#64748B] hover:text-[#0F172A]"
               }`}
             >
@@ -57,9 +57,9 @@ export function Navbar({ activeRoute = "courses", className = "", onNavigate }: 
                   onNavigate("my-learning");
                 }
               }}
-              className={`transition-colors py-1 cursor-pointer ${
+              className={`transition-colors py-1 cursor-pointer font-medium ${
                 activeRoute === "my-learning"
-                  ? "text-[#0F172A] font-semibold"
+                  ? "text-[#EA580C] font-semibold"
                   : "text-[#64748B] hover:text-[#0F172A]"
               }`}
             >

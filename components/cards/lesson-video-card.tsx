@@ -79,6 +79,129 @@ function CourseMiniBadge({ iconIdentifier }: { iconIdentifier?: string; courseTi
   );
 }
 
+/**
+ * High-fidelity Video Thumbnail Graphic matching the design specs
+ */
+function ThumbnailGraphic({
+  iconIdentifier = "",
+  title = "",
+  thumbnailUrl,
+}: {
+  iconIdentifier?: string;
+  title?: string;
+  thumbnailUrl?: string;
+}) {
+  const icon = (iconIdentifier || "").toLowerCase();
+  const lowerTitle = (title || "").toLowerCase();
+
+  // If a real custom image thumbnail exists, render it
+  if (thumbnailUrl && !thumbnailUrl.includes("picsum.photos")) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={thumbnailUrl}
+        alt={title}
+        className="w-full h-full object-cover opacity-85 group-hover:opacity-95 transition-opacity"
+      />
+    );
+  }
+
+  // 1. Next.js Graphic: Stylized large 'N' with dark gradient and subtle glow
+  if (icon.includes("next")) {
+    return (
+      <div className="absolute inset-0 bg-[#0B0F19] flex items-center justify-center overflow-hidden">
+        {/* Subtle ambient light */}
+        <div className="absolute w-36 h-36 rounded-full bg-white/5 blur-xl pointer-events-none" />
+        <svg viewBox="0 0 180 180" className="w-[45%] h-[45%] select-none opacity-90" fill="none">
+          <path
+            d="M149.508 157.508L69.8398 54.457H54.457V125.543H67.2427V72.1834L139.733 166.027C143.204 163.421 146.478 160.569 149.508 157.508Z"
+            fill="url(#vg_next_grad)"
+          />
+          <rect fill="url(#vg_next_bar)" height="71.0857" width="12.7857" x="112.757" y="54.457" />
+          <defs>
+            <linearGradient id="vg_next_grad" x1="109" x2="144.5" y1="116.5" y2="160.5" gradientUnits="userSpaceOnUse">
+              <stop stopColor="white" />
+              <stop offset="1" stopColor="white" stopOpacity="0.1" />
+            </linearGradient>
+            <linearGradient id="vg_next_bar" x1="119.143" x2="119.143" y1="54.457" y2="125.543" gradientUnits="userSpaceOnUse">
+              <stop stopColor="white" />
+              <stop offset="1" stopColor="white" stopOpacity="0.35" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    );
+  }
+
+  // 2. React Graphic: Dark code editor with syntax colors
+  if (icon.includes("react") || lowerTitle.includes("useeffect") || lowerTitle.includes("hook")) {
+    return (
+      <div className="absolute inset-0 bg-[#0B0F19] p-3.5 flex flex-col justify-center font-mono text-[9px] sm:text-[10px] leading-[1.35] select-none text-left overflow-hidden">
+        <div>
+          <span className="text-[#C084FC]">const</span> <span className="text-[#F472B6]">[users, setUsers]</span> = <span className="text-[#60A5FA]">useState</span>([]);
+        </div>
+        <div className="mt-1">
+          <span className="text-[#60A5FA]">useEffect</span>(() =&gt; &#123;
+        </div>
+        <div className="pl-3 text-[#94A3B8]">
+          <span className="text-[#38BDF8]">fetch</span>(<span className="text-[#4ADE80]">&apos;/api/users&apos;</span>)
+        </div>
+        <div className="pl-5 text-[#94A3B8]">
+          .<span className="text-[#FBBF24]">then</span>(res =&gt; res.<span className="text-[#60A5FA]">json</span>())
+        </div>
+        <div className="pl-5 text-[#94A3B8]">
+          .<span className="text-[#FBBF24]">then</span>(data =&gt; <span className="text-[#60A5FA]">setUsers</span>(data));
+        </div>
+        <div>&#125;, []);</div>
+      </div>
+    );
+  }
+
+  // 3. Node.js Graphic: Architecture Diagram (Client -> API Request -> Database)
+  if (icon.includes("node") || lowerTitle.includes("rest") || lowerTitle.includes("api")) {
+    return (
+      <div className="absolute inset-0 bg-[#0B0F19] p-3 flex items-center justify-between px-4 sm:px-6 select-none">
+        {/* Client Box */}
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-[9px] font-sans font-medium text-[#38BDF8]">Client</span>
+          <div className="w-10 h-10 rounded-lg bg-[#0F172A] border border-[#38BDF8]/40 shadow-xs" />
+        </div>
+
+        {/* Arrow / API */}
+        <div className="flex flex-col items-center gap-0.5">
+          <span className="text-[8.5px] font-sans text-[#4ADE80] font-medium">API Request</span>
+          <svg width="40" height="12" viewBox="0 0 40 12" fill="none" className="text-[#94A3B8]">
+            <path d="M0 6H36M36 6L30 2M36 6L30 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+
+        {/* Database Box */}
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-[9px] font-sans font-medium text-[#FB923C]">Database</span>
+          <div className="w-10 h-10 rounded-lg bg-[#0F172A] border border-[#FB923C]/40 flex items-center justify-center">
+            <div className="w-6 h-4 border border-[#FB923C]/60 rounded-xs" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 4. JavaScript / TypeScript Fetch API code snippet
+  return (
+    <div className="absolute inset-0 bg-[#0B0F19] p-3.5 flex flex-col justify-center font-mono text-[9px] sm:text-[10px] leading-[1.4] select-none text-left overflow-hidden">
+      <div>
+        <span className="text-[#C084FC]">const</span> <span className="text-[#F472B6]">data</span> = <span className="text-[#C084FC]">await</span> <span className="text-[#38BDF8]">fetch</span>(<span className="text-[#4ADE80]">&apos;/api/users&apos;</span>)
+      </div>
+      <div className="pl-3">
+        .<span className="text-[#FBBF24]">then</span>(res =&gt; res.<span className="text-[#60A5FA]">json</span>())
+      </div>
+      <div className="pl-3">
+        .<span className="text-[#F87171]">catch</span>(err =&gt; console.<span className="text-[#60A5FA]">error</span>(err))
+      </div>
+    </div>
+  );
+}
+
 export function LessonVideoCard({
   title = "Data Fetching in Server Components",
   description = "Learn how to fetch data on the server using async/await and Next.js best practices for better performance.",
@@ -99,22 +222,11 @@ export function LessonVideoCard({
     >
       {/* Left Column: Video Thumbnail Preview Box */}
       <div className="relative w-full md:w-[240px] lg:w-[260px] aspect-[16/10] md:aspect-auto shrink-0 bg-[#0B0F19] rounded-xl overflow-hidden flex items-center justify-center border border-black/10 shadow-inner group-hover:border-black/20 transition-colors">
-        {thumbnailUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={thumbnailUrl}
-            alt={title}
-            className="w-full h-full object-cover opacity-80 group-hover:opacity-95 transition-opacity"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0B0F19] flex items-center justify-center">
-            {/* Subtle decorative code or watermark */}
-            <div className="text-white/10 font-mono text-[11px] leading-tight select-none p-4 w-full h-full overflow-hidden flex flex-col justify-center">
-              <div>const data = await fetch();</div>
-              <div className="pl-3">return &lt;Component /&gt;;</div>
-            </div>
-          </div>
-        )}
+        <ThumbnailGraphic
+          iconIdentifier={courseIconIdentifier}
+          title={title}
+          thumbnailUrl={thumbnailUrl}
+        />
 
         {/* Center Play Button Overlay */}
         <div className="relative z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/90 group-hover:bg-white text-[#0F172A] shadow-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
@@ -183,7 +295,7 @@ export function LessonVideoCard({
 
   if (href) {
     return (
-      <Link href={href} className="block no-underline">
+      <Link href={href} onClick={onWatch} className="block no-underline">
         {cardContent}
       </Link>
     );

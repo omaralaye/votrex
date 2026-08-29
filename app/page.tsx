@@ -113,13 +113,19 @@ export default function VertexHomePage() {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      posthog.capture("course_searched", {
-        query: searchQuery.trim(),
+    const trimmed = searchQuery.trim();
+    if (trimmed) {
+      posthog.capture("search_performed", {
+        query: trimmed,
         results_count: filteredCourses.length,
         source: "home",
       });
-      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      posthog.capture("course_searched", {
+        query: trimmed,
+        results_count: filteredCourses.length,
+        source: "home",
+      });
+      router.push(`/search?q=${encodeURIComponent(trimmed)}`);
     }
   };
 
@@ -262,7 +268,15 @@ export default function VertexHomePage() {
                   {searchQuery ? (
                     <button
                       type="button"
-                      onClick={() => setSearchQuery("")}
+                      onClick={() => {
+                        const prev = searchQuery.trim();
+                        setSearchQuery("");
+                        if (prev) {
+                          posthog.capture("search_cleared", {
+                            previous_query: prev,
+                          });
+                        }
+                      }}
                       className="px-2 py-1 text-[12px] font-sans text-[#64748B] hover:text-[#0F172A] cursor-pointer"
                     >
                       Clear

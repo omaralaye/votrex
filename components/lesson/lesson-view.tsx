@@ -111,6 +111,7 @@ function getCourseSmallIcon(iconIdentifier?: string) {
 export function LessonView({ lesson, startSeconds = 0 }: LessonViewProps) {
   const [activeTab, setActiveTab] = useState<"content" | "notes">("content");
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [expandedModules, setExpandedModules] = useState<Record<string, boolean>>({});
 
@@ -158,8 +159,7 @@ export function LessonView({ lesson, startSeconds = 0 }: LessonViewProps) {
   if (currentModuleIndex === 0) currentModuleIndex = 5;
   if (currentLessonIndexInModule === 0) currentLessonIndexInModule = 1;
 
-
-  // Track PostHog page view
+  // Track PostHog lesson view and resume event
   useEffect(() => {
     posthog.capture("lesson_viewed", {
       course_slug: courseSlug,
@@ -169,8 +169,40 @@ export function LessonView({ lesson, startSeconds = 0 }: LessonViewProps) {
       module_number: currentModuleIndex,
       lesson_number: `${currentModuleIndex}.${currentLessonIndexInModule}`,
       duration: lesson.duration,
+      is_resumed: startSeconds > 0,
+      start_seconds: startSeconds,
     });
-  }, [courseSlug, courseTitle, lesson, currentModuleIndex, currentLessonIndexInModule]);
+
+    if (startSeconds > 0) {
+      posthog.capture("video_resume_used", {
+        course_slug: courseSlug,
+        course_title: courseTitle,
+        lesson_slug: lesson.slug?.current,
+        lesson_title: lesson.title,
+        resume_position_seconds: startSeconds,
+        source: "url_param",
+      });
+    }
+  }, [courseSlug, courseTitle, lesson, currentModuleIndex, currentLessonIndexInModule, startSeconds]);
+
+  const handleToggleComplete = (completedVia: string = "manual_button") => {
+    setIsCompleted((prev) => {
+      const next = !prev;
+      if (next) {
+        posthog.capture("lesson_completed", {
+          course_slug: courseSlug,
+          course_title: courseTitle,
+          lesson_slug: lesson.slug?.current,
+          lesson_title: lesson.title,
+          module_number: currentModuleIndex,
+          lesson_number: `${currentModuleIndex}.${currentLessonIndexInModule}`,
+          duration: lesson.duration,
+          completed_via: completedVia,
+        });
+      }
+      return next;
+    });
+  };
 
   // Find current position in flattened lessons for Previous / Next Navigation
   const currentFlatIndex = flattenedLessons.findIndex(
@@ -461,34 +493,49 @@ export function LessonView({ lesson, startSeconds = 0 }: LessonViewProps) {
               </span>
             </div>
 
-            {/* Title & Bookmark Button */}
+            {/* Title & Action Buttons */}
             <div className="flex items-start justify-between gap-4 mb-2">
               <h1 className="font-serif text-[32px] sm:text-[40px] lg:text-[44px] font-bold text-[#0F172A] leading-[1.15] tracking-tight">
                 {lesson.title}
               </h1>
 
-              <button
-                type="button"
-                aria-label="Bookmark lesson"
-                onClick={() => {
-                  setIsBookmarked((prev) => {
-                    const next = !prev;
-                    posthog.capture("lesson_bookmarked", {
-                      course_slug: courseSlug,
-                      lesson_slug: lesson.slug?.current,
-                      bookmarked: next,
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => handleToggleComplete("manual_button")}
+                  className={`inline-flex items-center gap-1.5 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl border text-[13px] font-sans font-medium transition-all cursor-pointer shadow-sm ${
+                    isCompleted
+                      ? "bg-[#F0FDF4] border-[#86EFAC] text-[#16A34A]"
+                      : "bg-white border-[#E2E8F0] hover:bg-[#F8FAFC] text-[#475569] hover:text-[#0F172A]"
+                  }`}
+                >
+                  <CheckCircleIcon size={17} className={isCompleted ? "text-[#16A34A]" : "text-[#94A3B8]"} />
+                  <span>{isCompleted ? "Completed" : "Mark Complete"}</span>
+                </button>
+
+                <button
+                  type="button"
+                  aria-label="Bookmark lesson"
+                  onClick={() => {
+                    setIsBookmarked((prev) => {
+                      const next = !prev;
+                      posthog.capture("lesson_bookmarked", {
+                        course_slug: courseSlug,
+                        lesson_slug: lesson.slug?.current,
+                        bookmarked: next,
+                      });
+                      return next;
                     });
-                    return next;
-                  });
-                }}
-                className={`p-2.5 rounded-xl border transition-all cursor-pointer shrink-0 shadow-sm ${
-                  isBookmarked
-                    ? "bg-[#FFF7ED] border-[#FDBA74] text-[#EA580C]"
-                    : "bg-white border-[#E2E8F0] hover:bg-[#F8FAFC] text-[#64748B] hover:text-[#0F172A]"
-                }`}
-              >
-                <BookmarkIcon size={20} filled={isBookmarked} />
-              </button>
+                  }}
+                  className={`p-2.5 rounded-xl border transition-all cursor-pointer shrink-0 shadow-sm ${
+                    isBookmarked
+                      ? "bg-[#FFF7ED] border-[#FDBA74] text-[#EA580C]"
+                      : "bg-white border-[#E2E8F0] hover:bg-[#F8FAFC] text-[#64748B] hover:text-[#0F172A]"
+                  }`}
+                >
+                  <BookmarkIcon size={20} filled={isBookmarked} />
+                </button>
+              </div>
             </div>
 
             {/* Subtitle / Summary */}
@@ -523,6 +570,10 @@ export function LessonView({ lesson, startSeconds = 0 }: LessonViewProps) {
               posterUrl={getLessonThumbnailUrl(lesson)}
               title={lesson.title}
               startSeconds={startSeconds}
+              courseSlug={courseSlug}
+              lessonSlug={lesson.slug?.current}
+              duration={lesson.duration}
+              onComplete={() => handleToggleComplete("video_ended")}
             />
           </section>
 
@@ -745,6 +796,16 @@ export function LessonView({ lesson, startSeconds = 0 }: LessonViewProps) {
                 <Link
                   href={`/courses/${courseSlug}/${nextItem.lesson.slug?.current || ""}`}
                   onClick={() => {
+                    posthog.capture("lesson_completed", {
+                      course_slug: courseSlug,
+                      course_title: courseTitle,
+                      lesson_slug: lesson.slug?.current,
+                      lesson_title: lesson.title,
+                      module_number: currentModuleIndex,
+                      lesson_number: `${currentModuleIndex}.${currentLessonIndexInModule}`,
+                      duration: lesson.duration,
+                      completed_via: "next_lesson",
+                    });
                     posthog.capture("lesson_navigated", {
                       course_slug: courseSlug,
                       from_lesson: lesson.slug?.current,
@@ -761,6 +822,22 @@ export function LessonView({ lesson, startSeconds = 0 }: LessonViewProps) {
             ) : (
               <Link
                 href={`/courses/${courseSlug}`}
+                onClick={() => {
+                  posthog.capture("lesson_completed", {
+                    course_slug: courseSlug,
+                    course_title: courseTitle,
+                    lesson_slug: lesson.slug?.current,
+                    lesson_title: lesson.title,
+                    module_number: currentModuleIndex,
+                    lesson_number: `${currentModuleIndex}.${currentLessonIndexInModule}`,
+                    duration: lesson.duration,
+                    completed_via: "course_complete",
+                  });
+                  posthog.capture("course_completed", {
+                    course_slug: courseSlug,
+                    course_title: courseTitle,
+                  });
+                }}
                 className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white font-sans font-medium text-[14px] shadow-sm transition-all cursor-pointer"
               >
                 <span>Complete Course</span>

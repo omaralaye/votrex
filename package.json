@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "typegen": "sanity schemas extract && sanity typegen generate",
-    "seed": "node sanity/seed.mjs"
+    "seed": "node sanity/seed.mjs",
+    "ingest:video": "tsx scripts/ingest-video.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.8.2",
